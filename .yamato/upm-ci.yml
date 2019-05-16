@@ -1,14 +1,10 @@
 test_editors:
   - version: trunk
 test_platforms:
-  - name: Windows64
-    type: Unity::VM
-    image: package-ci/win10:stable
-    flavor: m1.large
-#  - name: mac
-#    type: Unity::VM::osx
-#    image: buildfarm/mac:stable
-#    flavor: m1.mac
+  - name: mac
+    type: Unity::VM::osx
+    image: buildfarm/mac:stable
+    flavor: m1.mac
 ---
 pack:
   name: Pack
