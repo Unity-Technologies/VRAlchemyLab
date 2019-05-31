@@ -1,10 +1,15 @@
 test_editors:
-  - version: trunk
+  - version: 2019.2
 test_platforms:
-  - name: mac
-    type: Unity::VM::osx
-    image: buildfarm/mac:stable
-    flavor: m1.mac
+  - name: Windows64
+    type: Unity::VM::GPU
+    image: sdet/gamecode_win10:latest
+    flavor: m1.large
+#  - name: OSX
+#    type: Unity::VM::osx
+#    image: buildfarm/mac:stable
+#    flavor: m1.mac
+
 ---
 pack:
   name: Pack
