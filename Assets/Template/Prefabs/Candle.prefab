@@ -67,6 +67,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -92,19 +93,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.10833576, y: 0.109907165, z: 0.020312622}
   m_Center: {x: 0.0006342363, y: -0.0041769966, z: 0.010156311}
---- !u!65 &241693327575396353
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8601772682356339480}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.06610128, y: 0.06577673, z: 0.15070736}
-  m_Center: {x: -0.00022956202, y: -0.0003637054, z: 0.06454493}
 --- !u!1 &8413122234386590610
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,7 +137,7 @@ Light:
   serializedVersion: 9
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 30
+  m_Intensity: 10
   m_Range: 1.23
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -239,7 +227,7 @@ MonoBehaviour:
   useVolumetric: 1
   featuresFoldout: 1
   showAdditionalSettings: 0
-  displayLightIntensity: 30
+  displayLightIntensity: 10
   displayAreaLightEmissiveMesh: 0
   areaLightCookie: {fileID: 0}
   areaLightShadowCone: 120
@@ -301,6 +289,19 @@ MonoBehaviour:
     format: 0
     data: 
   shadowDatas: []
+--- !u!65 &241693327575396353
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8601772682356339480}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.06610128, y: 0.06577673, z: 0.15070736}
+  m_Center: {x: -0.00022956202, y: -0.0003637054, z: 0.06454493}
 --- !u!1001 &8413122233486681704
 PrefabInstance:
   m_ObjectHideFlags: 0
