@@ -1,5 +1,24 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!95 &5955223551214810350
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2441280158165253662}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 31ae6574fdad7c64bba143d6ab231ccf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4459626041405914571
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,6 +143,7 @@ GameObject:
   - component: {fileID: 4550282910051742162}
   - component: {fileID: 4746474647477097204}
   - component: {fileID: 5989968667248737235}
+  - component: {fileID: 7584674806846275437}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
@@ -138,12 +158,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8969069005660603785}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.00061753386, y: -0.24780431, z: 0.0024135632, w: 0.968807}
+  m_LocalPosition: {x: 0.3636, y: -0.0039000511, z: 0.7564002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1709804930525613069}
-  m_RootOrder: 0
+  m_Father: {fileID: 844600411277431433}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &4550282910051742162
 Light:
@@ -302,6 +322,25 @@ MonoBehaviour:
   shadowAlgorithm: 0
   shadowVariant: 0
   shadowPrecision: 0
+--- !u!95 &7584674806846275437
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8969069005660603785}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3e48bfb9f200296468e9da20b3d429de, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &5675146135970033788
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -309,11 +348,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 844600411277431433}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: a55410a49c78c0749bc51fb30300e88b,
-        type: 3}
-      propertyPath: m_Name
-      value: Globe
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: a55410a49c78c0749bc51fb30300e88b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -384,6 +418,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 0.9493485
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: a55410a49c78c0749bc51fb30300e88b,
+        type: 3}
+      propertyPath: m_Name
+      value: Globe
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a55410a49c78c0749bc51fb30300e88b, type: 3}
 --- !u!1001 &5675146136907594131
@@ -393,11 +432,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 844600410726617048}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: ac86f70b4ef24354eaba29bde0688932,
-        type: 3}
-      propertyPath: m_Name
-      value: GlobeRing
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ac86f70b4ef24354eaba29bde0688932,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -453,6 +487,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: ac86f70b4ef24354eaba29bde0688932,
+        type: 3}
+      propertyPath: m_Name
+      value: GlobeRing
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac86f70b4ef24354eaba29bde0688932, type: 3}
 --- !u!4 &844600411277431433 stripped
@@ -468,45 +507,40 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 844600410726617048}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 0ccb74dfe2ed97346a6406dfc0b98d75,
-        type: 3}
-      propertyPath: m_Name
-      value: GlobeSun
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 0ccb74dfe2ed97346a6406dfc0b98d75,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.358
+      value: 0.3636
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 0ccb74dfe2ed97346a6406dfc0b98d75,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.0039
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 0ccb74dfe2ed97346a6406dfc0b98d75,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.31
+      value: 1.3094
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 0ccb74dfe2ed97346a6406dfc0b98d75,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.000675693
+      value: 0.00061756367
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 0ccb74dfe2ed97346a6406dfc0b98d75,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.2711541
+      value: -0.24780431
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 0ccb74dfe2ed97346a6406dfc0b98d75,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0023978944
+      value: 0.0024135632
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 0ccb74dfe2ed97346a6406dfc0b98d75,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.96253276
+      value: 0.9688069
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 0ccb74dfe2ed97346a6406dfc0b98d75,
         type: 3}
@@ -516,20 +550,31 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 0ccb74dfe2ed97346a6406dfc0b98d75,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0.149
+      value: 0.13700001
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 0ccb74dfe2ed97346a6406dfc0b98d75,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -31.466002
+      value: -28.695002
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 0ccb74dfe2ed97346a6406dfc0b98d75,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0.24300002
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 0ccb74dfe2ed97346a6406dfc0b98d75,
+        type: 3}
+      propertyPath: m_Name
+      value: GlobeSun
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ccb74dfe2ed97346a6406dfc0b98d75, type: 3}
+--- !u!1 &2441280158165253662 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 0ccb74dfe2ed97346a6406dfc0b98d75,
+    type: 3}
+  m_PrefabInstance: {fileID: 5962983923450996503}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1709804930525613069 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 0ccb74dfe2ed97346a6406dfc0b98d75,

@@ -56,6 +56,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -120,11 +121,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8413122234386590610}
   m_LocalRotation: {x: -0.000000086613, y: 0.72601825, z: -0.00000014901161, w: 0.68767554}
-  m_LocalPosition: {x: 0.0002293353, y: 0.1861, z: -0.0016692579}
+  m_LocalPosition: {x: 0, y: 5.215, z: -0.002}
   m_LocalScale: {x: 0.96782017, y: 0.96782, z: 0.96782017}
   m_Children: []
   m_Father: {fileID: 3583702940339375474}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &8413122234386590614
 Light:
@@ -137,8 +138,8 @@ Light:
   serializedVersion: 9
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 10
-  m_Range: 1.23
+  m_Intensity: 6
+  m_Range: 0.7
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -198,8 +199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 4
-  m_Version: 4
+  version: 5
+  m_Version: 5
   directionalIntensity: 3.1415927
   punctualIntensity: 600
   areaIntensity: 200
@@ -209,8 +210,6 @@ MonoBehaviour:
   lightDimmer: 1
   m_VolumetricDimmer: 1
   lightUnit: 1
-  sunDiskSize: 1
-  sunHaloSize: 0.1
   fadeDistance: 10000
   affectDiffuse: 1
   affectSpecular: 1
@@ -221,21 +220,27 @@ MonoBehaviour:
   shapeHeight: 0.5
   aspectRatio: 1
   shapeRadius: 0
+  useCustomSpotLightShadowCone: 0
+  customSpotLightShadowCone: 30
   maxSmoothness: 0.99
   applyRangeAttenuation: 1
   useOldInspector: 0
   useVolumetric: 1
   featuresFoldout: 1
   showAdditionalSettings: 0
-  displayLightIntensity: 10
+  displayLightIntensity: 6
   displayAreaLightEmissiveMesh: 0
   areaLightCookie: {fileID: 0}
   areaLightShadowCone: 120
+  useScreenSpaceShadows: 0
+  interactsWithSky: 1
   evsmExponent: 15
   evsmLightLeakBias: 0
   evsmVarianceBias: 0.00001
   evsmBlurPasses: 0
   lightLayers: 1
+  lightlayersMask: 1
+  linkShadowLayers: 1
   shadowNearPlane: 0.1
   shadowSoftness: 0.5
   blockerSampleCount: 24
@@ -262,16 +267,10 @@ MonoBehaviour:
   volumetricShadowDimmer: 1
   shadowFadeDistance: 10000
   contactShadows: 0
-  viewBiasMin: 0.2
-  viewBiasMax: 100
-  viewBiasScale: 1
-  normalBiasMin: 0.5
-  normalBiasMax: 0.5
-  normalBiasScale: 1
-  sampleBiasScale: 0
-  edgeLeakFixup: 0
-  edgeToleranceNormal: 1
-  edgeTolerance: 1
+  shadowTint: {r: 0, g: 0, b: 0, a: 1}
+  normalBias: 0.75
+  constantBias: 0.15
+  shadowUpdateMode: 0
   shadowCascadeCount: 4
   shadowCascadeRatios:
   - 0.05
@@ -285,23 +284,6 @@ MonoBehaviour:
   shadowAlgorithm: 0
   shadowVariant: 0
   shadowPrecision: 0
-  shadowData:
-    format: 0
-    data: 
-  shadowDatas: []
---- !u!65 &241693327575396353
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8601772682356339480}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.06610128, y: 0.06577673, z: 0.15070736}
-  m_Center: {x: -0.00022956202, y: -0.0003637054, z: 0.06454493}
 --- !u!1001 &8413122233486681704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -309,11 +291,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3583702941095328941}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 4285a26f4eaf75d4093af189d2473c7b,
-        type: 3}
-      propertyPath: m_Name
-      value: Candle Prefab
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -369,6 +346,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 4285a26f4eaf75d4093af189d2473c7b,
+        type: 3}
+      propertyPath: m_Name
+      value: Candle Prefab
+      objectReference: {fileID: 0}
     - target: {fileID: -5693917361865104139, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -379,12 +361,6 @@ PrefabInstance:
 --- !u!4 &3583702940339375474 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 4285a26f4eaf75d4093af189d2473c7b,
-    type: 3}
-  m_PrefabInstance: {fileID: 8413122233486681704}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8601772682356339480 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 260866516477023600, guid: 4285a26f4eaf75d4093af189d2473c7b,
     type: 3}
   m_PrefabInstance: {fileID: 8413122233486681704}
   m_PrefabAsset: {fileID: 0}
