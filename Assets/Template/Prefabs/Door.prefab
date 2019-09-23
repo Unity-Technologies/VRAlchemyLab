@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9080681851404873950}
+  - component: {fileID: 8056527456060698403}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -46,6 +47,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8056527456060698403
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9080681851404873951}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.33952892, y: 2.1390429, z: 1.6672351}
+  m_Center: {x: 0.0112220645, y: 1.0557408, z: 0.65047395}
 --- !u!1001 &7174716395434038278
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1273,11 +1287,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9080681851404873950}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 4b9060409f14e7d47b6772e42e045eb2,
-        type: 3}
-      propertyPath: m_Name
-      value: Bar
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4b9060409f14e7d47b6772e42e045eb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1347,6 +1356,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 4b9060409f14e7d47b6772e42e045eb2,
+        type: 3}
+      propertyPath: m_Name
+      value: Bar
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b9060409f14e7d47b6772e42e045eb2, type: 3}
