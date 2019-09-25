@@ -214,9 +214,9 @@ MonoBehaviour:
       cookieTexArraySize: 16
       pointCookieSize: 128
       cubeCookieTexArraySize: 16
-      planarReflectionProbeCacheSize: 2
+      planarReflectionProbeCacheSize: 1
       planarReflectionTextureSize: 1024
-      reflectionProbeCacheSize: 64
+      reflectionProbeCacheSize: 32
       reflectionCubemapSize: 256
       reflectionCacheCompressed: 0
       planarReflectionCacheCompressed: 0
@@ -232,15 +232,15 @@ MonoBehaviour:
       maxDecalsOnScreen: 512
     hdShadowInitParams:
       maxShadowRequests: 128
-      directionalShadowsDepthBits: 32
+      directionalShadowsDepthBits: 16
       shadowFilteringQuality: 1
       punctualLightShadowAtlas:
         shadowAtlasResolution: 4096
-        shadowAtlasDepthBits: 32
+        shadowAtlasDepthBits: 16
         useDynamicViewportRescale: 1
       areaLightShadowAtlas:
-        shadowAtlasResolution: 4096
-        shadowAtlasDepthBits: 32
+        shadowAtlasResolution: 512
+        shadowAtlasDepthBits: 16
         useDynamicViewportRescale: 1
       shadowResolutionDirectional:
         m_Values: 00010000000200000004000000080000
