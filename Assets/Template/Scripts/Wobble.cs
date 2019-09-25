@@ -22,7 +22,7 @@ public class Wobble : MonoBehaviour
         // We get the mesh renderer
         skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
         // We store a copy of the 1st material
-        material = skinnedMeshRenderer.materials[3];
+        material = skinnedMeshRenderer.materials[2];
 
         // Init Wobbling to zero
         Value = 0.0f;
