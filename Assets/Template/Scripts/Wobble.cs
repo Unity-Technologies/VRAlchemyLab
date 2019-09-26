@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//[ExecuteInEditMode]
 [RequireComponent(typeof(SkinnedMeshRenderer))]
 public class Wobble : MonoBehaviour
 {
