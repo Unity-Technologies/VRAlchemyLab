@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-2431953128704055042
+--- !u!114 &-5919853534745329347
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,22 +20,20 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Liquid 3
-  m_Shader: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
-  m_ShaderKeywords: _BLENDMODE_ALPHA _BLENDMODE_PRESERVE_SPECULAR_LIGHTING _ENABLE_FOG_ON_TRANSPARENT
-    _ENABLE_GEOMETRIC_SPECULAR_AA _NORMALMAP_TANGENT_SPACE _REFRACTION_PLANE _SURFACE_TYPE_TRANSPARENT
+  m_Name: Liquid 12
+  m_Shader: {fileID: -6465566751694194690, guid: a804544564f060d47bf24a82afd90344,
+    type: 3}
+  m_ShaderKeywords: _ALPHATEST_ON _BLENDMODE_ALPHA _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2999
+  m_CustomRenderQueue: 3000
   stringTagMap:
+    MotionVector: User
     RenderType: Transparent
   disabledShaderPasses:
-  - MOTIONVECTORS
-  - DistortionVectors
-  - TransparentDepthPrepass
-  - TransparentDepthPostpass
   - TransparentBackface
+  - MOTIONVECTORS
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -124,13 +122,21 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - HorizontalMaxLevel: 0
+    - InvertMaxLevel: -10
+    - MaxLevel: 10
+    - Vector1_492CE600: -5.18
+    - Vector1_630DD464: 12.34
+    - Vector1_93C7B329: 1.04
+    - Vector1_9E420DEF: 2.65
+    - WobbleIntensity: 0
     - _AORemapMax: 1
     - _AORemapMin: 0
-    - _ATDistance: 0.006
+    - _ATDistance: 1
     - _AddPrecomputedVelocity: 0
     - _AlbedoAffectEmissive: 0
     - _AlphaCutoff: 0.5
-    - _AlphaCutoffEnable: 0
+    - _AlphaCutoffEnable: 1
     - _AlphaCutoffPostpass: 0.5
     - _AlphaCutoffPrepass: 0.5
     - _AlphaCutoffShadow: 0.5
@@ -153,32 +159,29 @@ Material:
     - _DisplacementMode: 0
     - _DistortionBlendMode: 0
     - _DistortionBlurBlendMode: 0
-    - _DistortionBlurDstBlend: 1
+    - _DistortionBlurDstBlend: 0
     - _DistortionBlurRemapMax: 1
-    - _DistortionBlurRemapMin: 0.14245012
+    - _DistortionBlurRemapMin: 0
     - _DistortionBlurScale: 1
-    - _DistortionBlurSrcBlend: 1
-    - _DistortionDepthTest: 0
-    - _DistortionDstBlend: 1
+    - _DistortionBlurSrcBlend: 0
+    - _DistortionDepthTest: 1
+    - _DistortionDstBlend: 0
     - _DistortionEnable: 0
     - _DistortionScale: 1
-    - _DistortionSrcBlend: 1
+    - _DistortionSrcBlend: 0
     - _DistortionVectorBias: -1
     - _DistortionVectorScale: 2
     - _DoubleSidedEnable: 0
-    - _DoubleSidedNormalMode: 1
-    - _Drag: 1
+    - _DoubleSidedNormalMode: 0
     - _DstBlend: 10
     - _EmissiveColorMode: 1
     - _EmissiveExposureWeight: 1
-    - _EmissiveIntensity: 10
+    - _EmissiveIntensity: 1
     - _EmissiveIntensityUnit: 0
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
-    - _EnableGeometricSpecularAA: 1
-    - _EnableMotionVectorForVertexAnimation: 0
+    - _EnableGeometricSpecularAA: 0
     - _EnableSpecularOcclusion: 0
-    - _EnableWind: 0
     - _EnergyConservingSpecularColor: 1
     - _HdrpVersion: 2
     - _HeightAmplitude: 0.02
@@ -190,9 +193,8 @@ Material:
     - _HeightPoMAmplitude: 2
     - _HeightTessAmplitude: 2
     - _HeightTessCenter: 0.5
-    - _InitialBend: 1
     - _InvTilingScale: 1
-    - _Ior: 1.4
+    - _Ior: 1
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
     - _LinkDetailsWithBase: 1
@@ -206,11 +208,11 @@ Material:
     - _PPDPrimitiveLength: 1
     - _PPDPrimitiveWidth: 1
     - _ReceivesSSR: 1
-    - _RefractionModel: 1
+    - _RefractionModel: 0
+    - _RenderQueueType: 5
+    - _RequireSplitLighting: 0
     - _SSRefractionProjectionModel: 0
-    - _ShiverDirectionality: 0.5
-    - _ShiverDrag: 0.2
-    - _Smoothness: 0.85
+    - _Smoothness: 0.5
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMin: 0
     - _SpecularAAScreenSpaceVariance: 0.1
@@ -226,46 +228,45 @@ Material:
     - _StencilWriteMaskDistortionVec: 64
     - _StencilWriteMaskGBuffer: 51
     - _StencilWriteMaskMV: 176
-    - _Stiffness: 1
     - _SubsurfaceMask: 1
     - _SupportDecals: 1
     - _SurfaceType: 1
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
-    - _Thickness: 0.01
+    - _Thickness: 1
     - _ThicknessMultiplier: 1
     - _TransmissionEnable: 1
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
     - _TransparentDepthPrepassEnable: 0
-    - _TransparentSortPriority: -1
+    - _TransparentSortPriority: 0
     - _TransparentWritingMotionVec: 0
-    - _TransparentWritingVelocity: 0
     - _UVBase: 0
     - _UVDetail: 0
     - _UVEmissive: 0
-    - _UseEmissiveIntensity: 1
+    - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
     - _ZTestDepthEqualForOpaque: 4
-    - _ZTestGBuffer: 4
+    - _ZTestGBuffer: 3
     - _ZTestModeDistortion: 8
     - _ZTestTransparent: 4
-    - _ZWrite: 0
+    - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.2862745, g: 0.5170303, b: 1, a: 0.09411765}
+    - Color_2B85FF3B: {r: 0, g: 0.8784314, b: 0.8232787, a: 0.74509805}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 0.28627446, g: 0.51703024, b: 1, a: 0.09411765}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
-    - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
+    - _DoubleSidedConstants: {r: -1, g: -1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissiveColor: {r: 2.5882344, g: 6.152975, b: 9.607842, a: 10}
-    - _EmissiveColorLDR: {r: 0.25882348, g: 0.6152975, b: 0.9607843, a: 1}
+    - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _TransmittanceColor: {r: 0.3726415, g: 0.77873844, b: 1, a: 1}
+    - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
