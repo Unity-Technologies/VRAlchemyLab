@@ -22,17 +22,17 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Liquid 3
   m_Shader: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
-  m_ShaderKeywords: _BLENDMODE_ALPHA _BLENDMODE_PRESERVE_SPECULAR_LIGHTING _DOUBLESIDED_ON
-    _ENABLE_FOG_ON_TRANSPARENT _ENABLE_GEOMETRIC_SPECULAR_AA _NORMALMAP_TANGENT_SPACE
-    _REFRACTION_SPHERE _SURFACE_TYPE_TRANSPARENT
+  m_ShaderKeywords: _BLENDMODE_ALPHA _BLENDMODE_PRESERVE_SPECULAR_LIGHTING _ENABLE_FOG_ON_TRANSPARENT
+    _ENABLE_GEOMETRIC_SPECULAR_AA _NORMALMAP_TANGENT_SPACE _REFRACTION_PLANE _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 1
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2999
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses:
   - MOTIONVECTORS
+  - DistortionVectors
   - TransparentDepthPrepass
   - TransparentDepthPostpass
   - TransparentBackface
@@ -126,7 +126,7 @@ Material:
     m_Floats:
     - _AORemapMax: 1
     - _AORemapMin: 0
-    - _ATDistance: 0.1
+    - _ATDistance: 0.006
     - _AddPrecomputedVelocity: 0
     - _AlbedoAffectEmissive: 0
     - _AlphaCutoff: 0.5
@@ -139,8 +139,8 @@ Material:
     - _Anisotropy: 0
     - _BlendMode: 0
     - _CoatMask: 0
-    - _CullMode: 0
-    - _CullModeForward: 0
+    - _CullMode: 2
+    - _CullModeForward: 2
     - _Cutoff: 0.5
     - _DepthOffsetEnable: 0
     - _DetailAlbedoScale: 1
@@ -158,14 +158,14 @@ Material:
     - _DistortionBlurRemapMin: 0.14245012
     - _DistortionBlurScale: 1
     - _DistortionBlurSrcBlend: 1
-    - _DistortionDepthTest: 1
+    - _DistortionDepthTest: 0
     - _DistortionDstBlend: 1
-    - _DistortionEnable: 1
+    - _DistortionEnable: 0
     - _DistortionScale: 1
     - _DistortionSrcBlend: 1
     - _DistortionVectorBias: -1
     - _DistortionVectorScale: 2
-    - _DoubleSidedEnable: 1
+    - _DoubleSidedEnable: 0
     - _DoubleSidedNormalMode: 1
     - _Drag: 1
     - _DstBlend: 10
@@ -192,7 +192,7 @@ Material:
     - _HeightTessCenter: 0.5
     - _InitialBend: 1
     - _InvTilingScale: 1
-    - _Ior: 1.041
+    - _Ior: 1.4
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
     - _LinkDetailsWithBase: 1
@@ -206,11 +206,11 @@ Material:
     - _PPDPrimitiveLength: 1
     - _PPDPrimitiveWidth: 1
     - _ReceivesSSR: 1
-    - _RefractionModel: 2
+    - _RefractionModel: 1
     - _SSRefractionProjectionModel: 0
     - _ShiverDirectionality: 0.5
     - _ShiverDrag: 0.2
-    - _Smoothness: 0.8
+    - _Smoothness: 0.85
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMin: 0
     - _SpecularAAScreenSpaceVariance: 0.1
@@ -232,7 +232,7 @@ Material:
     - _SurfaceType: 1
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
-    - _Thickness: 0.116
+    - _Thickness: 0.01
     - _ThicknessMultiplier: 1
     - _TransmissionEnable: 1
     - _TransparentBackfaceEnable: 0
@@ -249,7 +249,7 @@ Material:
     - _UseShadowThreshold: 0
     - _ZTestDepthEqualForOpaque: 4
     - _ZTestGBuffer: 4
-    - _ZTestModeDistortion: 4
+    - _ZTestModeDistortion: 8
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
