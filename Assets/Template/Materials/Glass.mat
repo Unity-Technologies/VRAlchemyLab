@@ -10,7 +10,7 @@ Material:
   m_Name: Glass
   m_Shader: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
   m_ShaderKeywords: _BLENDMODE_ALPHA _BLENDMODE_PRESERVE_SPECULAR_LIGHTING _ENABLE_FOG_ON_TRANSPARENT
-    _ENABLE_GEOMETRIC_SPECULAR_AA _NORMALMAP_TANGENT_SPACE _REFRACTION_PLANE _SURFACE_TYPE_TRANSPARENT
+    _ENABLE_GEOMETRIC_SPECULAR_AA _NORMALMAP_TANGENT_SPACE _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -19,7 +19,6 @@ Material:
     RenderType: Transparent
   disabledShaderPasses:
   - MOTIONVECTORS
-  - DistortionVectors
   - TransparentDepthPrepass
   - TransparentDepthPostpass
   m_SavedProperties:
@@ -141,12 +140,12 @@ Material:
     - _DistortionBlurBlendMode: 0
     - _DistortionBlurDstBlend: 1
     - _DistortionBlurRemapMax: 1
-    - _DistortionBlurRemapMin: 0.08230451
+    - _DistortionBlurRemapMin: 0.14910725
     - _DistortionBlurScale: 1
     - _DistortionBlurSrcBlend: 1
-    - _DistortionDepthTest: 1
+    - _DistortionDepthTest: 0
     - _DistortionDstBlend: 1
-    - _DistortionEnable: 0
+    - _DistortionEnable: 1
     - _DistortionScale: 1
     - _DistortionSrcBlend: 1
     - _DistortionVectorBias: -1
@@ -178,7 +177,7 @@ Material:
     - _HeightTessCenter: 0.5
     - _InitialBend: 1
     - _InvTilingScale: 1
-    - _Ior: 1.1
+    - _Ior: 1
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
     - _LinkDetailsWithBase: 1
@@ -192,11 +191,11 @@ Material:
     - _PPDPrimitiveLength: 1
     - _PPDPrimitiveWidth: 1
     - _ReceivesSSR: 1
-    - _RefractionModel: 1
+    - _RefractionModel: 0
     - _SSRefractionProjectionModel: 0
     - _ShiverDirectionality: 0.5
     - _ShiverDrag: 0.2
-    - _Smoothness: 0.9
+    - _Smoothness: 0.983
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMin: 0
     - _SpecularAAScreenSpaceVariance: 0.546
@@ -235,7 +234,7 @@ Material:
     - _UseShadowThreshold: 0
     - _ZTestDepthEqualForOpaque: 4
     - _ZTestGBuffer: 4
-    - _ZTestModeDistortion: 4
+    - _ZTestModeDistortion: 8
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:

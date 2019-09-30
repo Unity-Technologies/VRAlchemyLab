@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Tube05
-  m_Shader: {fileID: -6465566751694194690, guid: a804544564f060d47bf24a82afd90344,
+  m_Shader: {fileID: -6465566751694194690, guid: fb8e58f92a94d3248884f463843935e3,
     type: 3}
   m_ShaderKeywords: _ALPHATEST_ON _BLENDMODE_ALPHA _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
@@ -122,9 +122,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - HorizontalMaxLevel: 10
-    - InvertMaxLevel: 5
-    - MaxLevel: 10
+    - AplhaModifier: 1
+    - FillingRate: 0.7
+    - HorizontalMaxLevel: 2.2
+    - InvertMaxLevel: 0
+    - MaxLevel: 26.6
+    - Vector1_21A04A4D: 10.58
     - Vector1_492CE600: 10.2
     - Vector1_630DD464: 16.42
     - Vector1_93C7B329: 1.04
@@ -253,7 +256,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - Color_2B85FF3B: {r: 1, g: 0.46425888, b: 0.07058823, a: 0.56078434}
+    - Color_2B85FF3B: {r: 1, g: 0.4642588, b: 0.07058821, a: 0.20392157}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
