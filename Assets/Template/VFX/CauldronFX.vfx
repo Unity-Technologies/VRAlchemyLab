@@ -460,7 +460,7 @@ MonoBehaviour:
   m_InputSlots: []
   m_OutputSlots: []
   m_Disabled: 0
-  mode: 0
+  mode: 1
   axes: 4
 --- !u!114 &114596491906001080
 MonoBehaviour:
@@ -1138,26 +1138,31 @@ VisualEffectResource:
       && defined(VFX_VARYING_POSCS))\n\t\t\t#error VFX_VARYING_PS_INPUTS, VFX_VARYING_POSCS
       and VFX_VARYING_UV must be defined.\n\t\t\t#endif\n\t\t\t\n\t\t\t#include \"Packages/com.unity.render-pipelines.high-definition/Runtime/VFXGraph/Shaders/VFXCommon.hlsl\"\n\t\t\t#include
       \"Packages/com.unity.visualeffectgraph/Shaders/VFXCommon.hlsl\"\n\t\t\t\n\n\t\t\tvoid
-      Orient_4(inout float3 axisX, inout float3 axisY, inout float3 axisZ) /*mode:FaceCameraPlane
-      axes:ZY */\n\t\t\t{\n\t\t\t    \n\t\t\t    float3x3 viewRot = GetVFXToViewRotMatrix();\n\t\t\t   
-      axisX = viewRot[0].xyz;\n\t\t\t    axisY = viewRot[1].xyz;\n\t\t\t    #if VFX_LOCAL_SPACE
-      // Need to remove potential scale in local transform\n\t\t\t    axisX = normalize(axisX);\n\t\t\t   
-      axisY = normalize(axisY);\n\t\t\t    axisZ = cross(axisX,axisY);\n\t\t\t   
-      #else\n\t\t\t    axisZ = -viewRot[2].xyz;\n\t\t\t    #endif\n\t\t\t    \n\t\t\t}\n\t\t\tvoid
-      AttributeFromCurve_45ABB90F(inout float size, float age, float lifetime, float4
-      Size) /*attribute:size Composition:Overwrite AlphaComposition:Overwrite SampleMode:OverLife
-      Mode:PerComponent ColorMode:ColorAndAlpha channels:X */\n\t\t\t{\n\t\t\t   
-      float t = age / lifetime;\n\t\t\t    float value = 0.0f;\n\t\t\t    value =
-      SampleCurve(Size, t);\n\t\t\t    size = value;\n\t\t\t}\n\t\t\tvoid ColorOverLife_73257(float
-      age, float lifetime, inout float3 color, inout float alpha, float gradient,
-      float BlendColor, float BlendAlpha) /*mode:ColorAndAlpha ColorComposition:Blend
-      AlphaComposition:Blend */\n\t\t\t{\n\t\t\t    \n\t\t\t    float4 sampledColor
-      = SampleGradient(gradient, age/lifetime);\n\t\t\t    color = lerp(color,sampledColor.rgb,BlendColor);\n\t\t\t   
-      alpha = lerp(alpha,sampledColor.a,BlendAlpha);\n\t\t\t    \n\t\t\t}\n\t\t\tvoid
-      SetAttribute_ED2BDC15(inout bool alive, bool Alive) /*attribute:alive Composition:Overwrite
-      Source:Slot Random:Off channels:XYZ */\n\t\t\t{\n\t\t\t    alive = Alive;\n\t\t\t}\n\t\t\t\n\n\t\t\t\n\t\t\t#if
-      defined(HAS_STRIPS) && !defined(VFX_PRIMITIVE_QUAD)\n\t\t\t#error VFX_PRIMITIVE_QUAD
-      must be defined when HAS_STRIPS is.\n\t\t\t#endif\n\t\t\t\n\t\t\tstruct vs_input\n\t\t\t{\n\t\t\t\tVFX_DECLARE_INSTANCE_ID\n\t\t\t};\n\t\t\t\n\t\t\t#if
+      Orient_189(inout float3 axisX, inout float3 axisY, inout float3 axisZ, float3
+      position) /*mode:FaceCameraPosition axes:ZY */\n\t\t\t{\n\t\t\t    \n\t\t\t   
+      if (unity_OrthoParams.w == 1.0f) // Face plane for ortho\n\t\t\t    {\n\t\t\t       
+      float3x3 viewRot = GetVFXToViewRotMatrix();\n\t\t\t        axisX = viewRot[0].xyz;\n\t\t\t       
+      axisY = viewRot[1].xyz;\n\t\t\t        #if VFX_LOCAL_SPACE // Need to remove
+      potential scale in local transform\n\t\t\t        axisX = normalize(axisX);\n\t\t\t       
+      axisY = normalize(axisY);\n\t\t\t        axisZ = cross(axisX,axisY);\n\t\t\t       
+      #else\n\t\t\t        axisZ = -viewRot[2].xyz;\n\t\t\t        #endif\n\t\t\t   
+      }\n\t\t\t    else\n\t\t\t    {\n\t\t\t        axisZ = normalize(position -
+      GetViewVFXPosition());\n\t\t\t        axisX = normalize(cross(GetVFXToViewRotMatrix()[1].xyz,axisZ));\n\t\t\t       
+      axisY = cross(axisZ,axisX);\n\t\t\t    }\n\t\t\t    \n\t\t\t}\n\t\t\tvoid AttributeFromCurve_45ABB90F(inout
+      float size, float age, float lifetime, float4 Size) /*attribute:size Composition:Overwrite
+      AlphaComposition:Overwrite SampleMode:OverLife Mode:PerComponent ColorMode:ColorAndAlpha
+      channels:X */\n\t\t\t{\n\t\t\t    float t = age / lifetime;\n\t\t\t    float
+      value = 0.0f;\n\t\t\t    value = SampleCurve(Size, t);\n\t\t\t    size = value;\n\t\t\t}\n\t\t\tvoid
+      ColorOverLife_73257(float age, float lifetime, inout float3 color, inout float
+      alpha, float gradient, float BlendColor, float BlendAlpha) /*mode:ColorAndAlpha
+      ColorComposition:Blend AlphaComposition:Blend */\n\t\t\t{\n\t\t\t    \n\t\t\t   
+      float4 sampledColor = SampleGradient(gradient, age/lifetime);\n\t\t\t    color
+      = lerp(color,sampledColor.rgb,BlendColor);\n\t\t\t    alpha = lerp(alpha,sampledColor.a,BlendAlpha);\n\t\t\t   
+      \n\t\t\t}\n\t\t\tvoid SetAttribute_ED2BDC15(inout bool alive, bool Alive) /*attribute:alive
+      Composition:Overwrite Source:Slot Random:Off channels:XYZ */\n\t\t\t{\n\t\t\t   
+      alive = Alive;\n\t\t\t}\n\t\t\t\n\n\t\t\t\n\t\t\t#if defined(HAS_STRIPS) &&
+      !defined(VFX_PRIMITIVE_QUAD)\n\t\t\t#error VFX_PRIMITIVE_QUAD must be defined
+      when HAS_STRIPS is.\n\t\t\t#endif\n\t\t\t\n\t\t\tstruct vs_input\n\t\t\t{\n\t\t\t\tVFX_DECLARE_INSTANCE_ID\n\t\t\t};\n\t\t\t\n\t\t\t#if
       HAS_STRIPS\n\t\t\t#define PARTICLE_IN_EDGE (id & 1)\n\t\t\t\n\t\t\tfloat3 GetParticlePosition(uint
       index)\n\t\t\t{\n\t\t\t\tstruct Attributes attributes = (Attributes)0;\n\t\t\t\tattributes.position
       = asfloat(attributeBuffer.Load3((index * 0x4 + 0x1E0) << 2));\n\t\t\t\t\n\n\t\t\t\treturn
@@ -1222,12 +1227,13 @@ VisualEffectResource:
       = (float)1;\n\t\t\t\t\t\tattributes.scaleZ = (float)1;\n\t\t\t\t\t\tattributes.particleId
       = (attributeBuffer.Load((index * 0x1 + 0x260) << 2));\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\n\t\t\t\t\t\t//
       Initialize built-in needed attributes\n\t\t\t\t\t\t#if HAS_STRIPS\n\t\t\t\t\t\tInitStripAttributes(index,
-      attributes, stripData);\n\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\tOrient_4(
-      /*inout */attributes.axisX,  /*inout */attributes.axisY,  /*inout */attributes.axisZ);\n\t\t\t\tAttributeFromCurve_45ABB90F(
-      /*inout */attributes.size, attributes.age, attributes.lifetime, Size_b);\n\t\t\t\t{\n\t\t\t\t   
-      ColorOverLife_73257(attributes.age, attributes.lifetime,  /*inout */attributes.color, 
-      /*inout */attributes.alpha, gradient_c, (float)0.5, (float)0.5);\n\t\t\t\t}\n\t\t\t\t{\n\t\t\t\t   
-      uint tmp_bf = attributes.particleId / (uint)2;\n\t\t\t\t    uint tmp_bg = tmp_bf
+      attributes, stripData);\n\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\tOrient_189(
+      /*inout */attributes.axisX,  /*inout */attributes.axisY,  /*inout */attributes.axisZ,
+      attributes.position);\n\t\t\t\tAttributeFromCurve_45ABB90F( /*inout */attributes.size,
+      attributes.age, attributes.lifetime, Size_b);\n\t\t\t\t{\n\t\t\t\t    ColorOverLife_73257(attributes.age,
+      attributes.lifetime,  /*inout */attributes.color,  /*inout */attributes.alpha,
+      gradient_c, (float)0.5, (float)0.5);\n\t\t\t\t}\n\t\t\t\t{\n\t\t\t\t    uint
+      tmp_bf = attributes.particleId / (uint)2;\n\t\t\t\t    uint tmp_bg = tmp_bf
       * (uint)2;\n\t\t\t\t    uint tmp_bh = attributes.particleId - tmp_bg;\n\t\t\t\t   
       float tmp_bi = (float)tmp_bh;\n\t\t\t\t    bool tmp_bk = tmp_bi == (float)0;\n\t\t\t\t   
       SetAttribute_ED2BDC15( /*inout */attributes.alive, tmp_bk);\n\t\t\t\t}\n\t\t\t\t\n\n\t\t\t\t\n\t\t\t#if
@@ -1401,26 +1407,31 @@ VisualEffectResource:
       && defined(VFX_VARYING_POSCS))\n\t\t\t#error VFX_VARYING_PS_INPUTS, VFX_VARYING_POSCS
       and VFX_VARYING_UV must be defined.\n\t\t\t#endif\n\t\t\t\n\t\t\t#include \"Packages/com.unity.render-pipelines.high-definition/Runtime/VFXGraph/Shaders/VFXCommon.hlsl\"\n\t\t\t#include
       \"Packages/com.unity.visualeffectgraph/Shaders/VFXCommon.hlsl\"\n\t\t\t\n\n\t\t\tvoid
-      Orient_4(inout float3 axisX, inout float3 axisY, inout float3 axisZ) /*mode:FaceCameraPlane
-      axes:ZY */\n\t\t\t{\n\t\t\t    \n\t\t\t    float3x3 viewRot = GetVFXToViewRotMatrix();\n\t\t\t   
-      axisX = viewRot[0].xyz;\n\t\t\t    axisY = viewRot[1].xyz;\n\t\t\t    #if VFX_LOCAL_SPACE
-      // Need to remove potential scale in local transform\n\t\t\t    axisX = normalize(axisX);\n\t\t\t   
-      axisY = normalize(axisY);\n\t\t\t    axisZ = cross(axisX,axisY);\n\t\t\t   
-      #else\n\t\t\t    axisZ = -viewRot[2].xyz;\n\t\t\t    #endif\n\t\t\t    \n\t\t\t}\n\t\t\tvoid
-      AttributeFromCurve_45ABB90F(inout float size, float age, float lifetime, float4
-      Size) /*attribute:size Composition:Overwrite AlphaComposition:Overwrite SampleMode:OverLife
-      Mode:PerComponent ColorMode:ColorAndAlpha channels:X */\n\t\t\t{\n\t\t\t   
-      float t = age / lifetime;\n\t\t\t    float value = 0.0f;\n\t\t\t    value =
-      SampleCurve(Size, t);\n\t\t\t    size = value;\n\t\t\t}\n\t\t\tvoid ColorOverLife_73257(float
-      age, float lifetime, inout float3 color, inout float alpha, float gradient,
-      float BlendColor, float BlendAlpha) /*mode:ColorAndAlpha ColorComposition:Blend
-      AlphaComposition:Blend */\n\t\t\t{\n\t\t\t    \n\t\t\t    float4 sampledColor
-      = SampleGradient(gradient, age/lifetime);\n\t\t\t    color = lerp(color,sampledColor.rgb,BlendColor);\n\t\t\t   
-      alpha = lerp(alpha,sampledColor.a,BlendAlpha);\n\t\t\t    \n\t\t\t}\n\t\t\tvoid
-      SetAttribute_ED2BDC15(inout bool alive, bool Alive) /*attribute:alive Composition:Overwrite
-      Source:Slot Random:Off channels:XYZ */\n\t\t\t{\n\t\t\t    alive = Alive;\n\t\t\t}\n\t\t\t\n\n\t\t\t\n\t\t\t#if
-      defined(HAS_STRIPS) && !defined(VFX_PRIMITIVE_QUAD)\n\t\t\t#error VFX_PRIMITIVE_QUAD
-      must be defined when HAS_STRIPS is.\n\t\t\t#endif\n\t\t\t\n\t\t\tstruct vs_input\n\t\t\t{\n\t\t\t\tVFX_DECLARE_INSTANCE_ID\n\t\t\t};\n\t\t\t\n\t\t\t#if
+      Orient_189(inout float3 axisX, inout float3 axisY, inout float3 axisZ, float3
+      position) /*mode:FaceCameraPosition axes:ZY */\n\t\t\t{\n\t\t\t    \n\t\t\t   
+      if (unity_OrthoParams.w == 1.0f) // Face plane for ortho\n\t\t\t    {\n\t\t\t       
+      float3x3 viewRot = GetVFXToViewRotMatrix();\n\t\t\t        axisX = viewRot[0].xyz;\n\t\t\t       
+      axisY = viewRot[1].xyz;\n\t\t\t        #if VFX_LOCAL_SPACE // Need to remove
+      potential scale in local transform\n\t\t\t        axisX = normalize(axisX);\n\t\t\t       
+      axisY = normalize(axisY);\n\t\t\t        axisZ = cross(axisX,axisY);\n\t\t\t       
+      #else\n\t\t\t        axisZ = -viewRot[2].xyz;\n\t\t\t        #endif\n\t\t\t   
+      }\n\t\t\t    else\n\t\t\t    {\n\t\t\t        axisZ = normalize(position -
+      GetViewVFXPosition());\n\t\t\t        axisX = normalize(cross(GetVFXToViewRotMatrix()[1].xyz,axisZ));\n\t\t\t       
+      axisY = cross(axisZ,axisX);\n\t\t\t    }\n\t\t\t    \n\t\t\t}\n\t\t\tvoid AttributeFromCurve_45ABB90F(inout
+      float size, float age, float lifetime, float4 Size) /*attribute:size Composition:Overwrite
+      AlphaComposition:Overwrite SampleMode:OverLife Mode:PerComponent ColorMode:ColorAndAlpha
+      channels:X */\n\t\t\t{\n\t\t\t    float t = age / lifetime;\n\t\t\t    float
+      value = 0.0f;\n\t\t\t    value = SampleCurve(Size, t);\n\t\t\t    size = value;\n\t\t\t}\n\t\t\tvoid
+      ColorOverLife_73257(float age, float lifetime, inout float3 color, inout float
+      alpha, float gradient, float BlendColor, float BlendAlpha) /*mode:ColorAndAlpha
+      ColorComposition:Blend AlphaComposition:Blend */\n\t\t\t{\n\t\t\t    \n\t\t\t   
+      float4 sampledColor = SampleGradient(gradient, age/lifetime);\n\t\t\t    color
+      = lerp(color,sampledColor.rgb,BlendColor);\n\t\t\t    alpha = lerp(alpha,sampledColor.a,BlendAlpha);\n\t\t\t   
+      \n\t\t\t}\n\t\t\tvoid SetAttribute_ED2BDC15(inout bool alive, bool Alive) /*attribute:alive
+      Composition:Overwrite Source:Slot Random:Off channels:XYZ */\n\t\t\t{\n\t\t\t   
+      alive = Alive;\n\t\t\t}\n\t\t\t\n\n\t\t\t\n\t\t\t#if defined(HAS_STRIPS) &&
+      !defined(VFX_PRIMITIVE_QUAD)\n\t\t\t#error VFX_PRIMITIVE_QUAD must be defined
+      when HAS_STRIPS is.\n\t\t\t#endif\n\t\t\t\n\t\t\tstruct vs_input\n\t\t\t{\n\t\t\t\tVFX_DECLARE_INSTANCE_ID\n\t\t\t};\n\t\t\t\n\t\t\t#if
       HAS_STRIPS\n\t\t\t#define PARTICLE_IN_EDGE (id & 1)\n\t\t\t\n\t\t\tfloat3 GetParticlePosition(uint
       index)\n\t\t\t{\n\t\t\t\tstruct Attributes attributes = (Attributes)0;\n\t\t\t\tattributes.position
       = asfloat(attributeBuffer.Load3((index * 0x4 + 0x1E0) << 2));\n\t\t\t\t\n\n\t\t\t\treturn
@@ -1485,12 +1496,13 @@ VisualEffectResource:
       = (float)1;\n\t\t\t\t\t\tattributes.scaleZ = (float)1;\n\t\t\t\t\t\tattributes.particleId
       = (attributeBuffer.Load((index * 0x1 + 0x260) << 2));\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\n\t\t\t\t\t\t//
       Initialize built-in needed attributes\n\t\t\t\t\t\t#if HAS_STRIPS\n\t\t\t\t\t\tInitStripAttributes(index,
-      attributes, stripData);\n\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\tOrient_4(
-      /*inout */attributes.axisX,  /*inout */attributes.axisY,  /*inout */attributes.axisZ);\n\t\t\t\tAttributeFromCurve_45ABB90F(
-      /*inout */attributes.size, attributes.age, attributes.lifetime, Size_b);\n\t\t\t\t{\n\t\t\t\t   
-      ColorOverLife_73257(attributes.age, attributes.lifetime,  /*inout */attributes.color, 
-      /*inout */attributes.alpha, gradient_c, (float)0.5, (float)0.5);\n\t\t\t\t}\n\t\t\t\t{\n\t\t\t\t   
-      uint tmp_bf = attributes.particleId / (uint)2;\n\t\t\t\t    uint tmp_bg = tmp_bf
+      attributes, stripData);\n\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\tOrient_189(
+      /*inout */attributes.axisX,  /*inout */attributes.axisY,  /*inout */attributes.axisZ,
+      attributes.position);\n\t\t\t\tAttributeFromCurve_45ABB90F( /*inout */attributes.size,
+      attributes.age, attributes.lifetime, Size_b);\n\t\t\t\t{\n\t\t\t\t    ColorOverLife_73257(attributes.age,
+      attributes.lifetime,  /*inout */attributes.color,  /*inout */attributes.alpha,
+      gradient_c, (float)0.5, (float)0.5);\n\t\t\t\t}\n\t\t\t\t{\n\t\t\t\t    uint
+      tmp_bf = attributes.particleId / (uint)2;\n\t\t\t\t    uint tmp_bg = tmp_bf
       * (uint)2;\n\t\t\t\t    uint tmp_bh = attributes.particleId - tmp_bg;\n\t\t\t\t   
       float tmp_bi = (float)tmp_bh;\n\t\t\t\t    bool tmp_bk = tmp_bi != (float)0;\n\t\t\t\t   
       SetAttribute_ED2BDC15( /*inout */attributes.alive, tmp_bk);\n\t\t\t\t}\n\t\t\t\t\n\n\t\t\t\t\n\t\t\t#if
@@ -5179,7 +5191,7 @@ MonoBehaviour:
   m_InputSlots: []
   m_OutputSlots: []
   m_Disabled: 0
-  mode: 0
+  mode: 1
   axes: 4
 --- !u!114 &8926484042661614661
 MonoBehaviour:
