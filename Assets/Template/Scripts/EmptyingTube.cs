@@ -13,6 +13,7 @@ public class EmptyingTube : MonoBehaviour
     float newFilling;
 
     public float speedMultiplier = 1.0f;
+    //Level is the height plan where the liquid starts to go out from the tube
     float level = 0.025f;
 
     MeshRenderer meshRenderer;
@@ -54,7 +55,7 @@ public class EmptyingTube : MonoBehaviour
             //To correct an artefact when empty.
             if (filling < 0.007)
             {
-                material.SetFloat("AlphaModifier", 0.0f);
+                material.SetFloat("Modifier", 0.0f);
             }
          }
     }
