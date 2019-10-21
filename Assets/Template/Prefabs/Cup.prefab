@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1938307128344788118
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 746816055747006237}
+  - component: {fileID: 6599453122801376718}
+  m_Layer: 0
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &746816055747006237
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1938307128344788118}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 902845934100456886}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &6599453122801376718
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1938307128344788118}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7062276064935470353, guid: b7ddcd2a894e2264cabfaa66af708d7f, type: 3}
 --- !u!64 &4482475002025635238
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -48,6 +93,7 @@ Transform:
   - {fileID: 501891269628790696}
   - {fileID: 8805037383012364724}
   - {fileID: 7808314704462272426}
+  - {fileID: 746816055747006237}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -165,13 +211,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7199508729403539423}
-  m_LocalRotation: {x: -0, y: 0.95351356, z: -0, w: -0.3013502}
+  m_LocalRotation: {x: -0, y: 0.999946, z: -0, w: 0.010390289}
   m_LocalPosition: {x: 0, y: 0.0583, z: 0.0802}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 902845934100456886}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 215.077, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 178.809, z: 0}
 --- !u!1001 &4560864494139808430
 PrefabInstance:
   m_ObjectHideFlags: 0
