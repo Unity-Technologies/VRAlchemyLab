@@ -1,0 +1,31 @@
+{
+    "name": "Unity.XR.Interaction.Toolkit.Tests",
+    "references": [
+        "Unity.XR.Interaction.Toolkit",
+        "Unity.ugui",
+        "Unity.XR.ARSubsystems",
+        "Unity.XR.ARFoundation",
+        "UnityEngine.SpatialTracking"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+	  ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"        
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [        
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.unity.xr.arfoundation",
+            "expression": "2.0.2",
+            "define": "AR_FOUNDATION_PRESENT"
+        }
+    ]
+}
