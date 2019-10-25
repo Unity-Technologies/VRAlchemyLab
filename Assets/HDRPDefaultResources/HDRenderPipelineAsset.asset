@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cf1dab834d4ec34195b920ea7bbf9ec, type: 3}
   m_Name: HDRenderPipelineAsset
   m_EditorClassIdentifier: 
-  m_Version: 6
+  m_Version: 9
   m_ObsoleteFrameSettings:
     overrides: 0
     enableShadow: 0
@@ -155,30 +155,39 @@ MonoBehaviour:
     type: 2}
   m_RenderingPathDefaultCameraFrameSettings:
     bitDatas:
-      data1: 69284255760157
-      data2: 4539628424657829888
+      data1: 69559133667101
+      data2: 4539628424926265344
     lodBias: 1
     lodBiasMode: 0
+    lodBiasQualityLevel: 0
     maximumLODLevel: 0
     maximumLODLevelMode: 0
+    maximumLODLevelQualityLevel: 0
+    materialQuality: 0
   m_RenderingPathDefaultBakedOrCustomReflectionFrameSettings:
     bitDatas:
       data1: 69284255760157
       data2: 4539628424389459968
     lodBias: 1
     lodBiasMode: 0
+    lodBiasQualityLevel: 0
     maximumLODLevel: 0
     maximumLODLevelMode: 0
+    maximumLODLevelQualityLevel: 0
+    materialQuality: 0
   m_RenderingPathDefaultRealtimeReflectionFrameSettings:
     bitDatas:
-      data1: 69284098219805
+      data1: 69558976126749
       data2: 4539628424389459968
     lodBias: 1
     lodBiasMode: 0
+    lodBiasQualityLevel: 0
     maximumLODLevel: 0
     maximumLODLevelMode: 0
+    maximumLODLevelQualityLevel: 0
+    materialQuality: 0
   m_RenderPipelineSettings:
-    supportShadowMask: 1
+    supportShadowMask: 0
     supportSSR: 0
     supportSSAO: 1
     supportSubsurfaceScattering: 1
@@ -197,6 +206,7 @@ MonoBehaviour:
     supportMotionVectors: 1
     supportRuntimeDebugDisplay: 1
     supportDitheringCrossFade: 1
+    supportTerrainHole: 0
     supportRayTracing: 0
     supportedRaytracingTier: 2
     lightLoopSettings:
@@ -223,7 +233,7 @@ MonoBehaviour:
     hdShadowInitParams:
       maxShadowRequests: 128
       directionalShadowsDepthBits: 32
-      shadowQuality: 0
+      shadowFilteringQuality: 0
       punctualLightShadowAtlas:
         shadowAtlasResolution: 4096
         shadowAtlasDepthBits: 32
@@ -232,6 +242,15 @@ MonoBehaviour:
         shadowAtlasResolution: 4096
         shadowAtlasDepthBits: 32
         useDynamicViewportRescale: 1
+      shadowResolutionDirectional:
+        m_Values: 00010000000200000004000000080000
+      shadowResolutionPunctual:
+        m_Values: 00010000000200000004000000080000
+      shadowResolutionArea:
+        m_Values: 00010000000200000004000000080000
+      maxDirectionalShadowMapResolution: 2048
+      maxPunctualShadowMapResolution: 2048
+      maxAreaShadowMapResolution: 2048
       supportScreenSpaceShadows: 0
       maxScreenSpaceShadows: 2
     decalSettings:
@@ -254,12 +273,49 @@ MonoBehaviour:
       enabled: 1
       checkerboardDepthBuffer: 1
       upsampleType: 1
+    xrSettings:
+      occlusionMesh: 1
+    postProcessQualitySettings:
+      NearBlurSampleCount: 030000000500000008000000
+      NearBlurMaxRadius:
+      - 2
+      - 4
+      - 7
+      FarBlurSampleCount: 04000000070000000e000000
+      FarBlurMaxRadius:
+      - 5
+      - 8
+      - 13
+      DoFResolution: 040000000200000001000000
+      DoFHighQualityFiltering: 000101
+      MotionBlurSampleCount: 04000000080000000c000000
+      BloomRes: 040000000200000002000000
+      BloomHighQualityFiltering: 000101
+      ChromaticAberrationMaxSamples: 03000000060000000c000000
+    lightSettings:
+      useContactShadow:
+        m_Low: 0
+        m_Medium: 0
+        m_High: 0
+    maximumLODLevel:
+      m_Low: 0
+      m_Medium: 0
+      m_High: 0
+    lodBias:
+      m_Low: 1
+      m_Medium: 1
+      m_High: 1
   allowShaderVariantStripping: 1
   enableSRPBatcher: 1
   shaderVariantLogLevel: 0
+  materialQualityLevels: -1
+  m_CurrentMaterialQualityLevel: 4
   diffusionProfileSettings: {fileID: 0}
   diffusionProfileSettingsList:
   - {fileID: 11400000, guid: e5afe2e9bd341fd4a96ce02b3c1c6098, type: 2}
-  - {fileID: 11400000, guid: 97f022c5c2f72514a9abee345f801d34, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 6fa47b5fe7126544bb154a15303f4ed2, type: 2}
   - {fileID: 0}
+  beforeTransparentCustomPostProcesses: []
+  beforePostProcessCustomPostProcesses: []
+  afterPostProcessCustomPostProcesses: []
