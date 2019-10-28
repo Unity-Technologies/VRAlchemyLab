@@ -11,10 +11,14 @@ namespace RDSystem
 
         private void OnCollisionEnter(Collision collision)
         {
-            var pos = gameObject.transform.InverseTransformPoint(collision.contacts[0].point);
-            updater.hitPosition = new Vector2(pos.x + 0.5f, pos.y + 0.5f);
-            updater.hitColor = collision.gameObject.GetComponent<MeshRenderer>().materials[materialID].GetColor(colorPropertyName);
-            updater.Hit();
+            var fillRate = collision.gameObject.GetComponent<MeshRenderer>().materials[materialID].GetFloat("FillingRate");
+            if(fillRate>0)
+            {
+                var pos = gameObject.transform.InverseTransformPoint(collision.contacts[0].point);
+                updater.hitPosition = new Vector2(pos.x + 0.5f, pos.y + 0.5f);
+                updater.hitColor = collision.gameObject.GetComponent<MeshRenderer>().materials[materialID].GetColor(colorPropertyName);
+                updater.Hit();
+            }
         }
     }
 }
