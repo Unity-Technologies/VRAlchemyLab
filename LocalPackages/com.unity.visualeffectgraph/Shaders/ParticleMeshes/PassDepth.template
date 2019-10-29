@@ -1,0 +1,14 @@
+// Depth pass
+Pass
+{		
+	Tags { "LightMode"=${VFXPassDepth} }
+
+	ZWrite On
+	Blend Off
+	
+	HLSLPROGRAM
+	#define IS_MOTION_VECTORS_PASS 0
+	${VFXInclude("Shaders/ParticleMeshes/PassDepthOrMV.template")}
+
+	ENDHLSL
+}

@@ -1,0 +1,47 @@
+{
+    "name": "Unity.VisualEffectGraph.Runtime",
+    "references": [
+        "Unity.Timeline",
+        "Unity.ugui",
+        "Unity.RenderPipelines.HighDefinition.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.timeline",
+            "expression": "[0.0.0-builtin]",
+            "define": "VFX_HAS_TIMELINE"
+        },
+        {
+            "name": "com.unity.timeline",
+            "expression": "1.0.0",
+            "define": "VFX_HAS_TIMELINE"
+        },
+        {
+            "name": "com.unity.modules.terrain",
+            "expression": "1.0.0",
+            "define": "VFX_HAS_TERRAINMODULE"
+        },
+        {
+            "name": "com.unity.ugui",
+            "expression": "1.0.0",
+            "define": "VFX_HAS_UI"
+        },
+        {
+            "name": "com.unity.modules.physics",
+            "expression": "1.0.0",
+            "define": "VFX_HAS_PHYSICS"
+        },
+        {
+            "name": "com.unity.modules.audio",
+            "expression": "1.0.0",
+            "define": "VFX_HAS_AUDIO"
+        }
+    ]
+}
