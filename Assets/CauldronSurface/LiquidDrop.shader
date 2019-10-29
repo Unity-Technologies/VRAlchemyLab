@@ -59,7 +59,7 @@
 
 		float pct = 0.0;
 		// a. The DISTANCE from the pixel to the center
-		pct = saturate(1.0 - distance(i.globalTexcoord, _Position.xy) * 10.0);
+		pct = saturate(1.0f - distance(i.globalTexcoord.xy, _Position.xy) * 10.0f);
 
 		return half4(color.xyz, pct);
 	}
