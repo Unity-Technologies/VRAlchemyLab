@@ -45,6 +45,7 @@
         // Add your custom pass code here
 
 		float4 liquidColor = SampleCustomColor(posInput.positionNDC.xy);
+		liquidColor.a = saturate(sign(liquidColor.a - 0.5));
 
         return liquidColor;
     }

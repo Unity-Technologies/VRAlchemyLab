@@ -1,4 +1,4 @@
-﻿Shader "Hidden/FullScreen/Blur"
+﻿Shader "Hidden/FullScreen/BlurPasses"
 {
 	HLSLINCLUDE
 
@@ -42,7 +42,7 @@
 
 #pragma enable_d3d11_debug_symbols
 
-	float3 BlurPixels(float3 taps[9])
+	float4 BlurPixels(float4 taps[9])
 	{
 		return 0.27343750 * (taps[4])
 			+ 0.21875000 * (taps[3] + taps[5])
@@ -72,14 +72,14 @@
 
 		// Horizontal blur from the camera color buffer
 		float2 offset = _ScreenSize.zw * _Radius; // We don't use _ViewPortSize here because we want the offset to be the same between all the blur passes.
-		float3 taps[9];
+		float4 taps[9];
 		for (int i = -4; i <= 4; i++)
 		{
 			float2 uv = ClampUVs(texcoord + float2(i, 0) * offset);
-			taps[i + 4] = SAMPLE_TEXTURE2D_X_LOD(_Source, s_linear_clamp_sampler, uv, 0).rgb;
+			taps[i + 4] = SAMPLE_TEXTURE2D_X_LOD(_Source, s_linear_clamp_sampler, uv, 0);
 		}
 
-		return float4(BlurPixels(taps), 1);
+		return BlurPixels(taps);
 	}
 
 		float4 VerticalBlur(Varyings varyings) : SV_Target
@@ -88,14 +88,14 @@
 
 		// Vertical blur from the blur color buffer
 		float2 offset = _ScreenSize.zw * _Radius;
-		float3 taps[9];
+		float4 taps[9];
 		for (int i = -4; i <= 4; i++)
 		{
 			float2 uv = ClampUVs(texcoord + float2(0, i) * offset);
-			taps[i + 4] = SAMPLE_TEXTURE2D_X_LOD(_Source, s_linear_clamp_sampler, uv, 0).rgb;
+			taps[i + 4] = SAMPLE_TEXTURE2D_X_LOD(_Source, s_linear_clamp_sampler, uv, 0);
 		}
 
-		return float4(BlurPixels(taps), 1);
+		return BlurPixels(taps);
 	}
 
 
