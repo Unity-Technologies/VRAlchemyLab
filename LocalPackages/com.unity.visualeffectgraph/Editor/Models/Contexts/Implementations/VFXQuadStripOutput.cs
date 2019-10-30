@@ -9,10 +9,13 @@ namespace UnityEditor.VFX
     class VFXQuadStripOutput : VFXAbstractParticleOutput
     {
         [VFXSetting, SerializeField]
-        protected StripTilingMode tilingMode = StripTilingMode.Stretch; 
+        protected StripTilingMode tilingMode = StripTilingMode.Stretch;
+
+        [VFXSetting, SerializeField]
+        private bool UseCustomZAxis = false;
 
         protected VFXQuadStripOutput() : base(true) { }
-        public override string name { get { return "Quad Strip Output"; } }
+        public override string name { get { return "Output ParticleStrip Quad"; } }
         public override string codeGeneratorTemplate { get { return RenderPipeTemplate("VFXParticlePlanarPrimitive"); } }
         public override VFXTaskType taskType { get { return VFXTaskType.ParticleQuadOutput; } }
 
@@ -20,6 +23,7 @@ namespace UnityEditor.VFX
 
         public class InputProperties
         {
+            [Tooltip("Specifies the base color (RGB) and opacity (A) of the particle.")]
             public Texture2D mainTexture = VFXResources.defaultResources.particleTexture;
         }
 
@@ -60,6 +64,9 @@ namespace UnityEditor.VFX
 
                 if (tilingMode == StripTilingMode.Stretch)
                     yield return "VFX_STRIPS_UV_STRECHED";
+
+                if (UseCustomZAxis)
+                    yield return "VFX_STRIPS_ORIENT_CUSTOM";
 
                 yield return VFXPlanarPrimitiveHelper.GetShaderDefine(VFXPrimitiveType.Quad);
             }

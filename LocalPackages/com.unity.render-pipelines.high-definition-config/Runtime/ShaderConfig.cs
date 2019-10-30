@@ -28,7 +28,7 @@ namespace UnityEngine.Rendering.HighDefinition
 #else
         XrMaxViews = 1,
 #endif
-        AreaLights = 0,
+        AreaLights = 1,
 
         DeferredShadowFiltering = HDShadowFilteringQuality.Medium
     };

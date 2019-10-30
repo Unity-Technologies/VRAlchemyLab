@@ -4,21 +4,19 @@ All notable changes to this package are documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [7.1.3] - 2019-09-XX
-
-Version Updated
-The version number for this package has increased due to a version update of a related graphics package.
-
-## [7.1.2] - 2019-09-19
+## [7.2.0] - 2019-XX-XX
 ### Added
 - Added samples for Procedural Patterns to the package.
 - You can now use the right-click context menu to delete Sticky Notes.
+- Added support for vertex skinning when you use the DOTS animation package.
 
 ### Fixed 
 - The Editor now displays correct errors for missing or deleted Sub Graph Assets.
 - You can no longer drag and drop recursive nodes onto Sub Graph Assets.
 - Shader Graph no longer references the `NUnit` package.
 - Fixed a shader compatibility issue in the SRP Batcher when you use a hybrid instancing custom variable.
+- Fixed an issue where Unity would crash when you imported a Shader Graph Asset with invalid formatting.
+- Fixed an issue with the animated preview when there is no Camera with animated Materials in the Editor.
 
 ## [7.1.1] - 2019-09-05
 ### Added
