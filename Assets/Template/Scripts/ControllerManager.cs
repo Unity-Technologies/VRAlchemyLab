@@ -9,8 +9,10 @@ public class ControllerManager : MonoBehaviour
     InputDevice m_RightController;
     InputDevice m_LeftController;
 
-    bool m_LeftTouchPadClicked;
-    bool m_LeftPrimaryButtonClicked;
+    bool m_LeftPrimaryButtonPressed;
+    bool m_LeftSecondaryButtonPressed;
+    bool m_LeftGripButtonPressed;
+
     bool m_RightTouchPadClicked;
     bool m_RightPrimaryButtonClicked;
 
@@ -167,7 +169,7 @@ public class ControllerManager : MonoBehaviour
             {
                 m_LeftController = connectedDevice;
                 m_LeftControllerState.ClearAll();
-                m_LeftControllerState.SetState(ControllerStates.Select);
+                //m_LeftControllerState.SetState(ControllerStates.Select);
             }
             else if (connectedDevice.role == InputDeviceRole.RightHanded)
             {
@@ -182,16 +184,22 @@ public class ControllerManager : MonoBehaviour
     {
         if (m_LeftController.isValid)
         {           
-            m_LeftController.TryGetFeatureValue(CommonUsages.primary2DAxisClick, out m_LeftTouchPadClicked);
-            m_LeftController.TryGetFeatureValue(CommonUsages.primaryButton, out m_LeftPrimaryButtonClicked);
+            
+            m_LeftController.TryGetFeatureValue(CommonUsages.primaryButton, out m_LeftPrimaryButtonPressed);
+            m_LeftController.TryGetFeatureValue(CommonUsages.secondaryButton, out m_LeftSecondaryButtonPressed);
+            m_LeftController.TryGetFeatureValue(CommonUsages.gripButton, out m_LeftGripButtonPressed);
 
-            if (m_LeftTouchPadClicked || m_LeftPrimaryButtonClicked)
+            if (m_LeftPrimaryButtonPressed)
             {
                 m_LeftControllerState.SetState(ControllerStates.Teleport);
             }
-            else
+            if (m_LeftSecondaryButtonPressed)
             {
                 m_LeftControllerState.SetState(ControllerStates.Select);
+            }
+            if (m_LeftGripButtonPressed)
+            {
+                m_LeftControllerState.ClearAll();
             }
         }
 
