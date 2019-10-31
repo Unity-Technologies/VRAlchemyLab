@@ -96,7 +96,7 @@ class LiquidCustomPass : CustomPass
         using (new ProfilingSample(cmd, "Downsample", CustomSampler.Create("Downsample")))
         {
             // This Blit will automatically downsample the color because our target buffer have been allocated in half resolution
-            HDUtils.BlitCameraTexture(cmd, customColorBuffer, downSampleBuffer, 0);
+            HDUtils.BlitCameraTexture(cmd, customColorBuffer, downSampleBuffer,0, true);
         }
 
         // Horizontal Blur

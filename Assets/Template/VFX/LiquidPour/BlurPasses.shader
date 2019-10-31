@@ -61,6 +61,7 @@
 	float2 GetSampleUVs(Varyings varyings)
 	{
 		float depth = LoadCameraDepth(varyings.positionCS.xy);
+		//float linearDepth = Linear01Depth(depth,_ZBufferParams);
 		PositionInputs posInput = GetPositionInput(varyings.positionCS.xy, _ViewPortSize.zw, depth, UNITY_MATRIX_I_VP, UNITY_MATRIX_V);
 		return posInput.positionNDC.xy * _RTHandleScale;
 	}
