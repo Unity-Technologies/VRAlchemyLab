@@ -7,10 +7,11 @@ using UnityEngine.Profiling;
 class LiquidCustomPass : CustomPass
 {
     ShaderTagId[] shaderTags;
+    [Range(0, 20)]
     public float radius = 4;
     public LayerMask maskLayer = 0;
 
-    Material blurMaterial;
+    Material blurMaterial;// To destroy in the end
     RTHandle downSampleBuffer;
     RTHandle blurBuffer;
 
@@ -128,6 +129,8 @@ class LiquidCustomPass : CustomPass
 
     protected override void Cleanup()
     {
-        // Cleanup code
+        CoreUtils.Destroy(blurMaterial);
+        downSampleBuffer.Release();
+        blurBuffer.Release();
     }
 }

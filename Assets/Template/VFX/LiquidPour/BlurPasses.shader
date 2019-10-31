@@ -57,7 +57,7 @@
 		uv = clamp(uv, 0, _RTHandleScale.xy - _ViewPortSize.zw); // clamp UV to 1 pixel to avoid bleeding
 		return uv;
 	}
-
+	
 	float2 GetSampleUVs(Varyings varyings)
 	{
 		float depth = LoadCameraDepth(varyings.positionCS.xy);
@@ -69,30 +69,32 @@
 
 	float4 HorizontalBlur(Varyings varyings) : SV_Target
 	{
+		UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(varyings);
 		float2 texcoord = GetSampleUVs(varyings);
 
 		// Horizontal blur from the camera color buffer
-		float2 offset = _ScreenSize.zw * _Radius; // We don't use _ViewPortSize here because we want the offset to be the same between all the blur passes.
+		float offset = _Radius * 0.001;
 		float4 taps[9];
 		for (int i = -4; i <= 4; i++)
 		{
-			float2 uv = ClampUVs(texcoord + float2(i, 0) * offset);
+			float2 uv = ClampUVs(texcoord + float2(i * offset, 0));
 			taps[i + 4] = SAMPLE_TEXTURE2D_X_LOD(_Source, s_linear_clamp_sampler, uv, 0);
 		}
 
 		return BlurPixels(taps);
 	}
 
-		float4 VerticalBlur(Varyings varyings) : SV_Target
+	float4 VerticalBlur(Varyings varyings) : SV_Target
 	{
+		UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(varyings);
 		float2 texcoord = GetSampleUVs(varyings);
 
 		// Vertical blur from the blur color buffer
-		float2 offset = _ScreenSize.zw * _Radius;
+		float offset = max(0.1,(_ViewPortSize.x/ _ViewPortSize.y)) * _Radius * 0.001;
 		float4 taps[9];
 		for (int i = -4; i <= 4; i++)
 		{
-			float2 uv = ClampUVs(texcoord + float2(0, i) * offset);
+			float2 uv = ClampUVs(texcoord + float2(0,i * offset));
 			taps[i + 4] = SAMPLE_TEXTURE2D_X_LOD(_Source, s_linear_clamp_sampler, uv, 0);
 		}
 
