@@ -104,7 +104,7 @@ AnimatorStateMachine:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Base Layer
+  m_Name: Book
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1414103130660374195}
@@ -112,9 +112,6 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -6074286134718292783}
     m_Position: {x: 420, y: 280, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 5818613912626549495}
-    m_Position: {x: 820, y: 280, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6330289848339259875}
     m_Position: {x: 820, y: 150, z: 0}
@@ -149,15 +146,9 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: PageOpen
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
-    m_Name: Base Layer
+    m_Name: Book
     m_StateMachine: {fileID: -1340653608927685516}
     m_Mask: {fileID: 0}
     m_Motions: []
@@ -221,33 +212,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!1102 &5818613912626549495
-AnimatorState:
-  serializedVersion: 5
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: OpenPose
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 4700592489890859373, guid: 785ca8a763f95a94b8e067ed5dd34756,
-    type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1101 &6159238090909193142
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
