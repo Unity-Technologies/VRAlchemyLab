@@ -9,22 +9,28 @@ public class LiquidPour : MonoBehaviour
 {
     [Range(0.01f, 7)]
     public float bottleNeckDiameter = 2;
+    public Color color = Color.white;
 
     VisualEffect vfx;
     float flow;
+    float flowLimit;
 
     float verticality;
     Vector3 upVector;
+    bool playVFX;
 
     private void Init()
     {
         vfx = GetComponent<VisualEffect>();
+        flowLimit = vfx.GetFloat("StripFlowLimit");
     }
 
     private void Verif()
     {
         if(vfx == null)
             vfx = GetComponent<VisualEffect>();
+
+        flowLimit = vfx.GetFloat("StripFlowLimit");
     }
 
     private void UpdateVFX()
@@ -50,8 +56,20 @@ public class LiquidPour : MonoBehaviour
     {
         Verif();
         UpdateVFX();
+
+        if ((!playVFX) && (flow <= flowLimit))
+        {
+            playVFX = true;
+        }
+        if (playVFX)
+        {
+            vfx.Play();
+            playVFX = false;
+        }
+
         vfx.SetFloat("Flow", flow);
         vfx.SetFloat("BottleDiameter(cm)", bottleNeckDiameter);
-        
+        vfx.SetVector4("Color", color);
+
     }
 }
