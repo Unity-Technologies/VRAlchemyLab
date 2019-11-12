@@ -4,11 +4,19 @@ All notable changes to this package will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [7.2.0] - 2019-XX-XX
+## [7.1.3] - 2019-11-04
+
+Version Updated
+The version number for this package has increased due to a version update of a related graphics package.
+
+## [7.1.2] - 2019-09-19
 
 ### Changed
 - Restored usage of ENABLE_VR to fix compilation errors on some platforms.
-- Only call SetDirty on an object when actually modifying it in SRP updater utility 
+- Only call SetDirty on an object when actually modifying it in SRP updater utility
+
+### Fixed
+- Fixed compile errors for platforms with no VR support
 
 ## [7.1.1] - 2019-09-05
 

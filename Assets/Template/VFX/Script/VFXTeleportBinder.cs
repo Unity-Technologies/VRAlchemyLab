@@ -35,7 +35,7 @@ public class VFXTeleportBinder : VFXBinderBase
         int id = 0;
         bool hit = false;
 
-        if (XRRayInteractor.TryGetHitInfo(ref m_Position, ref m_Normal, ref id, ref hit))
+        if (XRRayInteractor.TryGetHitInfo(ref m_Position, ref m_Normal, ref id, ref hit) && XRRayInteractor.isActiveAndEnabled)
         {
             component.SetBool(HitProperty, true);
             component.SetVector3(TargetProperty, m_Position);
