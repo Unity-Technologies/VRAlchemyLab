@@ -538,9 +538,8 @@ VisualEffectResource:
       Off\n\t\t\t\n\t\t\tHLSLPROGRAM\n\t\t\t#define VFX_PASSDEPTH VFX_PASSDEPTH_SELECTION\n\t\t\t#pragma
       target 4.5\n\t\t\t#define UNITY_MATERIAL_LIT\n\t\t\t#pragma multi_compile _
       WRITE_NORMAL_BUFFER\n\t\t\t\n\t\t\t#define NEEDS_NORMAL\tdefined(WRITE_NORMAL_BUFFER)
-      || FORCE_NORMAL_VARYING || SHADERGRAPH_HAS_NORMAL // TODO Should extract mv
-      pass\n\t\t\t#define NEEDS_TANGENT\tUSE_NORMAL_MAP || USE_NORMAL_BENDING ||
-      SHADERGRAPH_NEEDS_TANGENT_DEPTH || SHADERGRAPH_HAS_NORMAL\n\t\t\t\n\t\t\tstruct
+      || FORCE_NORMAL_VARYING || SHADERGRAPH_NEEDS_NORMAL_DEPTHONLY\n\t\t\t#define
+      NEEDS_TANGENT\tUSE_NORMAL_MAP || USE_NORMAL_BENDING || SHADERGRAPH_NEEDS_TANGENT_DEPTHONLY\n\t\t\t\n\t\t\tstruct
       ps_input\n\t\t\t{\n\t\t\t\tfloat4 pos : SV_POSITION;\n\t\t\t\t#if USE_FLIPBOOK_INTERPOLATION\n\t\t\t\tfloat4
       uv : TEXCOORD0;\n\t\t\t\t#else\n\t\t\t\tfloat2 uv : TEXCOORD0;\t\n\t\t\t\t#endif\n\t\t\t\t#if
       USE_ALPHA_TEST || USE_FLIPBOOK_INTERPOLATION || VFX_USE_ALPHA_CURRENT\n\t\t\t\t//
@@ -768,36 +767,36 @@ VisualEffectResource:
       WRITE_NORMAL_BUFFER\n\t\t\t\t\t, out float4 outNormalBuffer : SV_Target1\n\t\t\t\t#endif\n\t\t\t#else\n\t\t\t\t#ifdef
       WRITE_NORMAL_BUFFER\n\t\t\t\t\t, out float4 outNormalBuffer : SV_Target0\n\t\t\t\t#elif
       VFX_PASSDEPTH == VFX_PASSDEPTH_SELECTION\n\t\t\t\t\t, out float4 outColor :
-      SV_Target0\n\t\t\t\t#endif\n\t\t\t#endif\n\t\t\t\t)\n\t\t\t{\n\t\t\t\tUNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);\n\t\t\t\tVFXTransformPSInputs(i);\n\t\t\t\t#ifdef
+      SV_Target0\n\t\t\t\t#endif\n\t\t\t#endif\n\t\t\t\t)\n\t\t\t{\n\t\t\t\tUNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);\n\t\t\t\tVFXTransformPSInputs(i);\n\t\t\t\t\n\t\t\t\t\t\t\t#ifdef
+      VFX_VARYING_NORMAL\n\t\t\t\t\t\t\t#if USE_DOUBLE_SIDED\n\t\t\t\t\t\t\tconst
+      float faceMul = frontFace ? 1.0f : -1.0f;\n\t\t\t\t\t\t\t#else\n\t\t\t\t\t\t\tconst
+      float faceMul = 1.0f;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\tfloat3
+      normalWS = i.VFX_VARYING_NORMAL * faceMul;\n\t\t\t\t\t\t\tconst VFXUVData uvData
+      = GetUVData(i);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#ifdef VFX_VARYING_TANGENT\n\t\t\t\t\t\t\tfloat3
+      tangentWS = i.VFX_VARYING_TANGENT;\n\t\t\t\t\t\t\tfloat3 bitangentWS = cross(i.VFX_VARYING_TANGENT,i.VFX_VARYING_NORMAL);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#if
+      defined(VFX_VARYING_BENTFACTORS) && USE_NORMAL_BENDING\t\n\t\t\t\t\t\t\tfloat3
+      bentFactors = float3(i.VFX_VARYING_BENTFACTORS.xy,sqrt(1.0f - dot(i.VFX_VARYING_BENTFACTORS,i.VFX_VARYING_BENTFACTORS)));\n\t\t\t\t\t\t\tnormalWS
+      = tangentWS * bentFactors.x + bitangentWS * bentFactors.y + normalWS * bentFactors.z;\n\t\t\t\t\t\t\ttangentWS
+      = normalize(cross(normalWS,bitangentWS));\n\t\t\t\t\t\t\tbitangentWS = cross(tangentWS,normalWS);\n\t\t\t\t\t\t\ttangentWS
+      *= faceMul;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\tfloat3x3 tbn
+      = float3x3(tangentWS,bitangentWS,normalWS);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#if
+      USE_NORMAL_MAP\n\t\t\t\t\t\t\tfloat3 n = SampleNormalMap(VFX_SAMPLER(normalMap),uvData);\n\t\t\t\t\t\t\tfloat
+      normalScale = 1.0f;\n\t\t\t\t\t\t\t#ifdef VFX_VARYING_NORMALSCALE\n\t\t\t\t\t\t\tnormalScale
+      = i.VFX_VARYING_NORMALSCALE;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\tnormalWS
+      = normalize(lerp(normalWS,mul(n,tbn),normalScale));\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t#ifdef
       VFX_SHADERGRAPH\n\t\t\t    \n\t\t\t        \n\t\t\t        \n\t\t\t       
       \n\t\t\t        \n\t\t\t        float alpha = OUTSG.;\n\t\t\t    #else\n\t\t\t       
       float alpha = VFXGetFragmentColor(i).a;\n\t\t\t        #if HDRP_USE_BASE_COLOR_MAP_ALPHA\n\t\t\t           
       alpha *= VFXGetTextureColor(VFX_SAMPLER(baseColorMap),i).a;\n\t\t\t       
       #endif\n\t\t\t    #endif\n\t\t\t        VFXClipFragmentColor(alpha,i);\n\t\t\t\t\n\t\t\t\t#ifdef
-      WRITE_NORMAL_BUFFER\n\t\t\t\t\t\n\t\t\t\t\t\t\t\t#if USE_DOUBLE_SIDED\n\t\t\t\t\t\t\t\tconst
-      float faceMul = frontFace ? 1.0f : -1.0f;\n\t\t\t\t\t\t\t\t#else\n\t\t\t\t\t\t\t\tconst
-      float faceMul = 1.0f;\n\t\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\tfloat3
-      normalWS = i.VFX_VARYING_NORMAL * faceMul;\n\t\t\t\t\t\t\t\tconst VFXUVData
-      uvData = GetUVData(i);\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t#if defined(VFX_VARYING_TANGENT)
-      && (USE_NORMAL_MAP || USE_NORMAL_BENDING || VFX_SHADERGRAPH)\n\t\t\t\t\t\t\t\tfloat3
-      tangentWS = i.VFX_VARYING_TANGENT;\n\t\t\t\t\t\t\t\tfloat3 bitangentWS = cross(i.VFX_VARYING_TANGENT,i.VFX_VARYING_NORMAL);\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t#if
-      defined(VFX_VARYING_BENTFACTORS) && USE_NORMAL_BENDING\t\n\t\t\t\t\t\t\t\tfloat3
-      bentFactors = float3(i.VFX_VARYING_BENTFACTORS.xy,sqrt(1.0f - dot(i.VFX_VARYING_BENTFACTORS,i.VFX_VARYING_BENTFACTORS)));\n\t\t\t\t\t\t\t\tnormalWS
-      = tangentWS * bentFactors.x + bitangentWS * bentFactors.y + normalWS * bentFactors.z;\n\t\t\t\t\t\t\t\ttangentWS
-      = normalize(cross(normalWS,bitangentWS));\n\t\t\t\t\t\t\t\tbitangentWS = cross(tangentWS,normalWS);\n\t\t\t\t\t\t\t\ttangentWS
-      *= faceMul;\n\t\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t#if
-      USE_NORMAL_MAP\n\t\t\t\t\t\t\t\tfloat3 n = SampleNormalMap(VFX_SAMPLER(normalMap),uvData);\n\t\t\t\t\t\t\t\tfloat3x3
-      tbn = float3x3(tangentWS,bitangentWS,normalWS);\n\t\t\t\t\t\t\t\tfloat normalScale
-      = 1.0f;\n\t\t\t\t\t\t\t\t#ifdef VFX_VARYING_NORMALSCALE\n\t\t\t\t\t\t\t\tnormalScale
-      = i.VFX_VARYING_NORMALSCALE;\n\t\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\tnormalWS
-      = normalize(lerp(normalWS,mul(n,tbn),normalScale));\n\t\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t\n\t\t\t       
-      #ifndef VFX_SHADERGRAPH\n\t\t\t            VFXComputePixelOutputToNormalBuffer(i,normalWS,uvData,outNormalBuffer);\n\t\t\t       
+      WRITE_NORMAL_BUFFER\n\t\t\t        #ifndef VFX_SHADERGRAPH\n\t\t\t           
+      VFXComputePixelOutputToNormalBuffer(i,normalWS,uvData,outNormalBuffer);\n\t\t\t       
       #else\n\t\t\t           #if HAS_SHADERGRAPH_PARAM_NORMAL\n\t\t\t              
-      float3 n =  OUTSG.Normal_8;\n\t\t\t               float3x3 tbn = float3x3(tangentWS,bitangentWS,normalWS);\n\t\t\t              
-      normalWS = mul(n,tbn);\n\t\t\t           #endif\n\t\t\t           SurfaceData
-      surface = (SurfaceData)0;\n\t\t\t           \n\t\t\t           surface.normalWS
-      = normalWS;\n\t\t\t           \n\t\t\t           EncodeIntoNormalBuffer(ConvertSurfaceDataToNormalData(surface),
-      i.VFX_VARYING_POSCS.xy, outNormalBuffer);\n\t\t\t        #endif\n\t\t\t\t#endif\n\t\t\t\n\t\t\t\t#if
+      float3 n =  OUTSG.Normal_8;\n\t\t\t               normalWS = mul(n,tbn);\n\t\t\t          
+      #endif\n\t\t\t           SurfaceData surface = (SurfaceData)0;\n\t\t\t          
+      \n\t\t\t           surface.normalWS = normalWS;\n\t\t\t           \n\t\t\t          
+      EncodeIntoNormalBuffer(ConvertSurfaceDataToNormalData(surface), i.VFX_VARYING_POSCS.xy,
+      outNormalBuffer);\n\t\t\t        #endif\n\t\t\t\t#endif\n\t\t\t\n\t\t\t\t#if
       VFX_PASSDEPTH == VFX_PASSDEPTH_MOTION_VECTOR\n\t\t\t\t\t\n\t\t\t\t\t\t\tfloat2
       velocity = (i.VFX_VARYING_VELOCITY_CPOS.xy/i.VFX_VARYING_VELOCITY_CPOS.w) -
       (i.VFX_VARYING_VELOCITY_CPOS_PREVIOUS.xy/i.VFX_VARYING_VELOCITY_CPOS_PREVIOUS.w);\n\t\t\t\t\t\t\t#if
@@ -812,9 +811,8 @@ VisualEffectResource:
       { \"LightMode\"=\"DepthOnly\" }\n\t\t\n\t\t\tZWrite On\n\t\t\tBlend Off\n\t\t\t\n\t\t\tHLSLPROGRAM\n\t\t\t#define
       VFX_PASSDEPTH VFX_PASSDEPTH_ACTUAL\n\t\t\t#pragma target 4.5\n\t\t\t#define
       UNITY_MATERIAL_LIT\n\t\t\t#pragma multi_compile _ WRITE_NORMAL_BUFFER\n\t\t\t\n\t\t\t#define
-      NEEDS_NORMAL\tdefined(WRITE_NORMAL_BUFFER) || FORCE_NORMAL_VARYING || SHADERGRAPH_HAS_NORMAL
-      // TODO Should extract mv pass\n\t\t\t#define NEEDS_TANGENT\tUSE_NORMAL_MAP
-      || USE_NORMAL_BENDING || SHADERGRAPH_NEEDS_TANGENT_DEPTH || SHADERGRAPH_HAS_NORMAL\n\t\t\t\n\t\t\tstruct
+      NEEDS_NORMAL\tdefined(WRITE_NORMAL_BUFFER) || FORCE_NORMAL_VARYING || SHADERGRAPH_NEEDS_NORMAL_DEPTHONLY\n\t\t\t#define
+      NEEDS_TANGENT\tUSE_NORMAL_MAP || USE_NORMAL_BENDING || SHADERGRAPH_NEEDS_TANGENT_DEPTHONLY\n\t\t\t\n\t\t\tstruct
       ps_input\n\t\t\t{\n\t\t\t\tfloat4 pos : SV_POSITION;\n\t\t\t\t#if USE_FLIPBOOK_INTERPOLATION\n\t\t\t\tfloat4
       uv : TEXCOORD0;\n\t\t\t\t#else\n\t\t\t\tfloat2 uv : TEXCOORD0;\t\n\t\t\t\t#endif\n\t\t\t\t#if
       USE_ALPHA_TEST || USE_FLIPBOOK_INTERPOLATION || VFX_USE_ALPHA_CURRENT\n\t\t\t\t//
@@ -1042,36 +1040,36 @@ VisualEffectResource:
       WRITE_NORMAL_BUFFER\n\t\t\t\t\t, out float4 outNormalBuffer : SV_Target1\n\t\t\t\t#endif\n\t\t\t#else\n\t\t\t\t#ifdef
       WRITE_NORMAL_BUFFER\n\t\t\t\t\t, out float4 outNormalBuffer : SV_Target0\n\t\t\t\t#elif
       VFX_PASSDEPTH == VFX_PASSDEPTH_SELECTION\n\t\t\t\t\t, out float4 outColor :
-      SV_Target0\n\t\t\t\t#endif\n\t\t\t#endif\n\t\t\t\t)\n\t\t\t{\n\t\t\t\tUNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);\n\t\t\t\tVFXTransformPSInputs(i);\n\t\t\t\t#ifdef
+      SV_Target0\n\t\t\t\t#endif\n\t\t\t#endif\n\t\t\t\t)\n\t\t\t{\n\t\t\t\tUNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);\n\t\t\t\tVFXTransformPSInputs(i);\n\t\t\t\t\n\t\t\t\t\t\t\t#ifdef
+      VFX_VARYING_NORMAL\n\t\t\t\t\t\t\t#if USE_DOUBLE_SIDED\n\t\t\t\t\t\t\tconst
+      float faceMul = frontFace ? 1.0f : -1.0f;\n\t\t\t\t\t\t\t#else\n\t\t\t\t\t\t\tconst
+      float faceMul = 1.0f;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\tfloat3
+      normalWS = i.VFX_VARYING_NORMAL * faceMul;\n\t\t\t\t\t\t\tconst VFXUVData uvData
+      = GetUVData(i);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#ifdef VFX_VARYING_TANGENT\n\t\t\t\t\t\t\tfloat3
+      tangentWS = i.VFX_VARYING_TANGENT;\n\t\t\t\t\t\t\tfloat3 bitangentWS = cross(i.VFX_VARYING_TANGENT,i.VFX_VARYING_NORMAL);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#if
+      defined(VFX_VARYING_BENTFACTORS) && USE_NORMAL_BENDING\t\n\t\t\t\t\t\t\tfloat3
+      bentFactors = float3(i.VFX_VARYING_BENTFACTORS.xy,sqrt(1.0f - dot(i.VFX_VARYING_BENTFACTORS,i.VFX_VARYING_BENTFACTORS)));\n\t\t\t\t\t\t\tnormalWS
+      = tangentWS * bentFactors.x + bitangentWS * bentFactors.y + normalWS * bentFactors.z;\n\t\t\t\t\t\t\ttangentWS
+      = normalize(cross(normalWS,bitangentWS));\n\t\t\t\t\t\t\tbitangentWS = cross(tangentWS,normalWS);\n\t\t\t\t\t\t\ttangentWS
+      *= faceMul;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\tfloat3x3 tbn
+      = float3x3(tangentWS,bitangentWS,normalWS);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#if
+      USE_NORMAL_MAP\n\t\t\t\t\t\t\tfloat3 n = SampleNormalMap(VFX_SAMPLER(normalMap),uvData);\n\t\t\t\t\t\t\tfloat
+      normalScale = 1.0f;\n\t\t\t\t\t\t\t#ifdef VFX_VARYING_NORMALSCALE\n\t\t\t\t\t\t\tnormalScale
+      = i.VFX_VARYING_NORMALSCALE;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\tnormalWS
+      = normalize(lerp(normalWS,mul(n,tbn),normalScale));\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t#ifdef
       VFX_SHADERGRAPH\n\t\t\t    \n\t\t\t        \n\t\t\t        \n\t\t\t       
       \n\t\t\t        \n\t\t\t        float alpha = OUTSG.;\n\t\t\t    #else\n\t\t\t       
       float alpha = VFXGetFragmentColor(i).a;\n\t\t\t        #if HDRP_USE_BASE_COLOR_MAP_ALPHA\n\t\t\t           
       alpha *= VFXGetTextureColor(VFX_SAMPLER(baseColorMap),i).a;\n\t\t\t       
       #endif\n\t\t\t    #endif\n\t\t\t        VFXClipFragmentColor(alpha,i);\n\t\t\t\t\n\t\t\t\t#ifdef
-      WRITE_NORMAL_BUFFER\n\t\t\t\t\t\n\t\t\t\t\t\t\t\t#if USE_DOUBLE_SIDED\n\t\t\t\t\t\t\t\tconst
-      float faceMul = frontFace ? 1.0f : -1.0f;\n\t\t\t\t\t\t\t\t#else\n\t\t\t\t\t\t\t\tconst
-      float faceMul = 1.0f;\n\t\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\tfloat3
-      normalWS = i.VFX_VARYING_NORMAL * faceMul;\n\t\t\t\t\t\t\t\tconst VFXUVData
-      uvData = GetUVData(i);\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t#if defined(VFX_VARYING_TANGENT)
-      && (USE_NORMAL_MAP || USE_NORMAL_BENDING || VFX_SHADERGRAPH)\n\t\t\t\t\t\t\t\tfloat3
-      tangentWS = i.VFX_VARYING_TANGENT;\n\t\t\t\t\t\t\t\tfloat3 bitangentWS = cross(i.VFX_VARYING_TANGENT,i.VFX_VARYING_NORMAL);\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t#if
-      defined(VFX_VARYING_BENTFACTORS) && USE_NORMAL_BENDING\t\n\t\t\t\t\t\t\t\tfloat3
-      bentFactors = float3(i.VFX_VARYING_BENTFACTORS.xy,sqrt(1.0f - dot(i.VFX_VARYING_BENTFACTORS,i.VFX_VARYING_BENTFACTORS)));\n\t\t\t\t\t\t\t\tnormalWS
-      = tangentWS * bentFactors.x + bitangentWS * bentFactors.y + normalWS * bentFactors.z;\n\t\t\t\t\t\t\t\ttangentWS
-      = normalize(cross(normalWS,bitangentWS));\n\t\t\t\t\t\t\t\tbitangentWS = cross(tangentWS,normalWS);\n\t\t\t\t\t\t\t\ttangentWS
-      *= faceMul;\n\t\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t#if
-      USE_NORMAL_MAP\n\t\t\t\t\t\t\t\tfloat3 n = SampleNormalMap(VFX_SAMPLER(normalMap),uvData);\n\t\t\t\t\t\t\t\tfloat3x3
-      tbn = float3x3(tangentWS,bitangentWS,normalWS);\n\t\t\t\t\t\t\t\tfloat normalScale
-      = 1.0f;\n\t\t\t\t\t\t\t\t#ifdef VFX_VARYING_NORMALSCALE\n\t\t\t\t\t\t\t\tnormalScale
-      = i.VFX_VARYING_NORMALSCALE;\n\t\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\tnormalWS
-      = normalize(lerp(normalWS,mul(n,tbn),normalScale));\n\t\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t\n\t\t\t       
-      #ifndef VFX_SHADERGRAPH\n\t\t\t            VFXComputePixelOutputToNormalBuffer(i,normalWS,uvData,outNormalBuffer);\n\t\t\t       
+      WRITE_NORMAL_BUFFER\n\t\t\t        #ifndef VFX_SHADERGRAPH\n\t\t\t           
+      VFXComputePixelOutputToNormalBuffer(i,normalWS,uvData,outNormalBuffer);\n\t\t\t       
       #else\n\t\t\t           #if HAS_SHADERGRAPH_PARAM_NORMAL\n\t\t\t              
-      float3 n =  OUTSG.Normal_8;\n\t\t\t               float3x3 tbn = float3x3(tangentWS,bitangentWS,normalWS);\n\t\t\t              
-      normalWS = mul(n,tbn);\n\t\t\t           #endif\n\t\t\t           SurfaceData
-      surface = (SurfaceData)0;\n\t\t\t           \n\t\t\t           surface.normalWS
-      = normalWS;\n\t\t\t           \n\t\t\t           EncodeIntoNormalBuffer(ConvertSurfaceDataToNormalData(surface),
-      i.VFX_VARYING_POSCS.xy, outNormalBuffer);\n\t\t\t        #endif\n\t\t\t\t#endif\n\t\t\t\n\t\t\t\t#if
+      float3 n =  OUTSG.Normal_8;\n\t\t\t               normalWS = mul(n,tbn);\n\t\t\t          
+      #endif\n\t\t\t           SurfaceData surface = (SurfaceData)0;\n\t\t\t          
+      \n\t\t\t           surface.normalWS = normalWS;\n\t\t\t           \n\t\t\t          
+      EncodeIntoNormalBuffer(ConvertSurfaceDataToNormalData(surface), i.VFX_VARYING_POSCS.xy,
+      outNormalBuffer);\n\t\t\t        #endif\n\t\t\t\t#endif\n\t\t\t\n\t\t\t\t#if
       VFX_PASSDEPTH == VFX_PASSDEPTH_MOTION_VECTOR\n\t\t\t\t\t\n\t\t\t\t\t\t\tfloat2
       velocity = (i.VFX_VARYING_VELOCITY_CPOS.xy/i.VFX_VARYING_VELOCITY_CPOS.w) -
       (i.VFX_VARYING_VELOCITY_CPOS_PREVIOUS.xy/i.VFX_VARYING_VELOCITY_CPOS_PREVIOUS.w);\n\t\t\t\t\t\t\t#if
@@ -1106,9 +1104,9 @@ VisualEffectResource:
       x: motion vector scale u\n\t\t\t\t// y: motion vector scale v\n\t\t\t\tVFX_OPTIONAL_INTERPOLATION
       float2 builtInInterpolants2 : TEXCOORD3;\n\t\t\t\t#endif\n\t\t\t\tVFX_OPTIONAL_INTERPOLATION
       float3 normal : TEXCOORD4;\n\t\t\t\t#if USE_NORMAL_MAP || USE_NORMAL_BENDING
-      || SHADERGRAPH_NEEDS_TANGENT_GBUFFER || SHADERGRAPH_HAS_NORMAL\n\t\t\t\tVFX_OPTIONAL_INTERPOLATION
-      float3 tangent : TEXCOORD5;\n\t\t\t\t#endif\n\t\t\t\t#if USE_NORMAL_BENDING\n\t\t\t\tfloat2
-      bentFactors : TEXCOORD6;\n\t\t\t\t#endif\n\t\t        #if VFX_NEEDS_POSWS_INTERPOLATOR\n\t\t           
+      || SHADERGRAPH_NEEDS_TANGENT_GBUFFER\n\t\t\t\tVFX_OPTIONAL_INTERPOLATION float3
+      tangent : TEXCOORD5;\n\t\t\t\t#endif\n\t\t\t\t#if USE_NORMAL_BENDING\n\t\t\t\tfloat2
+      bentFactors : TEXCOORD6;\n\t\t\t\t#endif\n\t\t        #if VFX_NEEDS_POSWS_INTERPOLATOR\n\t\t       
       float3 posWS : TEXCOORD7;\n\t\t        #endif\n\t\t\n\t\t        \n\t\t\n\t\t\t\tUNITY_VERTEX_OUTPUT_STEREO\n\t\t\t};\n\t\t\t\n\t\t\n\t\t\t\t\t#if
       (VFX_NEEDS_COLOR_INTERPOLATOR && HDRP_USE_BASE_COLOR) || HDRP_USE_ADDITIONAL_BASE_COLOR\n\t\t\t\t\t#define
       VFX_VARYING_COLOR color.rgb\n\t\t\t\t\t#define VFX_VARYING_ALPHA color.a\n\t\t\t\t\t#endif\n\t\t\t\t\t\n\t\t\t\t\t#define
@@ -1126,13 +1124,12 @@ VisualEffectResource:
       VFX_VARYING_ALPHATHRESHOLD builtInInterpolants.y\n\t\t#define VFX_VARYING_FRAMEBLEND
       builtInInterpolants.z\n\t\t#define VFX_VARYING_MOTIONVECTORSCALE builtInInterpolants2.xy\n\t\t#define
       VFX_VARYING_UV uv\n\t\t#define VFX_VARYING_NORMAL normal\n\t\t#if USE_NORMAL_MAP
-      || USE_NORMAL_BENDING || SHADERGRAPH_NEEDS_TANGENT_GBUFFER || SHADERGRAPH_HAS_NORMAL\n\t\t#define
-      VFX_VARYING_TANGENT tangent\n\t\t#endif\n\t\t#if VFX_NEEDS_POSWS_INTERPOLATOR\n\t\t   
-      #define VFX_VARYING_POSWS posWS\n\t\t#endif\n\t\t#if USE_NORMAL_BENDING\n\t\t#define
-      VFX_VARYING_BENTFACTORS bentFactors\n\t\t#endif\n\t\t\n\t\t\n\t\t\t\n\t\t\t#if
-      !(defined(VFX_VARYING_PS_INPUTS) && defined(VFX_VARYING_POSCS))\n\t\t\t#error
-      VFX_VARYING_PS_INPUTS, VFX_VARYING_POSCS and VFX_VARYING_UV must be defined.\n\t\t\t#endif\n\t\t\t\n\t\t\t#include
-      \"Packages/com.unity.render-pipelines.high-definition/Runtime/VFXGraph/Shaders/VFXCommon.hlsl\"\n\t\t\t#include
+      || USE_NORMAL_BENDING || SHADERGRAPH_NEEDS_TANGENT_GBUFFER\n\t\t#define VFX_VARYING_TANGENT
+      tangent\n\t\t#endif\n\t\t#if VFX_NEEDS_POSWS_INTERPOLATOR\n\t\t#define VFX_VARYING_POSWS
+      posWS\n\t\t#endif\n\t\t#if USE_NORMAL_BENDING\n\t\t#define VFX_VARYING_BENTFACTORS
+      bentFactors\n\t\t#endif\n\t\t\n\t\t\n\t\t\t\n\t\t\t#if !(defined(VFX_VARYING_PS_INPUTS)
+      && defined(VFX_VARYING_POSCS))\n\t\t\t#error VFX_VARYING_PS_INPUTS, VFX_VARYING_POSCS
+      and VFX_VARYING_UV must be defined.\n\t\t\t#endif\n\t\t\t\n\t\t\t#include \"Packages/com.unity.render-pipelines.high-definition/Runtime/VFXGraph/Shaders/VFXCommon.hlsl\"\n\t\t\t#include
       \"Packages/com.unity.visualeffectgraph/Shaders/VFXCommon.hlsl\"\n\t\t\t\n\n\t\t\tvoid
       SetAttribute_CAC29747(inout float3 position, float3 Position) /*attribute:position
       Composition:Overwrite Source:Slot Random:Off channels:XYZ */\n\t\t\t{\n\t\t\t   
@@ -1350,23 +1347,23 @@ VisualEffectResource:
       }\n\t\t    \n\t\t    #endif\n\t\t    \n\t\t    \n\t\t    #include \"Packages/com.unity.render-pipelines.high-definition/Runtime/VFXGraph/Shaders/VFXLitPixelOutput.hlsl\"\n\t\t   
       \n\t\t    \n\t\t\n\t\t\t\t\t\n\t\t    \n\t\t\t#pragma fragment frag\n\t\t\tvoid
       frag(ps_input i, OUTPUT_GBUFFER(outGBuffer)\n\t\t\t#if USE_DOUBLE_SIDED\n\t\t\t,
-      bool frontFace : SV_IsFrontFace\n\t\t\t#endif\n\t\t\t)\n\t\t\t{\n\t\t\t\tUNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);\n\t\t\t\tVFXTransformPSInputs(i);\n\t\t\t\t\n\t\t\t\t\t\t\t#if
-      USE_DOUBLE_SIDED\n\t\t\t\t\t\t\tconst float faceMul = frontFace ? 1.0f : -1.0f;\n\t\t\t\t\t\t\t#else\n\t\t\t\t\t\t\tconst
+      bool frontFace : SV_IsFrontFace\n\t\t\t#endif\n\t\t\t)\n\t\t\t{\n\t\t\t\tUNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);\n\t\t\t\tVFXTransformPSInputs(i);\n\t\t\t\t\n\t\t\t\t\t\t\t#ifdef
+      VFX_VARYING_NORMAL\n\t\t\t\t\t\t\t#if USE_DOUBLE_SIDED\n\t\t\t\t\t\t\tconst
+      float faceMul = frontFace ? 1.0f : -1.0f;\n\t\t\t\t\t\t\t#else\n\t\t\t\t\t\t\tconst
       float faceMul = 1.0f;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\tfloat3
       normalWS = i.VFX_VARYING_NORMAL * faceMul;\n\t\t\t\t\t\t\tconst VFXUVData uvData
-      = GetUVData(i);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#if defined(VFX_VARYING_TANGENT)
-      && (USE_NORMAL_MAP || USE_NORMAL_BENDING || VFX_SHADERGRAPH)\n\t\t\t\t\t\t\tfloat3
+      = GetUVData(i);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#ifdef VFX_VARYING_TANGENT\n\t\t\t\t\t\t\tfloat3
       tangentWS = i.VFX_VARYING_TANGENT;\n\t\t\t\t\t\t\tfloat3 bitangentWS = cross(i.VFX_VARYING_TANGENT,i.VFX_VARYING_NORMAL);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#if
       defined(VFX_VARYING_BENTFACTORS) && USE_NORMAL_BENDING\t\n\t\t\t\t\t\t\tfloat3
       bentFactors = float3(i.VFX_VARYING_BENTFACTORS.xy,sqrt(1.0f - dot(i.VFX_VARYING_BENTFACTORS,i.VFX_VARYING_BENTFACTORS)));\n\t\t\t\t\t\t\tnormalWS
       = tangentWS * bentFactors.x + bitangentWS * bentFactors.y + normalWS * bentFactors.z;\n\t\t\t\t\t\t\ttangentWS
       = normalize(cross(normalWS,bitangentWS));\n\t\t\t\t\t\t\tbitangentWS = cross(tangentWS,normalWS);\n\t\t\t\t\t\t\ttangentWS
-      *= faceMul;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#if USE_NORMAL_MAP\n\t\t\t\t\t\t\tfloat3
-      n = SampleNormalMap(VFX_SAMPLER(normalMap),uvData);\n\t\t\t\t\t\t\tfloat3x3
-      tbn = float3x3(tangentWS,bitangentWS,normalWS);\n\t\t\t\t\t\t\tfloat normalScale
-      = 1.0f;\n\t\t\t\t\t\t\t#ifdef VFX_VARYING_NORMALSCALE\n\t\t\t\t\t\t\tnormalScale
+      *= faceMul;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\tfloat3x3 tbn
+      = float3x3(tangentWS,bitangentWS,normalWS);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#if
+      USE_NORMAL_MAP\n\t\t\t\t\t\t\tfloat3 n = SampleNormalMap(VFX_SAMPLER(normalMap),uvData);\n\t\t\t\t\t\t\tfloat
+      normalScale = 1.0f;\n\t\t\t\t\t\t\t#ifdef VFX_VARYING_NORMALSCALE\n\t\t\t\t\t\t\tnormalScale
       = i.VFX_VARYING_NORMALSCALE;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\tnormalWS
-      = normalize(lerp(normalWS,mul(n,tbn),normalScale));\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\n\t\t       
+      = normalize(lerp(normalWS,mul(n,tbn),normalScale));\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\n\t\t       
       #ifdef VFX_SHADERGRAPH\n\t\t           \n\t\t           \n\t\t           SurfaceData
       surface;\n\t\t           BuiltinData builtin;\n\t\t           surface = (SurfaceData)0;\n\t\t          
       builtin = (BuiltinData)0;\n\t\t           \n\t\t           surface.materialFeatures
@@ -1380,7 +1377,6 @@ VisualEffectResource:
       #endif\n\t\t           #if HAS_SHADERGRAPH_PARAM_BASECOLOR\n\t\t              
       surface.baseColor = OUTSG.;\n\t\t           #endif\n\t\t           \n\t\t          
       #if HAS_SHADERGRAPH_PARAM_NORMAL\n\t\t               float3 n =  OUTSG.;\n\t\t              
-      float3x3 tbn = float3x3(tangentWS,bitangentWS,normalWS);\n\t\t              
       normalWS = mul(n,tbn);\n\t\t           #endif\n\t\t           \n\t\t          
       surface.normalWS = normalWS;\n\t\t           \n\t\t           #if HAS_SHADERGRAPH_PARAM_EMISSIVE\n\t\t              
       builtin.emissiveColor = OUTSG.;\n\t\t           #endif\n\t\t\n\t\t           
@@ -1393,7 +1389,7 @@ VisualEffectResource:
       _ENABLE_FOG_ON_TRANSPARENT\n\t\t\t#define _DISABLE_DECALS\n\t\t\t\n\n\t\t\t#pragma
       multi_compile USE_FPTL_LIGHTLIST USE_CLUSTERED_LIGHTLIST \n\t\t\t#pragma multi_compile
       SHADOW_LOW SHADOW_MEDIUM SHADOW_HIGH\n\t\t\t#pragma multi_compile _ DEBUG_DISPLAY\n\t\t\t//#pragma
-      enable_d3d11_debug_symbols\n\t\t\t\t\n\t\t\t#define HDRP_NEEDS_UVS (HDRP_USE_BASE_COLOR_MAP
+      enable_d3d11_debug_symbols\n\t\t\t\t\t\n\t\t\t#define HDRP_NEEDS_UVS (HDRP_USE_BASE_COLOR_MAP
       || HDRP_USE_MASK_MAP || USE_NORMAL_MAP || HDRP_USE_EMISSIVE_MAP)\n\t\t\t#define
       HDRP_USE_EMISSIVE (HDRP_USE_EMISSIVE_MAP || HDRP_USE_EMISSIVE_COLOR || HDRP_USE_ADDITIONAL_EMISSIVE_COLOR)\n\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\tstruct
       ps_input\n\t\t\t{\n\t\t\t\tfloat4 pos : SV_POSITION;\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#if
@@ -1412,9 +1408,8 @@ VisualEffectResource:
       USE_FLIPBOOK_MOTIONVECTORS\n\t\t\t\t// x: motion vector scale u\n\t\t\t\t//
       y: motion vector scale v\n\t\t\t\tVFX_OPTIONAL_INTERPOLATION float2 builtInInterpolants2
       : TEXCOORD3;\n\t\t\t\t#endif\n\t\t\n\t\t\t\tVFX_OPTIONAL_INTERPOLATION float3
-      normal : TEXCOORD4;\n\t\t\t\t#if USE_NORMAL_MAP || USE_NORMAL_BENDING || SHADERGRAPH_NEEDS_TANGENT_FORWARD
-      || SHADERGRAPH_HAS_NORMAL\n\t\t\t\tVFX_OPTIONAL_INTERPOLATION float3 tangent
-      : TEXCOORD5;\n\t\t\t\t#endif\n\t\t\t\t#if USE_NORMAL_BENDING\n\t\t\t\tfloat2
+      normal : TEXCOORD4;\n\t\t\t\t#if USE_NORMAL_MAP || USE_NORMAL_BENDING || SHADERGRAPH_NEEDS_TANGENT_FORWARD\n\t\t\t\tVFX_OPTIONAL_INTERPOLATION
+      float3 tangent : TEXCOORD5;\n\t\t\t\t#endif\n\t\t\t\t#if USE_NORMAL_BENDING\n\t\t\t\tfloat2
       bentFactors : TEXCOORD6;\n\t\t\t\t#endif\n\t\t\n\t\t\t\t#if WRITE_MOTION_VECTOR_IN_FORWARD\n\t\t\t\tfloat4
       cPosPrevious : TEXCOORD7;\n\t\t\t\tfloat4 cPosNonJiterred : TEXCOORD8;\n\t\t\t\t#endif\n\t\t\t\t\n\t\t\t\tfloat3
       posWS : TEXCOOR9; // Needed for fog\n\t\t        \n\t\t        \n\t\t\t\t\n\t\t\t\tUNITY_VERTEX_OUTPUT_STEREO\n\t\t\t};\n\t\t\t\n\t\t\n\t\t\t\t\t#if
@@ -1434,11 +1429,11 @@ VisualEffectResource:
       VFX_VARYING_ALPHATHRESHOLD builtInInterpolants.y\n\t\t#define VFX_VARYING_FRAMEBLEND
       builtInInterpolants.z\n\t\t#define VFX_VARYING_MOTIONVECTORSCALE builtInInterpolants2.xy\n\t\t#define
       VFX_VARYING_UV uv\n\t\t#define VFX_VARYING_NORMAL normal\n\t\t#if USE_NORMAL_MAP
-      || USE_NORMAL_BENDING || SHADERGRAPH_NEEDS_TANGENT_FORWARD || SHADERGRAPH_HAS_NORMAL\n\t\t#define
-      VFX_VARYING_TANGENT tangent\n\t\t#endif\n\t\t#if USE_NORMAL_BENDING\n\t\t#define
-      VFX_VARYING_BENTFACTORS bentFactors\n\t\t#endif\n\t\t#define VFX_VARYING_POSWS
-      posWS\n\t\t\n\t\t#if WRITE_MOTION_VECTOR_IN_FORWARD\n\t\t#define VFX_VARYING_VELOCITY_CPOS
-      cPosNonJiterred\n\t\t#define VFX_VARYING_VELOCITY_CPOS_PREVIOUS cPosPrevious\n\t\t#endif\n\t\t\n\t\t\n\t\t\t\n\t\t\t#if
+      || USE_NORMAL_BENDING || SHADERGRAPH_NEEDS_TANGENT_FORWARD\n\t\t#define VFX_VARYING_TANGENT
+      tangent\n\t\t#endif\n\t\t#if USE_NORMAL_BENDING\n\t\t#define VFX_VARYING_BENTFACTORS
+      bentFactors\n\t\t#endif\n\t\t#define VFX_VARYING_POSWS posWS\n\t\t\n\t\t#if
+      WRITE_MOTION_VECTOR_IN_FORWARD\n\t\t#define VFX_VARYING_VELOCITY_CPOS cPosNonJiterred\n\t\t#define
+      VFX_VARYING_VELOCITY_CPOS_PREVIOUS cPosPrevious\n\t\t#endif\n\t\t\n\t\t\n\t\t\t\n\t\t\t#if
       !(defined(VFX_VARYING_PS_INPUTS) && defined(VFX_VARYING_POSCS))\n\t\t\t#error
       VFX_VARYING_PS_INPUTS, VFX_VARYING_POSCS and VFX_VARYING_UV must be defined.\n\t\t\t#endif\n\t\t\t\n\t\t\t#include
       \"Packages/com.unity.render-pipelines.high-definition/Runtime/VFXGraph/Shaders/VFXCommon.hlsl\"\n\t\t\t#include
@@ -1657,23 +1652,23 @@ VisualEffectResource:
       \n\t\t\t\t\t\t\t\n\t\t\t#pragma fragment frag\n\t\t\tvoid frag(ps_input i\n\t\t\t,
       out float4 outColor : SV_Target0\n\t\t\t#if USE_DOUBLE_SIDED\n\t\t\t, bool
       frontFace : SV_IsFrontFace\n\t\t\t#endif\n\t\t\t#if WRITE_MOTION_VECTOR_IN_FORWARD\n\t\t\t,
-      out float4 outMotionVector : SV_Target1\n\t\t\t#endif\n\t\t\t)\n\t\t\t{\n\t\t\t\tUNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);\n\t\t\t\tVFXTransformPSInputs(i);\n\t\t\t\t\n\t\t\t\t\t\t\t#if
-      USE_DOUBLE_SIDED\n\t\t\t\t\t\t\tconst float faceMul = frontFace ? 1.0f : -1.0f;\n\t\t\t\t\t\t\t#else\n\t\t\t\t\t\t\tconst
+      out float4 outMotionVector : SV_Target1\n\t\t\t#endif\n\t\t\t)\n\t\t\t{\n\t\t\t\tUNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);\n\t\t\t\tVFXTransformPSInputs(i);\n\t\t\t\t\n\t\t\t\t\t\t\t#ifdef
+      VFX_VARYING_NORMAL\n\t\t\t\t\t\t\t#if USE_DOUBLE_SIDED\n\t\t\t\t\t\t\tconst
+      float faceMul = frontFace ? 1.0f : -1.0f;\n\t\t\t\t\t\t\t#else\n\t\t\t\t\t\t\tconst
       float faceMul = 1.0f;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\tfloat3
       normalWS = i.VFX_VARYING_NORMAL * faceMul;\n\t\t\t\t\t\t\tconst VFXUVData uvData
-      = GetUVData(i);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#if defined(VFX_VARYING_TANGENT)
-      && (USE_NORMAL_MAP || USE_NORMAL_BENDING || VFX_SHADERGRAPH)\n\t\t\t\t\t\t\tfloat3
+      = GetUVData(i);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#ifdef VFX_VARYING_TANGENT\n\t\t\t\t\t\t\tfloat3
       tangentWS = i.VFX_VARYING_TANGENT;\n\t\t\t\t\t\t\tfloat3 bitangentWS = cross(i.VFX_VARYING_TANGENT,i.VFX_VARYING_NORMAL);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#if
       defined(VFX_VARYING_BENTFACTORS) && USE_NORMAL_BENDING\t\n\t\t\t\t\t\t\tfloat3
       bentFactors = float3(i.VFX_VARYING_BENTFACTORS.xy,sqrt(1.0f - dot(i.VFX_VARYING_BENTFACTORS,i.VFX_VARYING_BENTFACTORS)));\n\t\t\t\t\t\t\tnormalWS
       = tangentWS * bentFactors.x + bitangentWS * bentFactors.y + normalWS * bentFactors.z;\n\t\t\t\t\t\t\ttangentWS
       = normalize(cross(normalWS,bitangentWS));\n\t\t\t\t\t\t\tbitangentWS = cross(tangentWS,normalWS);\n\t\t\t\t\t\t\ttangentWS
-      *= faceMul;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#if USE_NORMAL_MAP\n\t\t\t\t\t\t\tfloat3
-      n = SampleNormalMap(VFX_SAMPLER(normalMap),uvData);\n\t\t\t\t\t\t\tfloat3x3
-      tbn = float3x3(tangentWS,bitangentWS,normalWS);\n\t\t\t\t\t\t\tfloat normalScale
-      = 1.0f;\n\t\t\t\t\t\t\t#ifdef VFX_VARYING_NORMALSCALE\n\t\t\t\t\t\t\tnormalScale
+      *= faceMul;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\tfloat3x3 tbn
+      = float3x3(tangentWS,bitangentWS,normalWS);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#if
+      USE_NORMAL_MAP\n\t\t\t\t\t\t\tfloat3 n = SampleNormalMap(VFX_SAMPLER(normalMap),uvData);\n\t\t\t\t\t\t\tfloat
+      normalScale = 1.0f;\n\t\t\t\t\t\t\t#ifdef VFX_VARYING_NORMALSCALE\n\t\t\t\t\t\t\tnormalScale
       = i.VFX_VARYING_NORMALSCALE;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\tnormalWS
-      = normalize(lerp(normalWS,mul(n,tbn),normalScale));\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t       
+      = normalize(lerp(normalWS,mul(n,tbn),normalScale));\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t       
       \n\t\t        #ifdef VFX_SHADERGRAPH\n\t\t           \n\t\t            \n\t\t           
       \n\t\t            SurfaceData surface;\n\t\t            BuiltinData builtin;\n\t\t           
       surface = (SurfaceData)0;\n\t\t            builtin = (BuiltinData)0;\n\t\t           
@@ -1688,7 +1683,6 @@ VisualEffectResource:
       OUTSG.;\n\t\t            #endif\n\t\t            #if HAS_SHADERGRAPH_PARAM_BASECOLOR\n\t\t               
       surface.baseColor = OUTSG.;\n\t\t            #endif\n\t\t            \n\t\t           
       #if HAS_SHADERGRAPH_PARAM_NORMAL\n\t\t                float3 n =  OUTSG.;\n\t\t               
-      float3x3 tbn = float3x3(tangentWS,bitangentWS,normalWS);\n\t\t               
       normalWS = mul(n,tbn);\n\t\t            #endif\n\t\t            \n\t\t           
       surface.normalWS = normalWS;\n\t\t            \n\t\t            #if HAS_SHADERGRAPH_PARAM_EMISSIVE\n\t\t               
       builtin.emissiveColor = OUTSG.;\n\t\t            #endif\n\t\t\n\t\t           
@@ -1752,9 +1746,8 @@ VisualEffectResource:
       Off\n\t\t\t\n\t\t\tHLSLPROGRAM\n\t\t\t#define VFX_PASSDEPTH VFX_PASSDEPTH_SELECTION\n\t\t\t#pragma
       target 4.5\n\t\t\t#define UNITY_MATERIAL_LIT\n\t\t\t#pragma multi_compile _
       WRITE_NORMAL_BUFFER\n\t\t\t\n\t\t\t#define NEEDS_NORMAL\tdefined(WRITE_NORMAL_BUFFER)
-      || FORCE_NORMAL_VARYING || SHADERGRAPH_HAS_NORMAL // TODO Should extract mv
-      pass\n\t\t\t#define NEEDS_TANGENT\tUSE_NORMAL_MAP || USE_NORMAL_BENDING ||
-      SHADERGRAPH_NEEDS_TANGENT_DEPTH || SHADERGRAPH_HAS_NORMAL\n\t\t\t\n\t\t\tstruct
+      || FORCE_NORMAL_VARYING || SHADERGRAPH_NEEDS_NORMAL_DEPTHONLY\n\t\t\t#define
+      NEEDS_TANGENT\tUSE_NORMAL_MAP || USE_NORMAL_BENDING || SHADERGRAPH_NEEDS_TANGENT_DEPTHONLY\n\t\t\t\n\t\t\tstruct
       ps_input\n\t\t\t{\n\t\t\t\tfloat4 pos : SV_POSITION;\n\t\t\t\t#if USE_FLIPBOOK_INTERPOLATION\n\t\t\t\tfloat4
       uv : TEXCOORD0;\n\t\t\t\t#else\n\t\t\t\tfloat2 uv : TEXCOORD0;\t\n\t\t\t\t#endif\n\t\t\t\t#if
       USE_ALPHA_TEST || USE_FLIPBOOK_INTERPOLATION || VFX_USE_ALPHA_CURRENT\n\t\t\t\t//
@@ -1982,36 +1975,36 @@ VisualEffectResource:
       WRITE_NORMAL_BUFFER\n\t\t\t\t\t, out float4 outNormalBuffer : SV_Target1\n\t\t\t\t#endif\n\t\t\t#else\n\t\t\t\t#ifdef
       WRITE_NORMAL_BUFFER\n\t\t\t\t\t, out float4 outNormalBuffer : SV_Target0\n\t\t\t\t#elif
       VFX_PASSDEPTH == VFX_PASSDEPTH_SELECTION\n\t\t\t\t\t, out float4 outColor :
-      SV_Target0\n\t\t\t\t#endif\n\t\t\t#endif\n\t\t\t\t)\n\t\t\t{\n\t\t\t\tUNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);\n\t\t\t\tVFXTransformPSInputs(i);\n\t\t\t\t#ifdef
+      SV_Target0\n\t\t\t\t#endif\n\t\t\t#endif\n\t\t\t\t)\n\t\t\t{\n\t\t\t\tUNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);\n\t\t\t\tVFXTransformPSInputs(i);\n\t\t\t\t\n\t\t\t\t\t\t\t#ifdef
+      VFX_VARYING_NORMAL\n\t\t\t\t\t\t\t#if USE_DOUBLE_SIDED\n\t\t\t\t\t\t\tconst
+      float faceMul = frontFace ? 1.0f : -1.0f;\n\t\t\t\t\t\t\t#else\n\t\t\t\t\t\t\tconst
+      float faceMul = 1.0f;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\tfloat3
+      normalWS = i.VFX_VARYING_NORMAL * faceMul;\n\t\t\t\t\t\t\tconst VFXUVData uvData
+      = GetUVData(i);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#ifdef VFX_VARYING_TANGENT\n\t\t\t\t\t\t\tfloat3
+      tangentWS = i.VFX_VARYING_TANGENT;\n\t\t\t\t\t\t\tfloat3 bitangentWS = cross(i.VFX_VARYING_TANGENT,i.VFX_VARYING_NORMAL);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#if
+      defined(VFX_VARYING_BENTFACTORS) && USE_NORMAL_BENDING\t\n\t\t\t\t\t\t\tfloat3
+      bentFactors = float3(i.VFX_VARYING_BENTFACTORS.xy,sqrt(1.0f - dot(i.VFX_VARYING_BENTFACTORS,i.VFX_VARYING_BENTFACTORS)));\n\t\t\t\t\t\t\tnormalWS
+      = tangentWS * bentFactors.x + bitangentWS * bentFactors.y + normalWS * bentFactors.z;\n\t\t\t\t\t\t\ttangentWS
+      = normalize(cross(normalWS,bitangentWS));\n\t\t\t\t\t\t\tbitangentWS = cross(tangentWS,normalWS);\n\t\t\t\t\t\t\ttangentWS
+      *= faceMul;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\tfloat3x3 tbn
+      = float3x3(tangentWS,bitangentWS,normalWS);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#if
+      USE_NORMAL_MAP\n\t\t\t\t\t\t\tfloat3 n = SampleNormalMap(VFX_SAMPLER(normalMap),uvData);\n\t\t\t\t\t\t\tfloat
+      normalScale = 1.0f;\n\t\t\t\t\t\t\t#ifdef VFX_VARYING_NORMALSCALE\n\t\t\t\t\t\t\tnormalScale
+      = i.VFX_VARYING_NORMALSCALE;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\tnormalWS
+      = normalize(lerp(normalWS,mul(n,tbn),normalScale));\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t#ifdef
       VFX_SHADERGRAPH\n\t\t\t    \n\t\t\t        \n\t\t\t        \n\t\t\t       
       \n\t\t\t        \n\t\t\t        float alpha = OUTSG.;\n\t\t\t    #else\n\t\t\t       
       float alpha = VFXGetFragmentColor(i).a;\n\t\t\t        #if HDRP_USE_BASE_COLOR_MAP_ALPHA\n\t\t\t           
       alpha *= VFXGetTextureColor(VFX_SAMPLER(baseColorMap),i).a;\n\t\t\t       
       #endif\n\t\t\t    #endif\n\t\t\t        VFXClipFragmentColor(alpha,i);\n\t\t\t\t\n\t\t\t\t#ifdef
-      WRITE_NORMAL_BUFFER\n\t\t\t\t\t\n\t\t\t\t\t\t\t\t#if USE_DOUBLE_SIDED\n\t\t\t\t\t\t\t\tconst
-      float faceMul = frontFace ? 1.0f : -1.0f;\n\t\t\t\t\t\t\t\t#else\n\t\t\t\t\t\t\t\tconst
-      float faceMul = 1.0f;\n\t\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\tfloat3
-      normalWS = i.VFX_VARYING_NORMAL * faceMul;\n\t\t\t\t\t\t\t\tconst VFXUVData
-      uvData = GetUVData(i);\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t#if defined(VFX_VARYING_TANGENT)
-      && (USE_NORMAL_MAP || USE_NORMAL_BENDING || VFX_SHADERGRAPH)\n\t\t\t\t\t\t\t\tfloat3
-      tangentWS = i.VFX_VARYING_TANGENT;\n\t\t\t\t\t\t\t\tfloat3 bitangentWS = cross(i.VFX_VARYING_TANGENT,i.VFX_VARYING_NORMAL);\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t#if
-      defined(VFX_VARYING_BENTFACTORS) && USE_NORMAL_BENDING\t\n\t\t\t\t\t\t\t\tfloat3
-      bentFactors = float3(i.VFX_VARYING_BENTFACTORS.xy,sqrt(1.0f - dot(i.VFX_VARYING_BENTFACTORS,i.VFX_VARYING_BENTFACTORS)));\n\t\t\t\t\t\t\t\tnormalWS
-      = tangentWS * bentFactors.x + bitangentWS * bentFactors.y + normalWS * bentFactors.z;\n\t\t\t\t\t\t\t\ttangentWS
-      = normalize(cross(normalWS,bitangentWS));\n\t\t\t\t\t\t\t\tbitangentWS = cross(tangentWS,normalWS);\n\t\t\t\t\t\t\t\ttangentWS
-      *= faceMul;\n\t\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t#if
-      USE_NORMAL_MAP\n\t\t\t\t\t\t\t\tfloat3 n = SampleNormalMap(VFX_SAMPLER(normalMap),uvData);\n\t\t\t\t\t\t\t\tfloat3x3
-      tbn = float3x3(tangentWS,bitangentWS,normalWS);\n\t\t\t\t\t\t\t\tfloat normalScale
-      = 1.0f;\n\t\t\t\t\t\t\t\t#ifdef VFX_VARYING_NORMALSCALE\n\t\t\t\t\t\t\t\tnormalScale
-      = i.VFX_VARYING_NORMALSCALE;\n\t\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\tnormalWS
-      = normalize(lerp(normalWS,mul(n,tbn),normalScale));\n\t\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t\n\t\t\t       
-      #ifndef VFX_SHADERGRAPH\n\t\t\t            VFXComputePixelOutputToNormalBuffer(i,normalWS,uvData,outNormalBuffer);\n\t\t\t       
+      WRITE_NORMAL_BUFFER\n\t\t\t        #ifndef VFX_SHADERGRAPH\n\t\t\t           
+      VFXComputePixelOutputToNormalBuffer(i,normalWS,uvData,outNormalBuffer);\n\t\t\t       
       #else\n\t\t\t           #if HAS_SHADERGRAPH_PARAM_NORMAL\n\t\t\t              
-      float3 n =  OUTSG.Normal_8;\n\t\t\t               float3x3 tbn = float3x3(tangentWS,bitangentWS,normalWS);\n\t\t\t              
-      normalWS = mul(n,tbn);\n\t\t\t           #endif\n\t\t\t           SurfaceData
-      surface = (SurfaceData)0;\n\t\t\t           \n\t\t\t           surface.normalWS
-      = normalWS;\n\t\t\t           \n\t\t\t           EncodeIntoNormalBuffer(ConvertSurfaceDataToNormalData(surface),
-      i.VFX_VARYING_POSCS.xy, outNormalBuffer);\n\t\t\t        #endif\n\t\t\t\t#endif\n\t\t\t\n\t\t\t\t#if
+      float3 n =  OUTSG.Normal_8;\n\t\t\t               normalWS = mul(n,tbn);\n\t\t\t          
+      #endif\n\t\t\t           SurfaceData surface = (SurfaceData)0;\n\t\t\t          
+      \n\t\t\t           surface.normalWS = normalWS;\n\t\t\t           \n\t\t\t          
+      EncodeIntoNormalBuffer(ConvertSurfaceDataToNormalData(surface), i.VFX_VARYING_POSCS.xy,
+      outNormalBuffer);\n\t\t\t        #endif\n\t\t\t\t#endif\n\t\t\t\n\t\t\t\t#if
       VFX_PASSDEPTH == VFX_PASSDEPTH_MOTION_VECTOR\n\t\t\t\t\t\n\t\t\t\t\t\t\tfloat2
       velocity = (i.VFX_VARYING_VELOCITY_CPOS.xy/i.VFX_VARYING_VELOCITY_CPOS.w) -
       (i.VFX_VARYING_VELOCITY_CPOS_PREVIOUS.xy/i.VFX_VARYING_VELOCITY_CPOS_PREVIOUS.w);\n\t\t\t\t\t\t\t#if
@@ -2026,9 +2019,8 @@ VisualEffectResource:
       { \"LightMode\"=\"DepthOnly\" }\n\t\t\n\t\t\tZWrite On\n\t\t\tBlend Off\n\t\t\t\n\t\t\tHLSLPROGRAM\n\t\t\t#define
       VFX_PASSDEPTH VFX_PASSDEPTH_ACTUAL\n\t\t\t#pragma target 4.5\n\t\t\t#define
       UNITY_MATERIAL_LIT\n\t\t\t#pragma multi_compile _ WRITE_NORMAL_BUFFER\n\t\t\t\n\t\t\t#define
-      NEEDS_NORMAL\tdefined(WRITE_NORMAL_BUFFER) || FORCE_NORMAL_VARYING || SHADERGRAPH_HAS_NORMAL
-      // TODO Should extract mv pass\n\t\t\t#define NEEDS_TANGENT\tUSE_NORMAL_MAP
-      || USE_NORMAL_BENDING || SHADERGRAPH_NEEDS_TANGENT_DEPTH || SHADERGRAPH_HAS_NORMAL\n\t\t\t\n\t\t\tstruct
+      NEEDS_NORMAL\tdefined(WRITE_NORMAL_BUFFER) || FORCE_NORMAL_VARYING || SHADERGRAPH_NEEDS_NORMAL_DEPTHONLY\n\t\t\t#define
+      NEEDS_TANGENT\tUSE_NORMAL_MAP || USE_NORMAL_BENDING || SHADERGRAPH_NEEDS_TANGENT_DEPTHONLY\n\t\t\t\n\t\t\tstruct
       ps_input\n\t\t\t{\n\t\t\t\tfloat4 pos : SV_POSITION;\n\t\t\t\t#if USE_FLIPBOOK_INTERPOLATION\n\t\t\t\tfloat4
       uv : TEXCOORD0;\n\t\t\t\t#else\n\t\t\t\tfloat2 uv : TEXCOORD0;\t\n\t\t\t\t#endif\n\t\t\t\t#if
       USE_ALPHA_TEST || USE_FLIPBOOK_INTERPOLATION || VFX_USE_ALPHA_CURRENT\n\t\t\t\t//
@@ -2256,36 +2248,36 @@ VisualEffectResource:
       WRITE_NORMAL_BUFFER\n\t\t\t\t\t, out float4 outNormalBuffer : SV_Target1\n\t\t\t\t#endif\n\t\t\t#else\n\t\t\t\t#ifdef
       WRITE_NORMAL_BUFFER\n\t\t\t\t\t, out float4 outNormalBuffer : SV_Target0\n\t\t\t\t#elif
       VFX_PASSDEPTH == VFX_PASSDEPTH_SELECTION\n\t\t\t\t\t, out float4 outColor :
-      SV_Target0\n\t\t\t\t#endif\n\t\t\t#endif\n\t\t\t\t)\n\t\t\t{\n\t\t\t\tUNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);\n\t\t\t\tVFXTransformPSInputs(i);\n\t\t\t\t#ifdef
+      SV_Target0\n\t\t\t\t#endif\n\t\t\t#endif\n\t\t\t\t)\n\t\t\t{\n\t\t\t\tUNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);\n\t\t\t\tVFXTransformPSInputs(i);\n\t\t\t\t\n\t\t\t\t\t\t\t#ifdef
+      VFX_VARYING_NORMAL\n\t\t\t\t\t\t\t#if USE_DOUBLE_SIDED\n\t\t\t\t\t\t\tconst
+      float faceMul = frontFace ? 1.0f : -1.0f;\n\t\t\t\t\t\t\t#else\n\t\t\t\t\t\t\tconst
+      float faceMul = 1.0f;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\tfloat3
+      normalWS = i.VFX_VARYING_NORMAL * faceMul;\n\t\t\t\t\t\t\tconst VFXUVData uvData
+      = GetUVData(i);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#ifdef VFX_VARYING_TANGENT\n\t\t\t\t\t\t\tfloat3
+      tangentWS = i.VFX_VARYING_TANGENT;\n\t\t\t\t\t\t\tfloat3 bitangentWS = cross(i.VFX_VARYING_TANGENT,i.VFX_VARYING_NORMAL);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#if
+      defined(VFX_VARYING_BENTFACTORS) && USE_NORMAL_BENDING\t\n\t\t\t\t\t\t\tfloat3
+      bentFactors = float3(i.VFX_VARYING_BENTFACTORS.xy,sqrt(1.0f - dot(i.VFX_VARYING_BENTFACTORS,i.VFX_VARYING_BENTFACTORS)));\n\t\t\t\t\t\t\tnormalWS
+      = tangentWS * bentFactors.x + bitangentWS * bentFactors.y + normalWS * bentFactors.z;\n\t\t\t\t\t\t\ttangentWS
+      = normalize(cross(normalWS,bitangentWS));\n\t\t\t\t\t\t\tbitangentWS = cross(tangentWS,normalWS);\n\t\t\t\t\t\t\ttangentWS
+      *= faceMul;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\tfloat3x3 tbn
+      = float3x3(tangentWS,bitangentWS,normalWS);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#if
+      USE_NORMAL_MAP\n\t\t\t\t\t\t\tfloat3 n = SampleNormalMap(VFX_SAMPLER(normalMap),uvData);\n\t\t\t\t\t\t\tfloat
+      normalScale = 1.0f;\n\t\t\t\t\t\t\t#ifdef VFX_VARYING_NORMALSCALE\n\t\t\t\t\t\t\tnormalScale
+      = i.VFX_VARYING_NORMALSCALE;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\tnormalWS
+      = normalize(lerp(normalWS,mul(n,tbn),normalScale));\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t#ifdef
       VFX_SHADERGRAPH\n\t\t\t    \n\t\t\t        \n\t\t\t        \n\t\t\t       
       \n\t\t\t        \n\t\t\t        float alpha = OUTSG.;\n\t\t\t    #else\n\t\t\t       
       float alpha = VFXGetFragmentColor(i).a;\n\t\t\t        #if HDRP_USE_BASE_COLOR_MAP_ALPHA\n\t\t\t           
       alpha *= VFXGetTextureColor(VFX_SAMPLER(baseColorMap),i).a;\n\t\t\t       
       #endif\n\t\t\t    #endif\n\t\t\t        VFXClipFragmentColor(alpha,i);\n\t\t\t\t\n\t\t\t\t#ifdef
-      WRITE_NORMAL_BUFFER\n\t\t\t\t\t\n\t\t\t\t\t\t\t\t#if USE_DOUBLE_SIDED\n\t\t\t\t\t\t\t\tconst
-      float faceMul = frontFace ? 1.0f : -1.0f;\n\t\t\t\t\t\t\t\t#else\n\t\t\t\t\t\t\t\tconst
-      float faceMul = 1.0f;\n\t\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\tfloat3
-      normalWS = i.VFX_VARYING_NORMAL * faceMul;\n\t\t\t\t\t\t\t\tconst VFXUVData
-      uvData = GetUVData(i);\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t#if defined(VFX_VARYING_TANGENT)
-      && (USE_NORMAL_MAP || USE_NORMAL_BENDING || VFX_SHADERGRAPH)\n\t\t\t\t\t\t\t\tfloat3
-      tangentWS = i.VFX_VARYING_TANGENT;\n\t\t\t\t\t\t\t\tfloat3 bitangentWS = cross(i.VFX_VARYING_TANGENT,i.VFX_VARYING_NORMAL);\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t#if
-      defined(VFX_VARYING_BENTFACTORS) && USE_NORMAL_BENDING\t\n\t\t\t\t\t\t\t\tfloat3
-      bentFactors = float3(i.VFX_VARYING_BENTFACTORS.xy,sqrt(1.0f - dot(i.VFX_VARYING_BENTFACTORS,i.VFX_VARYING_BENTFACTORS)));\n\t\t\t\t\t\t\t\tnormalWS
-      = tangentWS * bentFactors.x + bitangentWS * bentFactors.y + normalWS * bentFactors.z;\n\t\t\t\t\t\t\t\ttangentWS
-      = normalize(cross(normalWS,bitangentWS));\n\t\t\t\t\t\t\t\tbitangentWS = cross(tangentWS,normalWS);\n\t\t\t\t\t\t\t\ttangentWS
-      *= faceMul;\n\t\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t#if
-      USE_NORMAL_MAP\n\t\t\t\t\t\t\t\tfloat3 n = SampleNormalMap(VFX_SAMPLER(normalMap),uvData);\n\t\t\t\t\t\t\t\tfloat3x3
-      tbn = float3x3(tangentWS,bitangentWS,normalWS);\n\t\t\t\t\t\t\t\tfloat normalScale
-      = 1.0f;\n\t\t\t\t\t\t\t\t#ifdef VFX_VARYING_NORMALSCALE\n\t\t\t\t\t\t\t\tnormalScale
-      = i.VFX_VARYING_NORMALSCALE;\n\t\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\tnormalWS
-      = normalize(lerp(normalWS,mul(n,tbn),normalScale));\n\t\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t\n\t\t\t       
-      #ifndef VFX_SHADERGRAPH\n\t\t\t            VFXComputePixelOutputToNormalBuffer(i,normalWS,uvData,outNormalBuffer);\n\t\t\t       
+      WRITE_NORMAL_BUFFER\n\t\t\t        #ifndef VFX_SHADERGRAPH\n\t\t\t           
+      VFXComputePixelOutputToNormalBuffer(i,normalWS,uvData,outNormalBuffer);\n\t\t\t       
       #else\n\t\t\t           #if HAS_SHADERGRAPH_PARAM_NORMAL\n\t\t\t              
-      float3 n =  OUTSG.Normal_8;\n\t\t\t               float3x3 tbn = float3x3(tangentWS,bitangentWS,normalWS);\n\t\t\t              
-      normalWS = mul(n,tbn);\n\t\t\t           #endif\n\t\t\t           SurfaceData
-      surface = (SurfaceData)0;\n\t\t\t           \n\t\t\t           surface.normalWS
-      = normalWS;\n\t\t\t           \n\t\t\t           EncodeIntoNormalBuffer(ConvertSurfaceDataToNormalData(surface),
-      i.VFX_VARYING_POSCS.xy, outNormalBuffer);\n\t\t\t        #endif\n\t\t\t\t#endif\n\t\t\t\n\t\t\t\t#if
+      float3 n =  OUTSG.Normal_8;\n\t\t\t               normalWS = mul(n,tbn);\n\t\t\t          
+      #endif\n\t\t\t           SurfaceData surface = (SurfaceData)0;\n\t\t\t          
+      \n\t\t\t           surface.normalWS = normalWS;\n\t\t\t           \n\t\t\t          
+      EncodeIntoNormalBuffer(ConvertSurfaceDataToNormalData(surface), i.VFX_VARYING_POSCS.xy,
+      outNormalBuffer);\n\t\t\t        #endif\n\t\t\t\t#endif\n\t\t\t\n\t\t\t\t#if
       VFX_PASSDEPTH == VFX_PASSDEPTH_MOTION_VECTOR\n\t\t\t\t\t\n\t\t\t\t\t\t\tfloat2
       velocity = (i.VFX_VARYING_VELOCITY_CPOS.xy/i.VFX_VARYING_VELOCITY_CPOS.w) -
       (i.VFX_VARYING_VELOCITY_CPOS_PREVIOUS.xy/i.VFX_VARYING_VELOCITY_CPOS_PREVIOUS.w);\n\t\t\t\t\t\t\t#if
@@ -2320,9 +2312,9 @@ VisualEffectResource:
       x: motion vector scale u\n\t\t\t\t// y: motion vector scale v\n\t\t\t\tVFX_OPTIONAL_INTERPOLATION
       float2 builtInInterpolants2 : TEXCOORD3;\n\t\t\t\t#endif\n\t\t\t\tVFX_OPTIONAL_INTERPOLATION
       float3 normal : TEXCOORD4;\n\t\t\t\t#if USE_NORMAL_MAP || USE_NORMAL_BENDING
-      || SHADERGRAPH_NEEDS_TANGENT_GBUFFER || SHADERGRAPH_HAS_NORMAL\n\t\t\t\tVFX_OPTIONAL_INTERPOLATION
-      float3 tangent : TEXCOORD5;\n\t\t\t\t#endif\n\t\t\t\t#if USE_NORMAL_BENDING\n\t\t\t\tfloat2
-      bentFactors : TEXCOORD6;\n\t\t\t\t#endif\n\t\t        #if VFX_NEEDS_POSWS_INTERPOLATOR\n\t\t           
+      || SHADERGRAPH_NEEDS_TANGENT_GBUFFER\n\t\t\t\tVFX_OPTIONAL_INTERPOLATION float3
+      tangent : TEXCOORD5;\n\t\t\t\t#endif\n\t\t\t\t#if USE_NORMAL_BENDING\n\t\t\t\tfloat2
+      bentFactors : TEXCOORD6;\n\t\t\t\t#endif\n\t\t        #if VFX_NEEDS_POSWS_INTERPOLATOR\n\t\t       
       float3 posWS : TEXCOORD7;\n\t\t        #endif\n\t\t\n\t\t        \n\t\t\n\t\t\t\tUNITY_VERTEX_OUTPUT_STEREO\n\t\t\t};\n\t\t\t\n\t\t\n\t\t\t\t\t#if
       (VFX_NEEDS_COLOR_INTERPOLATOR && HDRP_USE_BASE_COLOR) || HDRP_USE_ADDITIONAL_BASE_COLOR\n\t\t\t\t\t#define
       VFX_VARYING_COLOR color.rgb\n\t\t\t\t\t#define VFX_VARYING_ALPHA color.a\n\t\t\t\t\t#endif\n\t\t\t\t\t\n\t\t\t\t\t#define
@@ -2340,13 +2332,12 @@ VisualEffectResource:
       VFX_VARYING_ALPHATHRESHOLD builtInInterpolants.y\n\t\t#define VFX_VARYING_FRAMEBLEND
       builtInInterpolants.z\n\t\t#define VFX_VARYING_MOTIONVECTORSCALE builtInInterpolants2.xy\n\t\t#define
       VFX_VARYING_UV uv\n\t\t#define VFX_VARYING_NORMAL normal\n\t\t#if USE_NORMAL_MAP
-      || USE_NORMAL_BENDING || SHADERGRAPH_NEEDS_TANGENT_GBUFFER || SHADERGRAPH_HAS_NORMAL\n\t\t#define
-      VFX_VARYING_TANGENT tangent\n\t\t#endif\n\t\t#if VFX_NEEDS_POSWS_INTERPOLATOR\n\t\t   
-      #define VFX_VARYING_POSWS posWS\n\t\t#endif\n\t\t#if USE_NORMAL_BENDING\n\t\t#define
-      VFX_VARYING_BENTFACTORS bentFactors\n\t\t#endif\n\t\t\n\t\t\n\t\t\t\n\t\t\t#if
-      !(defined(VFX_VARYING_PS_INPUTS) && defined(VFX_VARYING_POSCS))\n\t\t\t#error
-      VFX_VARYING_PS_INPUTS, VFX_VARYING_POSCS and VFX_VARYING_UV must be defined.\n\t\t\t#endif\n\t\t\t\n\t\t\t#include
-      \"Packages/com.unity.render-pipelines.high-definition/Runtime/VFXGraph/Shaders/VFXCommon.hlsl\"\n\t\t\t#include
+      || USE_NORMAL_BENDING || SHADERGRAPH_NEEDS_TANGENT_GBUFFER\n\t\t#define VFX_VARYING_TANGENT
+      tangent\n\t\t#endif\n\t\t#if VFX_NEEDS_POSWS_INTERPOLATOR\n\t\t#define VFX_VARYING_POSWS
+      posWS\n\t\t#endif\n\t\t#if USE_NORMAL_BENDING\n\t\t#define VFX_VARYING_BENTFACTORS
+      bentFactors\n\t\t#endif\n\t\t\n\t\t\n\t\t\t\n\t\t\t#if !(defined(VFX_VARYING_PS_INPUTS)
+      && defined(VFX_VARYING_POSCS))\n\t\t\t#error VFX_VARYING_PS_INPUTS, VFX_VARYING_POSCS
+      and VFX_VARYING_UV must be defined.\n\t\t\t#endif\n\t\t\t\n\t\t\t#include \"Packages/com.unity.render-pipelines.high-definition/Runtime/VFXGraph/Shaders/VFXCommon.hlsl\"\n\t\t\t#include
       \"Packages/com.unity.visualeffectgraph/Shaders/VFXCommon.hlsl\"\n\t\t\t\n\n\t\t\tvoid
       SetAttribute_CAC29747(inout float3 position, float3 Position) /*attribute:position
       Composition:Overwrite Source:Slot Random:Off channels:XYZ */\n\t\t\t{\n\t\t\t   
@@ -2564,23 +2555,23 @@ VisualEffectResource:
       }\n\t\t    \n\t\t    #endif\n\t\t    \n\t\t    \n\t\t    #include \"Packages/com.unity.render-pipelines.high-definition/Runtime/VFXGraph/Shaders/VFXLitPixelOutput.hlsl\"\n\t\t   
       \n\t\t    \n\t\t\n\t\t\t\t\t\n\t\t    \n\t\t\t#pragma fragment frag\n\t\t\tvoid
       frag(ps_input i, OUTPUT_GBUFFER(outGBuffer)\n\t\t\t#if USE_DOUBLE_SIDED\n\t\t\t,
-      bool frontFace : SV_IsFrontFace\n\t\t\t#endif\n\t\t\t)\n\t\t\t{\n\t\t\t\tUNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);\n\t\t\t\tVFXTransformPSInputs(i);\n\t\t\t\t\n\t\t\t\t\t\t\t#if
-      USE_DOUBLE_SIDED\n\t\t\t\t\t\t\tconst float faceMul = frontFace ? 1.0f : -1.0f;\n\t\t\t\t\t\t\t#else\n\t\t\t\t\t\t\tconst
+      bool frontFace : SV_IsFrontFace\n\t\t\t#endif\n\t\t\t)\n\t\t\t{\n\t\t\t\tUNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);\n\t\t\t\tVFXTransformPSInputs(i);\n\t\t\t\t\n\t\t\t\t\t\t\t#ifdef
+      VFX_VARYING_NORMAL\n\t\t\t\t\t\t\t#if USE_DOUBLE_SIDED\n\t\t\t\t\t\t\tconst
+      float faceMul = frontFace ? 1.0f : -1.0f;\n\t\t\t\t\t\t\t#else\n\t\t\t\t\t\t\tconst
       float faceMul = 1.0f;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\tfloat3
       normalWS = i.VFX_VARYING_NORMAL * faceMul;\n\t\t\t\t\t\t\tconst VFXUVData uvData
-      = GetUVData(i);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#if defined(VFX_VARYING_TANGENT)
-      && (USE_NORMAL_MAP || USE_NORMAL_BENDING || VFX_SHADERGRAPH)\n\t\t\t\t\t\t\tfloat3
+      = GetUVData(i);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#ifdef VFX_VARYING_TANGENT\n\t\t\t\t\t\t\tfloat3
       tangentWS = i.VFX_VARYING_TANGENT;\n\t\t\t\t\t\t\tfloat3 bitangentWS = cross(i.VFX_VARYING_TANGENT,i.VFX_VARYING_NORMAL);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#if
       defined(VFX_VARYING_BENTFACTORS) && USE_NORMAL_BENDING\t\n\t\t\t\t\t\t\tfloat3
       bentFactors = float3(i.VFX_VARYING_BENTFACTORS.xy,sqrt(1.0f - dot(i.VFX_VARYING_BENTFACTORS,i.VFX_VARYING_BENTFACTORS)));\n\t\t\t\t\t\t\tnormalWS
       = tangentWS * bentFactors.x + bitangentWS * bentFactors.y + normalWS * bentFactors.z;\n\t\t\t\t\t\t\ttangentWS
       = normalize(cross(normalWS,bitangentWS));\n\t\t\t\t\t\t\tbitangentWS = cross(tangentWS,normalWS);\n\t\t\t\t\t\t\ttangentWS
-      *= faceMul;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#if USE_NORMAL_MAP\n\t\t\t\t\t\t\tfloat3
-      n = SampleNormalMap(VFX_SAMPLER(normalMap),uvData);\n\t\t\t\t\t\t\tfloat3x3
-      tbn = float3x3(tangentWS,bitangentWS,normalWS);\n\t\t\t\t\t\t\tfloat normalScale
-      = 1.0f;\n\t\t\t\t\t\t\t#ifdef VFX_VARYING_NORMALSCALE\n\t\t\t\t\t\t\tnormalScale
+      *= faceMul;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\tfloat3x3 tbn
+      = float3x3(tangentWS,bitangentWS,normalWS);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#if
+      USE_NORMAL_MAP\n\t\t\t\t\t\t\tfloat3 n = SampleNormalMap(VFX_SAMPLER(normalMap),uvData);\n\t\t\t\t\t\t\tfloat
+      normalScale = 1.0f;\n\t\t\t\t\t\t\t#ifdef VFX_VARYING_NORMALSCALE\n\t\t\t\t\t\t\tnormalScale
       = i.VFX_VARYING_NORMALSCALE;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\tnormalWS
-      = normalize(lerp(normalWS,mul(n,tbn),normalScale));\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\n\t\t       
+      = normalize(lerp(normalWS,mul(n,tbn),normalScale));\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\n\t\t       
       #ifdef VFX_SHADERGRAPH\n\t\t           \n\t\t           \n\t\t           SurfaceData
       surface;\n\t\t           BuiltinData builtin;\n\t\t           surface = (SurfaceData)0;\n\t\t          
       builtin = (BuiltinData)0;\n\t\t           \n\t\t           surface.materialFeatures
@@ -2594,7 +2585,6 @@ VisualEffectResource:
       #endif\n\t\t           #if HAS_SHADERGRAPH_PARAM_BASECOLOR\n\t\t              
       surface.baseColor = OUTSG.;\n\t\t           #endif\n\t\t           \n\t\t          
       #if HAS_SHADERGRAPH_PARAM_NORMAL\n\t\t               float3 n =  OUTSG.;\n\t\t              
-      float3x3 tbn = float3x3(tangentWS,bitangentWS,normalWS);\n\t\t              
       normalWS = mul(n,tbn);\n\t\t           #endif\n\t\t           \n\t\t          
       surface.normalWS = normalWS;\n\t\t           \n\t\t           #if HAS_SHADERGRAPH_PARAM_EMISSIVE\n\t\t              
       builtin.emissiveColor = OUTSG.;\n\t\t           #endif\n\t\t\n\t\t           
@@ -2607,7 +2597,7 @@ VisualEffectResource:
       _ENABLE_FOG_ON_TRANSPARENT\n\t\t\t#define _DISABLE_DECALS\n\t\t\t\n\n\t\t\t#pragma
       multi_compile USE_FPTL_LIGHTLIST USE_CLUSTERED_LIGHTLIST \n\t\t\t#pragma multi_compile
       SHADOW_LOW SHADOW_MEDIUM SHADOW_HIGH\n\t\t\t#pragma multi_compile _ DEBUG_DISPLAY\n\t\t\t//#pragma
-      enable_d3d11_debug_symbols\n\t\t\t\t\n\t\t\t#define HDRP_NEEDS_UVS (HDRP_USE_BASE_COLOR_MAP
+      enable_d3d11_debug_symbols\n\t\t\t\t\t\n\t\t\t#define HDRP_NEEDS_UVS (HDRP_USE_BASE_COLOR_MAP
       || HDRP_USE_MASK_MAP || USE_NORMAL_MAP || HDRP_USE_EMISSIVE_MAP)\n\t\t\t#define
       HDRP_USE_EMISSIVE (HDRP_USE_EMISSIVE_MAP || HDRP_USE_EMISSIVE_COLOR || HDRP_USE_ADDITIONAL_EMISSIVE_COLOR)\n\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\tstruct
       ps_input\n\t\t\t{\n\t\t\t\tfloat4 pos : SV_POSITION;\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#if
@@ -2626,9 +2616,8 @@ VisualEffectResource:
       USE_FLIPBOOK_MOTIONVECTORS\n\t\t\t\t// x: motion vector scale u\n\t\t\t\t//
       y: motion vector scale v\n\t\t\t\tVFX_OPTIONAL_INTERPOLATION float2 builtInInterpolants2
       : TEXCOORD3;\n\t\t\t\t#endif\n\t\t\n\t\t\t\tVFX_OPTIONAL_INTERPOLATION float3
-      normal : TEXCOORD4;\n\t\t\t\t#if USE_NORMAL_MAP || USE_NORMAL_BENDING || SHADERGRAPH_NEEDS_TANGENT_FORWARD
-      || SHADERGRAPH_HAS_NORMAL\n\t\t\t\tVFX_OPTIONAL_INTERPOLATION float3 tangent
-      : TEXCOORD5;\n\t\t\t\t#endif\n\t\t\t\t#if USE_NORMAL_BENDING\n\t\t\t\tfloat2
+      normal : TEXCOORD4;\n\t\t\t\t#if USE_NORMAL_MAP || USE_NORMAL_BENDING || SHADERGRAPH_NEEDS_TANGENT_FORWARD\n\t\t\t\tVFX_OPTIONAL_INTERPOLATION
+      float3 tangent : TEXCOORD5;\n\t\t\t\t#endif\n\t\t\t\t#if USE_NORMAL_BENDING\n\t\t\t\tfloat2
       bentFactors : TEXCOORD6;\n\t\t\t\t#endif\n\t\t\n\t\t\t\t#if WRITE_MOTION_VECTOR_IN_FORWARD\n\t\t\t\tfloat4
       cPosPrevious : TEXCOORD7;\n\t\t\t\tfloat4 cPosNonJiterred : TEXCOORD8;\n\t\t\t\t#endif\n\t\t\t\t\n\t\t\t\tfloat3
       posWS : TEXCOOR9; // Needed for fog\n\t\t        \n\t\t        \n\t\t\t\t\n\t\t\t\tUNITY_VERTEX_OUTPUT_STEREO\n\t\t\t};\n\t\t\t\n\t\t\n\t\t\t\t\t#if
@@ -2648,11 +2637,11 @@ VisualEffectResource:
       VFX_VARYING_ALPHATHRESHOLD builtInInterpolants.y\n\t\t#define VFX_VARYING_FRAMEBLEND
       builtInInterpolants.z\n\t\t#define VFX_VARYING_MOTIONVECTORSCALE builtInInterpolants2.xy\n\t\t#define
       VFX_VARYING_UV uv\n\t\t#define VFX_VARYING_NORMAL normal\n\t\t#if USE_NORMAL_MAP
-      || USE_NORMAL_BENDING || SHADERGRAPH_NEEDS_TANGENT_FORWARD || SHADERGRAPH_HAS_NORMAL\n\t\t#define
-      VFX_VARYING_TANGENT tangent\n\t\t#endif\n\t\t#if USE_NORMAL_BENDING\n\t\t#define
-      VFX_VARYING_BENTFACTORS bentFactors\n\t\t#endif\n\t\t#define VFX_VARYING_POSWS
-      posWS\n\t\t\n\t\t#if WRITE_MOTION_VECTOR_IN_FORWARD\n\t\t#define VFX_VARYING_VELOCITY_CPOS
-      cPosNonJiterred\n\t\t#define VFX_VARYING_VELOCITY_CPOS_PREVIOUS cPosPrevious\n\t\t#endif\n\t\t\n\t\t\n\t\t\t\n\t\t\t#if
+      || USE_NORMAL_BENDING || SHADERGRAPH_NEEDS_TANGENT_FORWARD\n\t\t#define VFX_VARYING_TANGENT
+      tangent\n\t\t#endif\n\t\t#if USE_NORMAL_BENDING\n\t\t#define VFX_VARYING_BENTFACTORS
+      bentFactors\n\t\t#endif\n\t\t#define VFX_VARYING_POSWS posWS\n\t\t\n\t\t#if
+      WRITE_MOTION_VECTOR_IN_FORWARD\n\t\t#define VFX_VARYING_VELOCITY_CPOS cPosNonJiterred\n\t\t#define
+      VFX_VARYING_VELOCITY_CPOS_PREVIOUS cPosPrevious\n\t\t#endif\n\t\t\n\t\t\n\t\t\t\n\t\t\t#if
       !(defined(VFX_VARYING_PS_INPUTS) && defined(VFX_VARYING_POSCS))\n\t\t\t#error
       VFX_VARYING_PS_INPUTS, VFX_VARYING_POSCS and VFX_VARYING_UV must be defined.\n\t\t\t#endif\n\t\t\t\n\t\t\t#include
       \"Packages/com.unity.render-pipelines.high-definition/Runtime/VFXGraph/Shaders/VFXCommon.hlsl\"\n\t\t\t#include
@@ -2871,23 +2860,23 @@ VisualEffectResource:
       \n\t\t\t\t\t\t\t\n\t\t\t#pragma fragment frag\n\t\t\tvoid frag(ps_input i\n\t\t\t,
       out float4 outColor : SV_Target0\n\t\t\t#if USE_DOUBLE_SIDED\n\t\t\t, bool
       frontFace : SV_IsFrontFace\n\t\t\t#endif\n\t\t\t#if WRITE_MOTION_VECTOR_IN_FORWARD\n\t\t\t,
-      out float4 outMotionVector : SV_Target1\n\t\t\t#endif\n\t\t\t)\n\t\t\t{\n\t\t\t\tUNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);\n\t\t\t\tVFXTransformPSInputs(i);\n\t\t\t\t\n\t\t\t\t\t\t\t#if
-      USE_DOUBLE_SIDED\n\t\t\t\t\t\t\tconst float faceMul = frontFace ? 1.0f : -1.0f;\n\t\t\t\t\t\t\t#else\n\t\t\t\t\t\t\tconst
+      out float4 outMotionVector : SV_Target1\n\t\t\t#endif\n\t\t\t)\n\t\t\t{\n\t\t\t\tUNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);\n\t\t\t\tVFXTransformPSInputs(i);\n\t\t\t\t\n\t\t\t\t\t\t\t#ifdef
+      VFX_VARYING_NORMAL\n\t\t\t\t\t\t\t#if USE_DOUBLE_SIDED\n\t\t\t\t\t\t\tconst
+      float faceMul = frontFace ? 1.0f : -1.0f;\n\t\t\t\t\t\t\t#else\n\t\t\t\t\t\t\tconst
       float faceMul = 1.0f;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\tfloat3
       normalWS = i.VFX_VARYING_NORMAL * faceMul;\n\t\t\t\t\t\t\tconst VFXUVData uvData
-      = GetUVData(i);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#if defined(VFX_VARYING_TANGENT)
-      && (USE_NORMAL_MAP || USE_NORMAL_BENDING || VFX_SHADERGRAPH)\n\t\t\t\t\t\t\tfloat3
+      = GetUVData(i);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#ifdef VFX_VARYING_TANGENT\n\t\t\t\t\t\t\tfloat3
       tangentWS = i.VFX_VARYING_TANGENT;\n\t\t\t\t\t\t\tfloat3 bitangentWS = cross(i.VFX_VARYING_TANGENT,i.VFX_VARYING_NORMAL);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#if
       defined(VFX_VARYING_BENTFACTORS) && USE_NORMAL_BENDING\t\n\t\t\t\t\t\t\tfloat3
       bentFactors = float3(i.VFX_VARYING_BENTFACTORS.xy,sqrt(1.0f - dot(i.VFX_VARYING_BENTFACTORS,i.VFX_VARYING_BENTFACTORS)));\n\t\t\t\t\t\t\tnormalWS
       = tangentWS * bentFactors.x + bitangentWS * bentFactors.y + normalWS * bentFactors.z;\n\t\t\t\t\t\t\ttangentWS
       = normalize(cross(normalWS,bitangentWS));\n\t\t\t\t\t\t\tbitangentWS = cross(tangentWS,normalWS);\n\t\t\t\t\t\t\ttangentWS
-      *= faceMul;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#if USE_NORMAL_MAP\n\t\t\t\t\t\t\tfloat3
-      n = SampleNormalMap(VFX_SAMPLER(normalMap),uvData);\n\t\t\t\t\t\t\tfloat3x3
-      tbn = float3x3(tangentWS,bitangentWS,normalWS);\n\t\t\t\t\t\t\tfloat normalScale
-      = 1.0f;\n\t\t\t\t\t\t\t#ifdef VFX_VARYING_NORMALSCALE\n\t\t\t\t\t\t\tnormalScale
+      *= faceMul;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\tfloat3x3 tbn
+      = float3x3(tangentWS,bitangentWS,normalWS);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#if
+      USE_NORMAL_MAP\n\t\t\t\t\t\t\tfloat3 n = SampleNormalMap(VFX_SAMPLER(normalMap),uvData);\n\t\t\t\t\t\t\tfloat
+      normalScale = 1.0f;\n\t\t\t\t\t\t\t#ifdef VFX_VARYING_NORMALSCALE\n\t\t\t\t\t\t\tnormalScale
       = i.VFX_VARYING_NORMALSCALE;\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\tnormalWS
-      = normalize(lerp(normalWS,mul(n,tbn),normalScale));\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t       
+      = normalize(lerp(normalWS,mul(n,tbn),normalScale));\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\n\t\t       
       \n\t\t        #ifdef VFX_SHADERGRAPH\n\t\t           \n\t\t            \n\t\t           
       \n\t\t            SurfaceData surface;\n\t\t            BuiltinData builtin;\n\t\t           
       surface = (SurfaceData)0;\n\t\t            builtin = (BuiltinData)0;\n\t\t           
@@ -2902,7 +2891,6 @@ VisualEffectResource:
       OUTSG.;\n\t\t            #endif\n\t\t            #if HAS_SHADERGRAPH_PARAM_BASECOLOR\n\t\t               
       surface.baseColor = OUTSG.;\n\t\t            #endif\n\t\t            \n\t\t           
       #if HAS_SHADERGRAPH_PARAM_NORMAL\n\t\t                float3 n =  OUTSG.;\n\t\t               
-      float3x3 tbn = float3x3(tangentWS,bitangentWS,normalWS);\n\t\t               
       normalWS = mul(n,tbn);\n\t\t            #endif\n\t\t            \n\t\t           
       surface.normalWS = normalWS;\n\t\t            \n\t\t            #if HAS_SHADERGRAPH_PARAM_EMISSIVE\n\t\t               
       builtin.emissiveColor = OUTSG.;\n\t\t            #endif\n\t\t\n\t\t           

@@ -4,7 +4,7 @@ All notable changes to this package will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [7.2.0] - 2019-XX-XX
+## [7.1.3] - 2019-11-04
 
 ### Added
 - Ray tracing support for VR single-pass
@@ -21,29 +21,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added path tracing support for directional, point and spot lights, as well as emission from Lit and Unlit.
 - Added non temporal version of SSAO.
 - Added more detailed ray tracing stats in the debug window
+- Added Disc area light (bake only)
+- Added a warning in the material UI to prevent transparent + subsurface-scattering combination.
 
 ### Fixed
 - Sorting, undo, labels, layout in the Lighting Explorer.
 - Fixed sky settings and materials in Shader Graph Samples package
-- Fix/workaround a probable graphics driver bug in the GTAO shader.
-- Fixed Hair and PBR shader graphs double sided modes
-- Fixed an issue where updating an HDRP asset in the Quality setting panel would not recreate the pipeline.
-- Fixed issue with point lights being considered even when occupying less than a pixel on screen (case 1183196)
-- Fix a potential NaN source with iridescence (case 1183216)
-- Fixed issue of spotlight breaking when minimizing the cone angle via the gizmo (case 1178279)
-- Fixed issue that caused decals not to modify the roughness in the normal buffer, causing SSR to not behave correctly (case 1178336)
-- Fixed lit transparent refraction with XR single-pass rendering
-- Removed extra jitter for TemporalAA in VR
-- Fixed ShaderGraph time in main preview
-- Fixed issue on some UI elements in HDRP asset not expanding when clicking the arrow (case 1178369)
-- Fixed alpha blending in custom post process
-- Fixed the modification of the _AlphaCutoff property in the material UI when exposed with a ShaderGraph parameter.
-- Fixed HDRP test `1218_Lit_DiffusionProfiles` on Vulkan.
-- Fixed an issue where building a player in non-dev mode would generate render target error logs every frame
-- Fixed crash when upgrading version of HDRP
-- Fixed rendering issues with material previews
-- Fixed NPE when using light module in Shuriken particle systems (1173348).
-- Refresh cached shadow on editor changes
 - Fixed light supported units caching (1182266)
 - Fixed an issue where SSAO (that needs temporal reprojection) was still being rendered when Motion Vectors were not available (case 1184998)
 - Fixed a nullref when modifying the height parameters inside the layered lit shader UI.
@@ -106,6 +89,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fixed Spot light Pyramid Shape has shadow artifacts on aspect ratio values lower than 1
 - Fixed issue with AO upsampling in XR
 - Fixed camera without HDAdditionalCameraData component not rendering
+- Removed the macro ENABLE_RAYTRACING for most of the ray tracing code
+- Fixed prefab containing camera reloading in loop while selected in the Project view
+- Fixed issue causing NaN wheh the Z scale of an object is set to 0.
+- Fixed DXR shader passes attempting to render before pipeline loaded
+- Fixed black ambient sky issue when importing a project after deleting Library.
+- Fixed issue when upgrading a Standard transparent material (case 1186874)
+- Fixed area light cookies not working properly with stack lit
+- Fixed material render queue not updated when the shader is changed in the material inspector.
+- Fixed a number of issues with full screen debug modes not reseting correctly when setting another mutually exclusive mode
+- Fixed compile errors for platforms with no VR support
+- Fixed an issue with volumetrics and RTHandle scaling (case 1155236)
+- Fixed an issue where sky lighting might be updated uselessly
+- Fixed issue preventing to allow setting decal material to none (case 1196129)
+- Fixed XR multi-pass decals rendering
+- Fixed several fields on Light Inspector that not supported Prefab overrides
 - VFX: Removed z-fight glitches that could appear when using deferred depth prepass and lit quad primitives
 
 ### Changed
@@ -123,6 +121,37 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Improved quality of SSAO.
 - Moved RequestShadowMapRendering() back to public API.
 - Update HDRP DXR Wizard with an option to automatically clone the hdrp config package and setup raytracing to 1 in shaders file.
+- Added SceneSelection pass for TerrainLit shader.
+- Simplified Light's type API regrouping the logic in one place (Check type in HDAdditionalLightData)
+- The support of LOD CrossFade (Dithering transition) in master nodes now required to enable it in the master node settings (Save variant)
+- Improved shadow bias, by removing constant depth bias and substituting it with slope-scale bias. 
+- Fix the default stencil values when a material is created from a SSS ShaderGraph.
+- Tweak test asset to be compatible with XR: unlit SG material for canvas and double-side font material
+- Slightly tweaked the behaviour of bloom when resolution is low to reduce artifacts.
+- Hidden fields in Light Inspector that is not relevant while in BakingOnly mode.
+
+## [7.1.2] - 2019-09-19
+
+### Fixed
+- Fix/workaround a probable graphics driver bug in the GTAO shader.
+- Fixed Hair and PBR shader graphs double sided modes
+- Fixed an issue where updating an HDRP asset in the Quality setting panel would not recreate the pipeline.
+- Fixed issue with point lights being considered even when occupying less than a pixel on screen (case 1183196)
+- Fix a potential NaN source with iridescence (case 1183216)
+- Fixed issue of spotlight breaking when minimizing the cone angle via the gizmo (case 1178279)
+- Fixed issue that caused decals not to modify the roughness in the normal buffer, causing SSR to not behave correctly (case 1178336)
+- Fixed lit transparent refraction with XR single-pass rendering
+- Removed extra jitter for TemporalAA in VR
+- Fixed ShaderGraph time in main preview
+- Fixed issue on some UI elements in HDRP asset not expanding when clicking the arrow (case 1178369)
+- Fixed alpha blending in custom post process
+- Fixed the modification of the _AlphaCutoff property in the material UI when exposed with a ShaderGraph parameter.
+- Fixed HDRP test `1218_Lit_DiffusionProfiles` on Vulkan.
+- Fixed an issue where building a player in non-dev mode would generate render target error logs every frame
+- Fixed crash when upgrading version of HDRP
+- Fixed rendering issues with material previews
+- Fixed NPE when using light module in Shuriken particle systems (1173348).
+- Refresh cached shadow on editor changes
 
 ## [7.1.1] - 2019-09-05
 
