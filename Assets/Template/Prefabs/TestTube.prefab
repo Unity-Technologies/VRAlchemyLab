@@ -106,7 +106,7 @@ MonoBehaviour:
   filling: 0
   speedMultiplier: 0.2
   idMat: 1
---- !u!114 &7795962941789123550
+--- !u!114 &4548093182073570332
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 709137977269124010}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: 70b2277ec9a3c2b4a9574bca97f3caa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -123,6 +123,31 @@ MonoBehaviour:
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  m_OnFirstHoverEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHoverEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHoverExit:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnLastHoverExit:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSelectEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSelectExit:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnActivate:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnDeactivate:
+    m_PersistentCalls:
+      m_Calls: []
+  m_CustomReticle: {fileID: 0}
   m_AttachTransform: {fileID: 3904596180918222505}
   m_AttachEaseInTime: 0.15
   m_MovementType: 1
@@ -153,7 +178,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   m_ThrowVelocityScale: 1.5
   m_ThrowAngularVelocityScale: 0.25
-  m_GravityOnDetach: 1
+  m_GravityOnDetach: 0
 --- !u!65 &8860463027229266992
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -379,7 +404,7 @@ CapsuleCollider:
   m_Height: 0.2675201
   m_Direction: 2
   m_Center: {x: 0, y: 2.534242e-16, z: 0.13391654}
---- !u!114 &2434164778135495046
+--- !u!114 &4448012784898199309
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -388,7 +413,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 3873421471338884771}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: db1fd5718a55bc34ab7ff08435d3a2e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dotResult: 0
+  filling: 0
+  speedMultiplier: 0.2
+  idMat: 1
+--- !u!114 &5187027510179442104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3873421471338884771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b2277ec9a3c2b4a9574bca97f3caa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -396,6 +437,31 @@ MonoBehaviour:
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  m_OnFirstHoverEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHoverEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHoverExit:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnLastHoverExit:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSelectEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSelectExit:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnActivate:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnDeactivate:
+    m_PersistentCalls:
+      m_Calls: []
+  m_CustomReticle: {fileID: 0}
   m_AttachTransform: {fileID: 9105213016244244715}
   m_AttachEaseInTime: 0.15
   m_MovementType: 1
@@ -426,23 +492,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   m_ThrowVelocityScale: 1.5
   m_ThrowAngularVelocityScale: 0.25
-  m_GravityOnDetach: 1
---- !u!114 &4448012784898199309
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3873421471338884771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db1fd5718a55bc34ab7ff08435d3a2e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dotResult: 0
-  filling: 0
-  speedMultiplier: 0.2
-  idMat: 1
+  m_GravityOnDetach: 0
 --- !u!1 &4211636476947194686
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,7 +569,7 @@ MonoBehaviour:
   filling: 0
   speedMultiplier: 0.2
   idMat: 1
---- !u!114 &5043015835922964770
+--- !u!114 &6342259138333844191
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -528,7 +578,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5157854295546931073}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: 70b2277ec9a3c2b4a9574bca97f3caa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -536,6 +586,31 @@ MonoBehaviour:
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  m_OnFirstHoverEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHoverEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHoverExit:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnLastHoverExit:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSelectEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSelectExit:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnActivate:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnDeactivate:
+    m_PersistentCalls:
+      m_Calls: []
+  m_CustomReticle: {fileID: 0}
   m_AttachTransform: {fileID: 3643762914836773979}
   m_AttachEaseInTime: 0.15
   m_MovementType: 1
@@ -566,7 +641,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   m_ThrowVelocityScale: 1.5
   m_ThrowAngularVelocityScale: 0.25
-  m_GravityOnDetach: 1
+  m_GravityOnDetach: 0
 --- !u!54 &1323011073659791017
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -613,7 +688,7 @@ MonoBehaviour:
   filling: 0
   speedMultiplier: 0.2
   idMat: 1
---- !u!114 &7786865430057217971
+--- !u!114 &2527408600505854062
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -622,7 +697,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5844186064047312168}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: 70b2277ec9a3c2b4a9574bca97f3caa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -630,6 +705,31 @@ MonoBehaviour:
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  m_OnFirstHoverEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHoverEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHoverExit:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnLastHoverExit:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSelectEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSelectExit:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnActivate:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnDeactivate:
+    m_PersistentCalls:
+      m_Calls: []
+  m_CustomReticle: {fileID: 0}
   m_AttachTransform: {fileID: 51649051836857952}
   m_AttachEaseInTime: 0.15
   m_MovementType: 1
@@ -660,7 +760,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   m_ThrowVelocityScale: 1.5
   m_ThrowAngularVelocityScale: 0.25
-  m_GravityOnDetach: 1
+  m_GravityOnDetach: 0
 --- !u!1 &6441442967038949504
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,7 +851,7 @@ CapsuleCollider:
   m_Height: 0.2675201
   m_Direction: 2
   m_Center: {x: 0, y: 2.534242e-16, z: 0.13391654}
---- !u!114 &4887794745073000961
+--- !u!114 &7066572775860670871
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -760,7 +860,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 6615038128243651822}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: db1fd5718a55bc34ab7ff08435d3a2e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dotResult: 0
+  filling: 0
+  speedMultiplier: 0.2
+  idMat: 1
+--- !u!114 &3620479385066466371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6615038128243651822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b2277ec9a3c2b4a9574bca97f3caa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -768,6 +884,31 @@ MonoBehaviour:
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  m_OnFirstHoverEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHoverEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHoverExit:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnLastHoverExit:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSelectEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSelectExit:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnActivate:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnDeactivate:
+    m_PersistentCalls:
+      m_Calls: []
+  m_CustomReticle: {fileID: 0}
   m_AttachTransform: {fileID: 3934157578543083681}
   m_AttachEaseInTime: 0.15
   m_MovementType: 1
@@ -798,23 +939,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   m_ThrowVelocityScale: 1.5
   m_ThrowAngularVelocityScale: 0.25
-  m_GravityOnDetach: 1
---- !u!114 &7066572775860670871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6615038128243651822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db1fd5718a55bc34ab7ff08435d3a2e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dotResult: 0
-  filling: 0
-  speedMultiplier: 0.2
-  idMat: 1
+  m_GravityOnDetach: 0
 --- !u!1 &7431848145403096906
 GameObject:
   m_ObjectHideFlags: 0
@@ -891,7 +1016,7 @@ MonoBehaviour:
   filling: 0
   speedMultiplier: 0.2
   idMat: 1
---- !u!114 &7477450861028970261
+--- !u!114 &1704646756778972732
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -900,7 +1025,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8794886505872564335}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: 70b2277ec9a3c2b4a9574bca97f3caa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -908,6 +1033,31 @@ MonoBehaviour:
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  m_OnFirstHoverEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHoverEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHoverExit:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnLastHoverExit:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSelectEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSelectExit:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnActivate:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnDeactivate:
+    m_PersistentCalls:
+      m_Calls: []
+  m_CustomReticle: {fileID: 0}
   m_AttachTransform: {fileID: 5009251729555613883}
   m_AttachEaseInTime: 0.15
   m_MovementType: 1
@@ -938,7 +1088,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   m_ThrowVelocityScale: 1.5
   m_ThrowAngularVelocityScale: 0.25
-  m_GravityOnDetach: 1
+  m_GravityOnDetach: 0
 --- !u!1 &9201155496960522786
 GameObject:
   m_ObjectHideFlags: 0
