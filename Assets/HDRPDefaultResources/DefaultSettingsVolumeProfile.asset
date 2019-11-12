@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Name: Bloom
   m_EditorClassIdentifier: 
   active: 1
-  m_AdvancedMode: 0
+  m_AdvancedMode: 1
   quality:
     m_OverrideState: 1
     m_Value: 0
@@ -168,7 +168,7 @@ MonoBehaviour:
     m_Value: 0
     min: 0
   prefilter:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   anamorphic:
     m_OverrideState: 0
@@ -243,6 +243,32 @@ MonoBehaviour:
     m_Value: 40
     min: 16
     max: 256
+  temporalAccumulation:
+    m_OverrideState: 0
+    m_Value: 1
+  ghostingReduction:
+    m_OverrideState: 0
+    m_Value: 0.5
+    min: 0
+    max: 1
+  bilateralUpsample:
+    m_OverrideState: 0
+    m_Value: 1
+  directionCount:
+    m_OverrideState: 0
+    m_Value: 2
+    min: 1
+    max: 8
+  blurSharpness:
+    m_OverrideState: 0
+    m_Value: 0.1
+    min: 0
+    max: 1
+  layerMask:
+    m_OverrideState: 0
+    m_Value:
+      serializedVersion: 2
+      m_Bits: 4294967295
   rayLength:
     m_OverrideState: 0
     m_Value: 0.5
