@@ -5,8 +5,8 @@ using UnityEngine.VFX;
 using UnityEngine.VFX.Utility;
 using UnityEngine.XR.Interaction.Toolkit;
 
-[VFXBinder("VR Demo/XR Teleport Binder")]
-public class VFXTeleportBinder : VFXBinderBase
+[VFXBinder("VR Demo/XR Ray Interactor Binder")]
+public class VFXXRRayInteractorBinder : VFXBinderBase
 {
     public XRRayInteractor XRRayInteractor;
 
