@@ -45,13 +45,11 @@ public class LiquidPour : MonoBehaviour
         Init();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         Verif();
     }
 
-    // Update is called once per frame
     void Update()
     {
         Verif();
@@ -61,11 +59,14 @@ public class LiquidPour : MonoBehaviour
         {
             playVFX = true;
         }
-        if (playVFX)
+
+        if ((playVFX) && (flow > flowLimit))
         {
+            Debug.Log("test");
             vfx.Play();
             playVFX = false;
         }
+        
 
         vfx.SetFloat("Flow", flow);
         vfx.SetFloat("BottleDiameter(cm)", bottleNeckDiameter);

@@ -2168,11 +2168,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Version: 6
+  m_Version: 8
   m_ObsoleteShadowResolutionTier: 1
   m_ObsoleteUseShadowQualitySettings: 0
   m_ObsoleteCustomShadowResolution: 512
   m_ObsoleteContactShadows: 0
+  m_PointlightHDType: 0
+  m_SpotLightShape: 0
+  m_AreaLightShape: 0
   m_Intensity: 270
   m_EnableSpotReflector: 0
   m_LuxAtDistance: 1
@@ -2184,8 +2187,6 @@ MonoBehaviour:
   m_AffectDiffuse: 1
   m_AffectSpecular: 1
   m_NonLightmappedOnly: 0
-  m_LightTypeExtent: 0
-  m_SpotLightShape: 0
   m_ShapeWidth: 0.5
   m_ShapeHeight: 0.5
   m_AspectRatio: 1
@@ -2201,6 +2202,12 @@ MonoBehaviour:
   m_InteractsWithSky: 1
   m_AngularDiameter: 0
   m_Distance: 150000000
+  m_UseRayTracedShadows: 0
+  m_NumRayTracingSamples: 4
+  m_FilterTracedShadow: 1
+  m_FilterSizeTraced: 16
+  m_SunLightConeAngle: 0.5
+  m_LightShadowRadius: 0.5
   m_EvsmExponent: 15
   m_EvsmLightLeakBias: 0
   m_EvsmVarianceBias: 0.00001
@@ -2226,9 +2233,10 @@ MonoBehaviour:
     m_Override: 0
     m_UseOverride: 1
     m_Level: 0
+  m_RayTracedContactShadow: 0
   m_ShadowTint: {r: 0, g: 0, b: 0, a: 1}
   m_NormalBias: 0.75
-  m_ConstantBias: 0.15
+  m_SlopeBias: 0.5
   m_ShadowUpdateMode: 0
   m_ShadowCascadeRatios:
   - 0.05
@@ -9696,7 +9704,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -4973734387028869240, guid: b7ddcd2a894e2264cabfaa66af708d7f, type: 3}
+  - {fileID: 2100000, guid: e169fb20e42005940a040ae52f898b61, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14056,11 +14064,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Version: 6
+  m_Version: 8
   m_ObsoleteShadowResolutionTier: 1
   m_ObsoleteUseShadowQualitySettings: 0
   m_ObsoleteCustomShadowResolution: 512
   m_ObsoleteContactShadows: 0
+  m_PointlightHDType: 0
+  m_SpotLightShape: 0
+  m_AreaLightShape: 0
   m_Intensity: 1000
   m_EnableSpotReflector: 0
   m_LuxAtDistance: 1
@@ -14072,8 +14083,6 @@ MonoBehaviour:
   m_AffectDiffuse: 1
   m_AffectSpecular: 1
   m_NonLightmappedOnly: 0
-  m_LightTypeExtent: 0
-  m_SpotLightShape: 0
   m_ShapeWidth: 0.5
   m_ShapeHeight: 0.5
   m_AspectRatio: 1
@@ -14089,6 +14098,12 @@ MonoBehaviour:
   m_InteractsWithSky: 1
   m_AngularDiameter: 0
   m_Distance: 150000000
+  m_UseRayTracedShadows: 0
+  m_NumRayTracingSamples: 4
+  m_FilterTracedShadow: 1
+  m_FilterSizeTraced: 16
+  m_SunLightConeAngle: 0.5
+  m_LightShadowRadius: 0.5
   m_EvsmExponent: 15
   m_EvsmLightLeakBias: 0
   m_EvsmVarianceBias: 0.00001
@@ -14114,9 +14129,10 @@ MonoBehaviour:
     m_Override: 0
     m_UseOverride: 1
     m_Level: 0
+  m_RayTracedContactShadow: 0
   m_ShadowTint: {r: 0, g: 0, b: 0, a: 1}
   m_NormalBias: 0.75
-  m_ConstantBias: 0.15
+  m_SlopeBias: 0.5
   m_ShadowUpdateMode: 0
   m_ShadowCascadeRatios:
   - 0.05
@@ -14230,11 +14246,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5324092878823727771}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
-        type: 3}
-      propertyPath: m_Name
-      value: MetalCircle (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b7ddcd2a894e2264cabfaa66af708d7f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14304,6 +14315,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.8067564
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
+        type: 3}
+      propertyPath: m_Name
+      value: MetalCircle (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7ddcd2a894e2264cabfaa66af708d7f, type: 3}
@@ -14409,11 +14425,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5324092878823727771}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
-        type: 3}
-      propertyPath: m_Name
-      value: MetalCircle (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b7ddcd2a894e2264cabfaa66af708d7f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14484,6 +14495,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.8067564
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
+        type: 3}
+      propertyPath: m_Name
+      value: MetalCircle (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7ddcd2a894e2264cabfaa66af708d7f, type: 3}
 --- !u!4 &6319539274174800605 stripped
@@ -14502,17 +14518,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.008245332
+      value: 0.008
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.038138505
+      value: 0.071
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.035326753
+      value: 0.0353
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
@@ -14756,11 +14772,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5324092878823727771}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
-        type: 3}
-      propertyPath: m_Name
-      value: MetalCircle (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b7ddcd2a894e2264cabfaa66af708d7f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14830,6 +14841,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.8067564
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
+        type: 3}
+      propertyPath: m_Name
+      value: MetalCircle (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7ddcd2a894e2264cabfaa66af708d7f, type: 3}
@@ -15098,11 +15114,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5324092878823727771}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
-        type: 3}
-      propertyPath: m_Name
-      value: MetalCircle (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b7ddcd2a894e2264cabfaa66af708d7f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15172,6 +15183,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.8067563
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
+        type: 3}
+      propertyPath: m_Name
+      value: MetalCircle (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7ddcd2a894e2264cabfaa66af708d7f, type: 3}
@@ -15272,11 +15288,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5324092878823727771}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
-        type: 3}
-      propertyPath: m_Name
-      value: MetalCircle (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b7ddcd2a894e2264cabfaa66af708d7f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15347,6 +15358,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.80675644
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
+        type: 3}
+      propertyPath: m_Name
+      value: MetalCircle (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7ddcd2a894e2264cabfaa66af708d7f, type: 3}
 --- !u!4 &7704483474358638302 stripped
@@ -15362,11 +15378,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5324092878823727771}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
-        type: 3}
-      propertyPath: m_Name
-      value: MetalCircle (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b7ddcd2a894e2264cabfaa66af708d7f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15437,6 +15448,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.80675644
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
+        type: 3}
+      propertyPath: m_Name
+      value: MetalCircle (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7ddcd2a894e2264cabfaa66af708d7f, type: 3}
 --- !u!4 &8473821925719644427 stripped
@@ -15455,17 +15471,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.008245819
+      value: 0.008
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.038138725
+      value: 0.056
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.03532675
+      value: 0.0353
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
@@ -15541,11 +15557,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5324092878823727771}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
-        type: 3}
-      propertyPath: m_Name
-      value: MetalCircle (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b7ddcd2a894e2264cabfaa66af708d7f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15616,6 +15627,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.8067563
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
+        type: 3}
+      propertyPath: m_Name
+      value: MetalCircle (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7ddcd2a894e2264cabfaa66af708d7f, type: 3}
 --- !u!4 &9132504826477776412 stripped
@@ -15634,17 +15650,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.008246872
+      value: 0.008
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.038138162
+      value: 0.069
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0353266
+      value: 0.0353
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
@@ -15720,11 +15736,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5324092878823727771}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
-        type: 3}
-      propertyPath: m_Name
-      value: MetalCircle (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b7ddcd2a894e2264cabfaa66af708d7f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15795,6 +15806,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.80675644
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
+        type: 3}
+      propertyPath: m_Name
+      value: MetalCircle (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7ddcd2a894e2264cabfaa66af708d7f, type: 3}
 --- !u!4 &153109988886822723 stripped
@@ -15813,17 +15829,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.008245907
+      value: 0.008
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0381382
+      value: 0.088
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.035326753
+      value: 0.0353
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
@@ -15899,11 +15915,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5324092878823727771}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
-        type: 3}
-      propertyPath: m_Name
-      value: MetalCircle (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b7ddcd2a894e2264cabfaa66af708d7f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15974,6 +15985,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.8067565
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
+        type: 3}
+      propertyPath: m_Name
+      value: MetalCircle (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7ddcd2a894e2264cabfaa66af708d7f, type: 3}
 --- !u!4 &1879184932893562051 stripped
@@ -15992,17 +16008,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.008246805
+      value: 0.008
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.038138073
+      value: 0.058
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.03532675
+      value: 0.0353
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
@@ -16338,17 +16354,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.008245652
+      value: 0.008
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.03813827
+      value: 0.075
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.03532675
+      value: 0.0353
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
