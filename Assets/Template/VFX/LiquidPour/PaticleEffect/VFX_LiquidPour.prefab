@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6391139307215784299}
   - component: {fileID: 7417777996558121490}
   - component: {fileID: 4391800624583237826}
+  - component: {fileID: 5398479601160493724}
+  - component: {fileID: 862648193751620314}
   m_Layer: 0
   m_Name: VFX_LiquidPour
   m_TagString: Untagged
@@ -113,8 +115,14 @@ VisualEffect:
       - m_Value: {x: 0, y: 0, z: 0}
         m_Name: _SpawnerVelocity
         m_Overridden: 1
+      - m_Value: {x: 0, y: 0, z: 0}
+        m_Name: _Velocity
+        m_Overridden: 1
     m_Vector4f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 1, y: 1, z: 1, w: 0}
+        m_Name: Color
+        m_Overridden: 1
     m_Uint:
       m_Array:
       - m_Value: 0
@@ -145,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bottleNeckDiameter: 2
+  StripCutBasedOnFlow: 0.01
   color: {r: 1, g: 1, b: 1, a: 0}
 --- !u!73398921 &4391800624583237826
 VFXRenderer:
@@ -164,6 +173,7 @@ VFXRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+  - {fileID: 0}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -185,3 +195,34 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &5398479601160493724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7894392258012616213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdafc37f32b176349b1684c4455b98e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ExecuteInEditor: 1
+  m_Bindings:
+  - {fileID: 862648193751620314}
+  m_VisualEffect: {fileID: 6391139307215784299}
+--- !u!114 &862648193751620314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7894392258012616213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d80994697e576624b97a67538d27ddcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Property:
+    m_Name: _Velocity
+  Target: {fileID: 1358978443692841340}
