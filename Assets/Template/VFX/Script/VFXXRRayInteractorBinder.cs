@@ -11,6 +11,9 @@ public class VFXXRRayInteractorBinder : VFXBinderBase
     public XRRayInteractor XRRayInteractor;
 
     [VFXPropertyBinding("System.Boolean")]
+    public ExposedProperty EnabledProperty = "IsEnabled";
+
+    [VFXPropertyBinding("System.Boolean")]
     public ExposedProperty HitProperty = "IsHit";
 
     [VFXPropertyBinding("UnityEngine.Vector3")]
@@ -25,6 +28,7 @@ public class VFXXRRayInteractorBinder : VFXBinderBase
     public override bool IsValid(VisualEffect component)
     {
         return XRRayInteractor != null
+            && component.HasBool(EnabledProperty)
             && component.HasBool(HitProperty)
             && component.HasVector3(TargetProperty)
             && component.HasVector3(TargetNormalProperty);
@@ -35,13 +39,23 @@ public class VFXXRRayInteractorBinder : VFXBinderBase
         int id = 0;
         bool hit = false;
 
-        if (XRRayInteractor.TryGetHitInfo(ref m_Position, ref m_Normal, ref id, ref hit) && XRRayInteractor.isActiveAndEnabled)
+        bool valid = XRRayInteractor.TryGetHitInfo(ref m_Position, ref m_Normal, ref id, ref hit);
+
+        if(XRRayInteractor.isActiveAndEnabled)
         {
-            component.SetBool(HitProperty, true);
-            component.SetVector3(TargetProperty, m_Position);
-            component.SetVector3(TargetNormalProperty, m_Normal);
+            component.SetBool(EnabledProperty, true);
+
+            if (hit && valid)
+            {
+                component.SetBool(HitProperty, true);
+                component.SetVector3(TargetProperty, m_Position);
+                component.SetVector3(TargetNormalProperty, m_Normal);
+            }
+            else
+                component.SetBool(HitProperty, false);
         }
         else
-            component.SetBool(HitProperty, false);
+            component.SetBool(EnabledProperty, false);
+
     }
 }

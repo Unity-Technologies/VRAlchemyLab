@@ -17498,6 +17498,63 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.4987027, y: 0.50027895, z: 0.50222844}
   m_Center: {x: 0.00023516262, y: -0.00013741851, z: 0.00064291066}
+--- !u!1 &544097270
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 544097271}
+  - component: {fileID: 544097272}
+  m_Layer: 0
+  m_Name: SetSelectedFalse
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &544097271
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544097270}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1452700640}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &544097272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544097270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f78535f6bcf4e134fba8e5bdaadcf1da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Set Selected
+  visualEffect: {fileID: 1452700642}
+  property: Selected
+  Override: 1
+  dataType: 0
+  BoolValue: 0
+  FloatValue: 0
+  Vector2Value: {x: 0, y: 0}
+  Vector3Value: {x: 0, y: 0, z: 0}
+  Vector4Value: {x: 0, y: 0, z: 0, w: 0}
+  Texture2DValue: {fileID: 0}
+  Texture3DValue: {fileID: 0}
+  UIntValue: 0
+  IntValue: 0
 --- !u!1001 &549209237
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20937,7 +20994,7 @@ MonoBehaviour:
   m_InteractionManager: {fileID: 1144640071}
   m_InteractionLayerMask:
     serializedVersion: 2
-    m_Bits: 823
+    m_Bits: 512
   m_AttachTransform: {fileID: 0}
   m_StartingSelectedInteractable: {fileID: 0}
   m_OnHoverEnter:
@@ -20948,10 +21005,32 @@ MonoBehaviour:
       m_Calls: []
   m_OnSelectEnter:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 664906000}
+        m_MethodName: Execute
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 648131462}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnSelectExit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 544097272}
+        m_MethodName: Execute
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 648131462}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_ToggleSelect: 0
   m_HideControllerOnSelect: 0
   m_PlayAudioClipOnSelectEnter: 1
@@ -21508,6 +21587,63 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.4987028, y: 0.50027907, z: 0.5022285}
   m_Center: {x: 0.00023492442, y: -0.00013731423, z: 0.00064255303}
+--- !u!1 &664905998
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 664905999}
+  - component: {fileID: 664906000}
+  m_Layer: 0
+  m_Name: SetSelectedTrue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &664905999
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664905998}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1452700640}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &664906000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664905998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f78535f6bcf4e134fba8e5bdaadcf1da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Set Selected True
+  visualEffect: {fileID: 1452700642}
+  property: Selected
+  Override: 1
+  dataType: 0
+  BoolValue: 1
+  FloatValue: 0
+  Vector2Value: {x: 0, y: 0}
+  Vector3Value: {x: 0, y: 0, z: 0}
+  Vector4Value: {x: 0, y: 0, z: 0, w: 0}
+  Texture2DValue: {fileID: 0}
+  Texture3DValue: {fileID: 0}
+  UIntValue: 0
+  IntValue: 0
 --- !u!1001 &665414576
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37119,6 +37255,9 @@ VisualEffect:
       - m_Value: 0
         m_Name: TargetHit
         m_Overridden: 1
+      - m_Value: 1
+        m_Name: IsEnabled
+        m_Overridden: 1
 --- !u!114 &1155168944
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -37132,6 +37271,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   XRRayInteractor: {fileID: 387195726}
+  EnabledProperty:
+    m_Name: IsEnabled
   HitProperty:
     m_Name: TargetHit
   TargetProperty:
@@ -37150,7 +37291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdafc37f32b176349b1684c4455b98e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ExecuteInEditor: 1
+  m_ExecuteInEditor: 0
   m_Bindings:
   - {fileID: 1155168944}
   m_VisualEffect: {fileID: 1155168943}
@@ -45150,7 +45291,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 544097271}
+  - {fileID: 664905999}
   m_Father: {fileID: 648131463}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -45172,6 +45315,8 @@ VFXRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -45238,6 +45383,9 @@ VisualEffect:
       - m_Value: 0
         m_Name: TargetHit
         m_Overridden: 1
+      - m_Value: 0
+        m_Name: IsEnabled
+        m_Overridden: 1
 --- !u!114 &1452700643
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -45251,6 +45399,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   XRRayInteractor: {fileID: 648131466}
+  EnabledProperty:
+    m_Name: IsEnabled
   HitProperty:
     m_Name: TargetHit
   TargetProperty:
@@ -45269,7 +45419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdafc37f32b176349b1684c4455b98e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ExecuteInEditor: 1
+  m_ExecuteInEditor: 0
   m_Bindings:
   - {fileID: 1452700643}
   m_VisualEffect: {fileID: 1452700642}
