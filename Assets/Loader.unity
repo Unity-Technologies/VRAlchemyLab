@@ -131,7 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 12552316}
   - component: {fileID: 12552317}
-  - component: {fileID: 12552318}
+  - component: {fileID: 12552315}
   m_Layer: 0
   m_Name: Loading
   m_TagString: Untagged
@@ -139,6 +139,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &12552315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12552314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39abcbaec080eaa4cb915feb031bb7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: StreamingLevelAction
+  Scenes:
+  - Template VR
+  - Template VR Lighting
+  SceneToActivate: Template VR
+  Action: 0
+  ShowUI: 0
+  OnLoadComplete: []
 --- !u!4 &12552316
 Transform:
   m_ObjectHideFlags: 0
@@ -166,27 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnStart:
-  - {fileID: 12552318}
---- !u!114 &12552318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 12552314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3aabe1ebc59bfa94499c44333106efec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Load
-  ShowUI: 1
-  level: 6
-  specifiedLevel: {fileID: 11400000, guid: 436312fa9c21a2243998492d59527a04, type: 2}
-  UserSaveIndex: 0
-  UserSaveName: Progress
-  SaveProgress: 0
-  OnComplete: []
+  - {fileID: 12552315}
 --- !u!1 &177255705
 GameObject:
   m_ObjectHideFlags: 1
