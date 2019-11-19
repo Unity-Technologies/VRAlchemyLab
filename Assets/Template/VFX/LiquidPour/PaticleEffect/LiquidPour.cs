@@ -8,9 +8,9 @@ using UnityEngine.VFX;
 public class LiquidPour : MonoBehaviour
 {
     [Range(0.01f, 7)]
-    public float bottleNeckDiameter = 2;
+    public float bottleNeckDiameter = 4;
     [Range(0f, 0.3f)]
-    public float StripCutBasedOnFlow = 0.01f;
+    public float StripCutBasedOnFlow = 0.1f;
     public Color color = Color.white;
 
     VisualEffect vfx;
@@ -52,6 +52,8 @@ public class LiquidPour : MonoBehaviour
     {
         Verif();
         UpdateVFX();
+
+        //restarting the effect makes strip index change
 
         if ((!playVFX) && (flow <= StripCutBasedOnFlow))
         {
