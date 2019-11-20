@@ -84,9 +84,10 @@ public class LiquidPour : MonoBehaviour
             else
             {
                 var smr = objectRef.GetComponent<SkinnedMeshRenderer>();
-                var m = smr.sharedMaterials[matId];
+                //var m = smr.sharedMaterials[matId];
 
-                var colorFromMat =  m.GetColor("Color_2B85FF3B");
+                //var colorFromMat =  m.GetColor("Color_2B85FF3B");
+                var colorFromMat = smr.materials[matId].GetColor("Color_2B85FF3B");
                 colorFromMat.a = 1;
                 color = colorFromMat;
             }
