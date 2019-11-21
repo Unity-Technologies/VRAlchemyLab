@@ -17,6 +17,8 @@ public class LiquidPour : MonoBehaviour
     public string colorNameInMat = "Color_2B85FF3B";
     public int matId = 0;
     public bool flowFromObjScript = false;
+    //public string fillStateNameInMat = "FillingRate";
+    public float flowMultiplier = 3;
 
     VisualEffect vfx;
     float flow;
@@ -89,7 +91,7 @@ public class LiquidPour : MonoBehaviour
                 {
                     var smr = objectRef.GetComponent<SkinnedMeshRenderer>();
                     matId = Mathf.Min(matId, smr.sharedMaterials.Length - 1);
-                    var colorFromMat = smr.sharedMaterials[matId].GetColor("Color_2B85FF3B");
+                    var colorFromMat = smr.sharedMaterials[matId].GetColor(colorNameInMat);
                     colorFromMat.a = 1;
                     color = colorFromMat;
                 }
@@ -97,7 +99,7 @@ public class LiquidPour : MonoBehaviour
                 {
                     var mr = objectRef.GetComponent<MeshRenderer>();
                     matId = Mathf.Min(matId, mr.sharedMaterials.Length - 1);
-                    var colorFromMat = mr.sharedMaterials[matId].GetColor("Color_2B85FF3B");
+                    var colorFromMat = mr.sharedMaterials[matId].GetColor(colorNameInMat);
                     colorFromMat.a = 1;
                     color = colorFromMat;
                 }
@@ -110,28 +112,27 @@ public class LiquidPour : MonoBehaviour
             if (objectRef == null)
             {
                 Debug.LogError("The object reference is empty, reseting the color mode");
-                colorFromObjMat = false;
+                flowFromObjScript = false;
             }
             else
             {
+
+
                 Material m = null;
 
-                if (objectRef.GetComponent<SkinnedMeshRenderer>() != null)
+                if (objectRef.GetComponent<EmptyingSkinned>() != null)
                 {
-                    var smr = objectRef.GetComponent<SkinnedMeshRenderer>();
-                    m = smr.sharedMaterials[matId];
+                    var es = objectRef.GetComponent<EmptyingSkinned>();
+
+                    float fillingSpeed = Mathf.Clamp01(es.speed);
+                    flow *= Mathf.Clamp01(es.filling * 10); // lower the flow on the latest 10%
                 }
                 else
                 {
-                    var mr = objectRef.GetComponent<MeshRenderer>();
-                    m = mr.sharedMaterials[matId];
+                    Debug.LogError("The object reference require an EmptyingSkinned Script");
+                    flowFromObjScript = false;
                 }
-
-                currentFilling = Mathf.Clamp01(m.GetFloat("FillingRate"));
-                float fillingSpeed = Mathf.Abs(oldFilling - currentFilling) / Mathf.Max(Time.deltaTime, 0.0001f);
-                oldFilling = currentFilling;
-                flow = Mathf.Clamp01(fillingSpeed);
-
+                
             }
         }
 
