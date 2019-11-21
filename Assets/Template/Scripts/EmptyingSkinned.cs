@@ -14,6 +14,7 @@ public class EmptyingSkinned : MonoBehaviour
 
     public float speedMultiplier = 1.0f;
     float level = 0.0f;
+    public float speedModulate = 0.01f;
 
     SkinnedMeshRenderer skinnedMeshRenderer;
     Material material;
@@ -39,12 +40,19 @@ public class EmptyingSkinned : MonoBehaviour
 
         float speed = speedMultiplier * Time.deltaTime;
 
+        
+        //Modulate the empting speed with the angle
+        if (dotResult < level)
+        {
+            speedModulate = -1 * (dotResult - level - 0.01f);    
+        }
+
         if (dotResult < level)
         {
             //Empty the flask
             if (filling > 0)
             {
-                newFilling = filling - speed;
+                newFilling = filling - speed * speedModulate;
 
                 material.SetFloat("FillingRate", newFilling);
 
