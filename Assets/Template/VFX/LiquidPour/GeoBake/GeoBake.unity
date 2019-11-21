@@ -276,17 +276,17 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
+  near clip plane: 0.1
+  far clip plane: 3
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 3639
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: d2e1bfb4206860b4dbb17dd0d4a935c1, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -303,13 +303,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 242039506}
-  m_LocalRotation: {x: 0.028563969, y: 0.97132987, z: -0.16656741, w: 0.16720559}
-  m_LocalPosition: {x: 0.982, y: 1.965, z: 0.787}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &242039511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,5 +339,6 @@ MonoBehaviour:
         clearFlags: 0
         passFoldout: 0
         depthFromCam: {fileID: 8400000, guid: d2e1bfb4206860b4dbb17dd0d4a935c1, type: 2}
+        depthMaterial: {fileID: 2100000, guid: a181d403fa17a534796d25714dbb65ef, type: 2}
         bakeCamera: {fileID: 242039509}
         render: 1

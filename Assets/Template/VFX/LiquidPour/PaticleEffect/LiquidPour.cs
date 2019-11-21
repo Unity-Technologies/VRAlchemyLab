@@ -14,6 +14,7 @@ public class LiquidPour : MonoBehaviour
     public Color color = Color.white;
     public GameObject objectRef = null;
     public bool colorFromObjMat = false;
+    public string colorNameInMat = "Color_2B85FF3B";
     public int matId = 0;
     public bool flowFromObjScript = false;
 
