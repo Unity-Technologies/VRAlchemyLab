@@ -6,15 +6,12 @@ using UnityEngine.Experimental.Rendering;
 class DepthCapturePass : CustomPass
 {
     public RenderTexture depthFromCam;
+    public Material depthMaterial;
     public Camera bakeCamera;
     public bool render;
 
     ShaderTagId[] shaderTags;
 
-    // It can be used to configure render targets and their clear state. Also to create temporary render target textures.
-    // When empty this render pass will render to the active camera render target.
-    // You should never call CommandBuffer.SetRenderTarget. Instead call <c>ConfigureTarget</c> and <c>ConfigureClear</c>.
-    // The render pipeline will ensure target setup and clearing happens in an performance manner.
     protected override void Setup(ScriptableRenderContext renderContext, CommandBuffer cmd)
     {
         shaderTags = new ShaderTagId[2]
@@ -46,6 +43,8 @@ class DepthCapturePass : CustomPass
                 sortingCriteria = SortingCriteria.BackToFront,
                 excludeObjectMotionVectors = false,
                 layerMask = -1,
+                overrideMaterial = depthMaterial,
+                overrideMaterialPassIndex = depthMaterial.FindPass("ForwardOnly"),
             };
 
 
@@ -64,7 +63,7 @@ class DepthCapturePass : CustomPass
             cmd.SetGlobalVector("_WorldSpaceCameraPos", Vector3.zero);
             cmd.SetGlobalVector("_ShadowClipPlanes", Vector3.zero);
 
-            CoreUtils.SetRenderTarget(cmd, depthFromCam, ClearFlag.Depth);
+            CoreUtils.SetRenderTarget(cmd, depthFromCam, ClearFlag.Color);
 
             HDUtils.DrawRendererList(renderContext, cmd, RendererList.Create(result));
         }

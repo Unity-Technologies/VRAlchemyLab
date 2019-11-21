@@ -22,6 +22,9 @@ public class EmptyingSkinned : MonoBehaviour
     Vector3 vectorObj;
     public int idMat = 2;
 
+    [HideInInspector]
+    public float speed = 0.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,25 +41,22 @@ public class EmptyingSkinned : MonoBehaviour
         vectorObj = transform.InverseTransformVector(Vector3.up).normalized;
         dotResult = Vector3.Dot(vectorObj, Vector3.forward);
 
-        float speed = speedMultiplier * Time.deltaTime;
+
+        speedModulate = -1 * (dotResult - level - 0.01f);
+        speed = speedMultiplier * speedModulate;
 
         
-        //Modulate the empting speed with the angle
-        if (dotResult < level)
-        {
-            speedModulate = -1 * (dotResult - level - 0.01f);    
-        }
 
         if (dotResult < level)
         {
             //Empty the flask
             if (filling > 0)
             {
-                newFilling = filling - speed * speedModulate;
+                newFilling = filling - speed * Time.deltaTime;
 
                 material.SetFloat("FillingRate", newFilling);
 
-                filling = newFilling;
+                filling = Mathf.Clamp01(newFilling);
 
             }
             //To correct an artefact when empty.
