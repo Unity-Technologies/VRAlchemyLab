@@ -83,13 +83,24 @@ public class LiquidPour : MonoBehaviour
             }
             else
             {
-                var smr = objectRef.GetComponent<SkinnedMeshRenderer>();
-                //var m = smr.sharedMaterials[matId];
 
-                //var colorFromMat =  m.GetColor("Color_2B85FF3B");
-                var colorFromMat = smr.materials[matId].GetColor("Color_2B85FF3B");
-                colorFromMat.a = 1;
-                color = colorFromMat;
+                if (objectRef.GetComponent<SkinnedMeshRenderer>() != null)
+                {
+                    var smr = objectRef.GetComponent<SkinnedMeshRenderer>();
+                    matId = Mathf.Min(matId, smr.materials.Length - 1);
+                    var colorFromMat = smr.materials[matId].GetColor("Color_2B85FF3B");
+                    colorFromMat.a = 1;
+                    color = colorFromMat;
+                }
+                else
+                {
+                    var mr = objectRef.GetComponent<MeshRenderer>();
+                    matId = Mathf.Min(matId, mr.materials.Length - 1);
+                    var colorFromMat = mr.materials[matId].GetColor("Color_2B85FF3B");
+                    colorFromMat.a = 1;
+                    color = colorFromMat;
+                }
+                
             }
         }
 
@@ -102,12 +113,6 @@ public class LiquidPour : MonoBehaviour
             }
             else
             {
-                //var emptyingSkinned = objectRef.GetComponent<EmptyingSkinned>();
-                //currentFilling = emptyingSkinned.filling;
-                //float fillingSpeed = Mathf.Abs(oldFilling - currentFilling) / Mathf.Max(Time.deltaTime, 0.0001f);
-                //oldFilling = currentFilling;
-                //flow = Mathf.Clamp01(fillingSpeed);
-
                 var smr = objectRef.GetComponent<SkinnedMeshRenderer>();
                 var m = smr.sharedMaterials[matId];
 
