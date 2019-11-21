@@ -14,7 +14,7 @@ public class LiquidPour : MonoBehaviour
     public Color color = Color.white;
     public GameObject objectRef = null;
     public bool colorFromObjMat = false;
-    public int matId = 2;
+    public int matId = 0;
     public bool flowFromObjScript = false;
 
     VisualEffect vfx;
@@ -87,16 +87,16 @@ public class LiquidPour : MonoBehaviour
                 if (objectRef.GetComponent<SkinnedMeshRenderer>() != null)
                 {
                     var smr = objectRef.GetComponent<SkinnedMeshRenderer>();
-                    matId = Mathf.Min(matId, smr.materials.Length - 1);
-                    var colorFromMat = smr.materials[matId].GetColor("Color_2B85FF3B");
+                    matId = Mathf.Min(matId, smr.sharedMaterials.Length - 1);
+                    var colorFromMat = smr.sharedMaterials[matId].GetColor("Color_2B85FF3B");
                     colorFromMat.a = 1;
                     color = colorFromMat;
                 }
                 else
                 {
                     var mr = objectRef.GetComponent<MeshRenderer>();
-                    matId = Mathf.Min(matId, mr.materials.Length - 1);
-                    var colorFromMat = mr.materials[matId].GetColor("Color_2B85FF3B");
+                    matId = Mathf.Min(matId, mr.sharedMaterials.Length - 1);
+                    var colorFromMat = mr.sharedMaterials[matId].GetColor("Color_2B85FF3B");
                     colorFromMat.a = 1;
                     color = colorFromMat;
                 }
@@ -113,13 +113,24 @@ public class LiquidPour : MonoBehaviour
             }
             else
             {
-                var smr = objectRef.GetComponent<SkinnedMeshRenderer>();
-                var m = smr.sharedMaterials[matId];
+                Material m = null;
+
+                if (objectRef.GetComponent<SkinnedMeshRenderer>() != null)
+                {
+                    var smr = objectRef.GetComponent<SkinnedMeshRenderer>();
+                    m = smr.sharedMaterials[matId];
+                }
+                else
+                {
+                    var mr = objectRef.GetComponent<MeshRenderer>();
+                    m = mr.sharedMaterials[matId];
+                }
 
                 currentFilling = Mathf.Clamp01(m.GetFloat("FillingRate"));
                 float fillingSpeed = Mathf.Abs(oldFilling - currentFilling) / Mathf.Max(Time.deltaTime, 0.0001f);
                 oldFilling = currentFilling;
                 flow = Mathf.Clamp01(fillingSpeed);
+
             }
         }
 
