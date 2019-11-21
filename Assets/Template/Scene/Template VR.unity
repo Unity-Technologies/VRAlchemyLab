@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 4
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -958,12 +958,12 @@ PrefabInstance:
     - target: {fileID: 6391139307215784299, guid: 8a6d4b9a7e162af4382eea6b03c6bf1f,
         type: 3}
       propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.x
-      value: 0.07058821
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6391139307215784299, guid: 8a6d4b9a7e162af4382eea6b03c6bf1f,
         type: 3}
       propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.y
-      value: 1
+      value: 0.95283014
       objectReference: {fileID: 0}
     - target: {fileID: 6391139307215784299, guid: 8a6d4b9a7e162af4382eea6b03c6bf1f,
         type: 3}
@@ -993,7 +993,7 @@ PrefabInstance:
     - target: {fileID: 6391139307215784299, guid: 8a6d4b9a7e162af4382eea6b03c6bf1f,
         type: 3}
       propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.z
-      value: 0.9287941
+      value: 0.8804633
       objectReference: {fileID: 0}
     - target: {fileID: 6391139307215784299, guid: 8a6d4b9a7e162af4382eea6b03c6bf1f,
         type: 3}
@@ -6671,7 +6671,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: f3403a714ad960045b859cac239146ab,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.8296
+      value: 0.8334
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: f3403a714ad960045b859cac239146ab,
         type: 3}
@@ -6970,11 +6970,11 @@ Material:
   m_Name: Glass (Instance)
   m_Shader: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
   m_ShaderKeywords: _BLENDMODE_ALPHA _BLENDMODE_PRESERVE_SPECULAR_LIGHTING _ENABLE_FOG_ON_TRANSPARENT
-    _ENABLE_GEOMETRIC_SPECULAR_AA _NORMALMAP_TANGENT_SPACE _REFRACTION_PLANE _SURFACE_TYPE_TRANSPARENT
+    _ENABLE_GEOMETRIC_SPECULAR_AA _NORMALMAP_TANGENT_SPACE _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 3001
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses:
@@ -7152,7 +7152,7 @@ Material:
     - _PPDPrimitiveLength: 1
     - _PPDPrimitiveWidth: 1
     - _ReceivesSSR: 1
-    - _RefractionModel: 1
+    - _RefractionModel: 0
     - _SSRefractionProjectionModel: 0
     - _ShiverDirectionality: 0.5
     - _ShiverDrag: 0.2
@@ -7185,7 +7185,7 @@ Material:
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
     - _TransparentDepthPrepassEnable: 0
-    - _TransparentSortPriority: 0
+    - _TransparentSortPriority: 1
     - _TransparentWritingMotionVec: 0
     - _TransparentWritingVelocity: 0
     - _UVBase: 0
@@ -26369,7 +26369,7 @@ PrefabInstance:
     - target: {fileID: 6391139307215784299, guid: 8a6d4b9a7e162af4382eea6b03c6bf1f,
         type: 3}
       propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.z
-      value: 0.07058818
+      value: 0.07058815
       objectReference: {fileID: 0}
     - target: {fileID: 6391139307215784299, guid: 8a6d4b9a7e162af4382eea6b03c6bf1f,
         type: 3}
@@ -36862,6 +36862,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: f3403a714ad960045b859cac239146ab,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -4372722035470960727, guid: f3403a714ad960045b859cac239146ab,
         type: 3}
       propertyPath: m_Layer
@@ -36982,6 +36987,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[2]
       value: 
       objectReference: {fileID: 2100000, guid: d51de5e18f85f4643911272ff34e458a, type: 2}
+    - target: {fileID: 7886041563369675470, guid: f3403a714ad960045b859cac239146ab,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -896599214415664922, guid: f3403a714ad960045b859cac239146ab,
         type: 3}
       propertyPath: m_RootOrder
@@ -39795,7 +39805,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: f3403a714ad960045b859cac239146ab,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.822
+      value: 0.8266
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: f3403a714ad960045b859cac239146ab,
         type: 3}
@@ -42944,11 +42954,11 @@ Material:
   m_Name: Glass (Instance) (Instance)
   m_Shader: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
   m_ShaderKeywords: _BLENDMODE_ALPHA _BLENDMODE_PRESERVE_SPECULAR_LIGHTING _ENABLE_FOG_ON_TRANSPARENT
-    _ENABLE_GEOMETRIC_SPECULAR_AA _NORMALMAP_TANGENT_SPACE _REFRACTION_PLANE _SURFACE_TYPE_TRANSPARENT
+    _ENABLE_GEOMETRIC_SPECULAR_AA _NORMALMAP_TANGENT_SPACE _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 3001
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses:
@@ -43126,7 +43136,7 @@ Material:
     - _PPDPrimitiveLength: 1
     - _PPDPrimitiveWidth: 1
     - _ReceivesSSR: 1
-    - _RefractionModel: 1
+    - _RefractionModel: 0
     - _SSRefractionProjectionModel: 0
     - _ShiverDirectionality: 0.5
     - _ShiverDrag: 0.2
@@ -43159,7 +43169,7 @@ Material:
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
     - _TransparentDepthPrepassEnable: 0
-    - _TransparentSortPriority: 0
+    - _TransparentSortPriority: 1
     - _TransparentWritingMotionVec: 0
     - _TransparentWritingVelocity: 0
     - _UVBase: 0
@@ -64750,7 +64760,7 @@ Material:
     - InvertMaxLevel: -8.13
     - MaxLevel: 26.6
     - Modifier: 1
-    - Vector1_21A04A4D: 4
+    - Vector1_21A04A4D: 1
     - Vector1_492CE600: 12.5
     - Vector1_630DD464: 13.95
     - Vector1_93C7B329: 1.04
@@ -64877,9 +64887,9 @@ Material:
     - _ZTestGBuffer: 3
     - _ZTestModeDistortion: 8
     - _ZTestTransparent: 4
-    - _ZWrite: 1
+    - _ZWrite: 0
     m_Colors:
-    - Color_2B85FF3B: {r: 0.07058823, g: 1, b: 0.92879415, a: 0.45490196}
+    - Color_2B85FF3B: {r: 0, g: 0.95283014, b: 0.8804633, a: 0.46666667}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
@@ -70425,12 +70435,12 @@ PrefabInstance:
     - target: {fileID: 6391139307215784299, guid: 8a6d4b9a7e162af4382eea6b03c6bf1f,
         type: 3}
       propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.y
-      value: 0.8784314
+      value: 0.7735849
       objectReference: {fileID: 0}
     - target: {fileID: 6391139307215784299, guid: 8a6d4b9a7e162af4382eea6b03c6bf1f,
         type: 3}
       propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.z
-      value: 0.8232787
+      value: 0.72845906
       objectReference: {fileID: 0}
     - target: {fileID: 6391139307215784299, guid: 8a6d4b9a7e162af4382eea6b03c6bf1f,
         type: 3}

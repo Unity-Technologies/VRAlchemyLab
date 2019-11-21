@@ -23,7 +23,7 @@ Material:
   m_Name: Liquid 05
   m_Shader: {fileID: -6465566751694194690, guid: a804544564f060d47bf24a82afd90344,
     type: 3}
-  m_ShaderKeywords: _ALPHATEST_ON _BLENDMODE_ALPHA _SURFACE_TYPE_TRANSPARENT
+  m_ShaderKeywords: _ALPHATEST_ON _BLENDMODE_ALPHA _DISABLE_SSR _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -122,13 +122,13 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - AlphaModifier: 1
+    - AlphaModifier: 0.1
     - FillingRate: 0.53
     - HorizontalMaxLevel: 6
     - InvertMaxLevel: 0
     - InvertedMaxLevel: 21
     - MaxLevel: 19.58
-    - Vector1_21A04A4D: 8
+    - Vector1_21A04A4D: 2
     - Vector1_492CE600: -5.18
     - Vector1_630DD464: 12.34
     - Vector1_93C7B329: 1.04
@@ -211,7 +211,7 @@ Material:
     - _PPDMinSamples: 5
     - _PPDPrimitiveLength: 1
     - _PPDPrimitiveWidth: 1
-    - _ReceivesSSR: 1
+    - _ReceivesSSR: 0
     - _RefractionModel: 0
     - _RenderQueueType: 5
     - _RequireSplitLighting: 0
@@ -223,10 +223,10 @@ Material:
     - _SpecularAAThreshold: 0.2
     - _SrcBlend: 1
     - _StencilRef: 2
-    - _StencilRefDepth: 0
+    - _StencilRefDepth: 32
     - _StencilRefDistortionVec: 64
-    - _StencilRefGBuffer: 2
-    - _StencilRefMV: 128
+    - _StencilRefGBuffer: 34
+    - _StencilRefMV: 160
     - _StencilWriteMask: 3
     - _StencilWriteMaskDepth: 48
     - _StencilWriteMaskDistortionVec: 64
@@ -255,9 +255,9 @@ Material:
     - _ZTestGBuffer: 3
     - _ZTestModeDistortion: 8
     - _ZTestTransparent: 4
-    - _ZWrite: 1
+    - _ZWrite: 0
     m_Colors:
-    - Color_2B85FF3B: {r: 0, g: 0.8784314, b: 0.8232787, a: 0.74509805}
+    - Color_2B85FF3B: {r: 0, g: 0.7735849, b: 0.72845906, a: 0.23529412}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
