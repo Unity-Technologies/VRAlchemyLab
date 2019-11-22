@@ -39,7 +39,8 @@ class DepthCapturePass : CustomPass
             var result = new RendererListDesc(shaderTags, cullingResult, bakeCamera)
             {
                 rendererConfiguration = PerObjectData.None,
-                renderQueueRange = RenderQueueRange.all,
+                //renderQueueRange = RenderQueueRange.all,
+                renderQueueRange = GetRenderQueueRange(RenderQueueType.AllOpaque),
                 sortingCriteria = SortingCriteria.BackToFront,
                 excludeObjectMotionVectors = false,
                 layerMask = -1,
@@ -63,7 +64,7 @@ class DepthCapturePass : CustomPass
             cmd.SetGlobalVector("_WorldSpaceCameraPos", Vector3.zero);
             cmd.SetGlobalVector("_ShadowClipPlanes", Vector3.zero);
 
-            CoreUtils.SetRenderTarget(cmd, depthFromCam, ClearFlag.Color);
+            CoreUtils.SetRenderTarget(cmd, depthFromCam, ClearFlag.All);
 
             HDUtils.DrawRendererList(renderContext, cmd, RendererList.Create(result));
         }
