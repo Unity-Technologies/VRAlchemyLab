@@ -23,7 +23,7 @@ Material:
   m_Name: Tube02
   m_Shader: {fileID: -6465566751694194690, guid: fb8e58f92a94d3248884f463843935e3,
     type: 3}
-  m_ShaderKeywords: _ALPHATEST_ON _BLENDMODE_ADD _SURFACE_TYPE_TRANSPARENT
+  m_ShaderKeywords: _ALPHATEST_ON _BLENDMODE_ALPHA _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -122,13 +122,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - AlphaModifier: 1
     - AplhaModifier: 1
     - FillingRate: 0.88
     - HorizontalMaxLevel: 2.2
     - InvertMaxLevel: -12.88
     - MaxLevel: 26.6
     - Modifier: 1
-    - Vector1_21A04A4D: 0.5
+    - Vector1_21A04A4D: 2
     - Vector1_492CE600: 5.8
     - Vector1_630DD464: 20.58
     - Vector1_93C7B329: 1.04
@@ -144,10 +145,10 @@ Material:
     - _AlphaCutoffPostpass: 0.5
     - _AlphaCutoffPrepass: 0.5
     - _AlphaCutoffShadow: 0.5
-    - _AlphaDstBlend: 1
+    - _AlphaDstBlend: 10
     - _AlphaSrcBlend: 1
     - _Anisotropy: 0
-    - _BlendMode: 1
+    - _BlendMode: 0
     - _CoatMask: 0
     - _CullMode: 2
     - _CullModeForward: 2
@@ -177,7 +178,7 @@ Material:
     - _DistortionVectorScale: 2
     - _DoubleSidedEnable: 0
     - _DoubleSidedNormalMode: 0
-    - _DstBlend: 1
+    - _DstBlend: 10
     - _EmissiveColorMode: 1
     - _EmissiveExposureWeight: 1
     - _EmissiveIntensity: 1
@@ -257,7 +258,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - Color_2B85FF3B: {r: 0.7081372, g: 1, b: 0.070588164, a: 0.16862746}
+    - Color_2B85FF3B: {r: 0.7081372, g: 1, b: 0.07058809, a: 0.20392157}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
