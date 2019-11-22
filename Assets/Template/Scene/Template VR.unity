@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 4
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -20364,7 +20364,7 @@ PrefabInstance:
     - target: {fileID: 6391139307215784299, guid: 8a6d4b9a7e162af4382eea6b03c6bf1f,
         type: 3}
       propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.x
-      value: 0.735849
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6391139307215784299, guid: 8a6d4b9a7e162af4382eea6b03c6bf1f,
         type: 3}
@@ -20374,7 +20374,7 @@ PrefabInstance:
     - target: {fileID: 6391139307215784299, guid: 8a6d4b9a7e162af4382eea6b03c6bf1f,
         type: 3}
       propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.z
-      value: 0.47522008
+      value: 0.6436171
       objectReference: {fileID: 0}
     - target: {fileID: 6391139307215784299, guid: 8a6d4b9a7e162af4382eea6b03c6bf1f,
         type: 3}
@@ -55545,14 +55545,14 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 7d3b3ddc25789d94c9d771c4522e9b51, type: 2}
     - target: {fileID: 7886041563369675470, guid: f3403a714ad960045b859cac239146ab,
         type: 3}
-      propertyPath: m_Materials.Array.data[2]
-      value: 
-      objectReference: {fileID: 2100000, guid: 814c1c8951fabb24ca029e627b380027, type: 2}
-    - target: {fileID: 7886041563369675470, guid: f3403a714ad960045b859cac239146ab,
-        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ae4d73d0b333ee946bbec193e582e320, type: 2}
+    - target: {fileID: 7886041563369675470, guid: f3403a714ad960045b859cac239146ab,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 814c1c8951fabb24ca029e627b380027, type: 2}
     - target: {fileID: -896599214415664922, guid: f3403a714ad960045b859cac239146ab,
         type: 3}
       propertyPath: m_RootOrder
@@ -66541,6 +66541,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - AlphaModifier: 1
     - AplhaModifier: 1
     - FillingRate: 0.49
     - HorizontalMaxLevel: 2.2
@@ -67383,9 +67384,70 @@ MonoBehaviour:
   m_GameObject: {fileID: 2104112707}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: 70b2277ec9a3c2b4a9574bca97f3caa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_InteractionManager: {fileID: 1144640071}
+  m_Colliders: []
+  m_InteractionLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_OnFirstHoverEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHoverEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHoverExit:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnLastHoverExit:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSelectEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnSelectExit:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnActivate:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnDeactivate:
+    m_PersistentCalls:
+      m_Calls: []
+  m_CustomReticle: {fileID: 0}
+  m_AttachTransform: {fileID: 1225966398}
+  m_AttachEaseInTime: 0.15
+  m_MovementType: 1
+  m_TrackPosition: 1
+  m_SmoothPosition: 0
+  m_SmoothPositionAmount: 5
+  m_TightenPosition: 0.5
+  m_TrackRotation: 1
+  m_SmoothRotation: 0
+  m_SmoothRotationAmount: 5
+  m_TightenRotation: 0.5
+  m_ThrowOnDetach: 1
+  m_ThrowSmoothingDuration: 0.25
+  m_ThrowSmoothingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_ThrowVelocityScale: 1.5
+  m_ThrowAngularVelocityScale: 0.25
+  m_GravityOnDetach: 0
 --- !u!54 &2104112709
 Rigidbody:
   m_ObjectHideFlags: 0
