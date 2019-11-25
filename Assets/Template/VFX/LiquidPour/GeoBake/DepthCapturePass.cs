@@ -48,6 +48,10 @@ class DepthCapturePass : CustomPass
                 overrideMaterialPassIndex = depthMaterial.FindPass("ForwardOnly"),
             };
 
+            //renderContext.StereoEndRender(hdCamera.camera);
+            renderContext.ExecuteCommandBuffer(cmd);
+            cmd.Clear();
+            renderContext.StopMultiEye(hdCamera.camera);
 
             var p = GL.GetGPUProjectionMatrix(bakeCamera.projectionMatrix, true);
             Matrix4x4 scaleMatrix = Matrix4x4.identity;
@@ -67,6 +71,10 @@ class DepthCapturePass : CustomPass
             CoreUtils.SetRenderTarget(cmd, depthFromCam, ClearFlag.All);
 
             HDUtils.DrawRendererList(renderContext, cmd, RendererList.Create(result));
+
+            renderContext.StartMultiEye(hdCamera.camera);
+            renderContext.ExecuteCommandBuffer(cmd);
+            cmd.Clear();
         }
     }
 
