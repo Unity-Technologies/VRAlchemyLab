@@ -2,12 +2,12 @@
 
 namespace RDSystem
 {
-    [RequireComponent(typeof(Collider))]
     public class CauldronSurfaceHit : MonoBehaviour
     {
         public RDSystem.LiquidDropUpdater updater;
         public int materialID = 0;
         public string colorPropertyName = "_BaseColor";
+        public Collider m_collider;
 
         private void OnCollisionEnter(Collision collision)
         {
