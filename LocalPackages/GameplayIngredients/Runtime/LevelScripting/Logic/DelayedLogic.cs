@@ -1,13 +1,18 @@
 using NaughtyAttributes;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace GameplayIngredients.Logic
 {
     public class DelayedLogic : LogicBase
     {
+        public enum DelayMode {Constant, Random};
+        public DelayMode delayMode;
+
         public float Delay = 1.0f;
+
+        [ShowIf("DelayIsRandom")]
+        public float DelayMax = 2.0f;
 
         [ReorderableList]
         public Callable[] OnDelayComplete;
@@ -16,6 +21,12 @@ namespace GameplayIngredients.Logic
         public Callable[] OnCanceled;
 
         IEnumerator m_Coroutine;
+
+        private bool DelayIsRandom()
+        {
+            bool random = delayMode == DelayMode.Random ? true : false;
+            return random;
+        }
 
         public void Cancel(GameObject instigator = null)
         {
@@ -29,9 +40,14 @@ namespace GameplayIngredients.Logic
 
         public override void Execute(GameObject instigator = null)
         {
+            float newDelay;
             if (m_Coroutine != null) Cancel();
 
-            m_Coroutine = RunDelay(Delay, instigator);
+            if (delayMode == DelayMode.Random) newDelay = Random.Range(Delay, DelayMax);
+
+            else newDelay = Delay;
+
+            m_Coroutine = RunDelay(newDelay, instigator);
             StartCoroutine(m_Coroutine);
         }
 
@@ -43,4 +59,3 @@ namespace GameplayIngredients.Logic
         }
     }
 }
-
