@@ -111,13 +111,11 @@ public class LiquidPour : MonoBehaviour
         {
             if (objectRef == null)
             {
-                Debug.LogError("The object reference is empty, reseting the color mode");
+                Debug.LogError("LiquidPourScript: The object reference is empty, reseting the flow mode");
                 flowFromObjScript = false;
             }
             else
             {
-
-
                 Material m = null;
 
                 if (objectRef.GetComponent<EmptyingSkinned>() != null)
@@ -127,12 +125,18 @@ public class LiquidPour : MonoBehaviour
                     float fillingSpeed = Mathf.Clamp01(es.speed);
                     flow *= Mathf.Clamp01(es.filling * 10); // lower the flow on the latest 10%
                 }
+                else if (objectRef.GetComponent<EmptyingTube>() != null)
+                {
+                    var es = objectRef.GetComponent<EmptyingTube>();
+
+                    float fillingSpeed = Mathf.Clamp01(es.speed);
+                    flow *= Mathf.Clamp01(es.filling * 10); // lower the flow on the latest 10%
+                }
                 else
                 {
-                    Debug.LogError("The object reference require an EmptyingSkinned Script");
+                    Debug.LogError("LiquidPourScript: The object reference require an EmptyingSkinned or EmptyingTube Script");
                     flowFromObjScript = false;
                 }
-                
             }
         }
 
