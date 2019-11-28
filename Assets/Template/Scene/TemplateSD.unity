@@ -622,11 +622,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 727154205}
+  - component: {fileID: 727154206}
   - component: {fileID: 727154209}
   - component: {fileID: 727154208}
   - component: {fileID: 727154207}
-  - component: {fileID: 727154206}
   - component: {fileID: 727154210}
+  - component: {fileID: 727154211}
   m_Layer: 0
   m_Name: Street Audio
   m_TagString: Untagged
@@ -782,6 +783,7 @@ MonoBehaviour:
   OnDelayComplete:
   - {fileID: 727154207}
   - {fileID: 727154210}
+  - {fileID: 727154211}
   OnCanceled: []
 --- !u!114 &727154209
 MonoBehaviour:
@@ -816,7 +818,22 @@ MonoBehaviour:
   OnDelayComplete:
   - {fileID: 727154207}
   - {fileID: 727154210}
+  - {fileID: 727154211}
   OnCanceled: []
+--- !u!114 &727154211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727154204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68adda9532fd8043b281736d2a5fbcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Send Carriage Message
+  MessageToSend: Carriage Audio
 --- !u!1 &742369667
 GameObject:
   m_ObjectHideFlags: 0
