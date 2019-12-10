@@ -757,6 +757,7 @@ GameObject:
   - component: {fileID: 8795821180920236327}
   - component: {fileID: 8795821180920236326}
   - component: {fileID: 8795821180920236325}
+  - component: {fileID: 421203842103176826}
   m_Layer: 0
   m_Name: TurnPagesLeft
   m_TagString: Untagged
@@ -822,7 +823,23 @@ MonoBehaviour:
   direction: -1
   OnDirectionEnter:
   - {fileID: 8795821180920236326}
+  - {fileID: 421203842103176826}
   OnDirectionLeave: []
+--- !u!114 &421203842103176826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8795821180920236324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 313f9593d35b2c740928abbd82069aa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Audio State turn
+  StateMachine: {fileID: 367420208474014548}
+  m_State: PageTurn
 --- !u!1 &8795821181425080831
 GameObject:
   m_ObjectHideFlags: 0
@@ -1035,10 +1052,7 @@ VFXRenderer:
   m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1280,6 +1294,7 @@ MonoBehaviour:
   direction: 1
   OnDirectionEnter:
   - {fileID: 8795821181641985199}
+  - {fileID: 421203842103176826}
   OnDirectionLeave: []
 --- !u!1 &8795821182240324804
 GameObject:
@@ -1383,6 +1398,7 @@ Transform:
   - {fileID: 8795821181623000191}
   - {fileID: 8795821182836674263}
   - {fileID: 4569953013214898631}
+  - {fileID: 3349994365526373207}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1542,6 +1558,7 @@ GameObject:
   - component: {fileID: 8795821182672341150}
   - component: {fileID: 8795821182672341144}
   - component: {fileID: 8795821182672341151}
+  - component: {fileID: 8225647076505940762}
   m_Layer: 0
   m_Name: OpenPages
   m_TagString: Untagged
@@ -1599,6 +1616,7 @@ MonoBehaviour:
   - {fileID: 8795821182672341149}
   - {fileID: 8795821182672341144}
   - {fileID: 8795821182672341151}
+  - {fileID: 8225647076505940762}
   OnButtonUp: []
 --- !u!114 &8795821182672341144
 MonoBehaviour:
@@ -1612,7 +1630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0e98867b2173494983582dfb1a01d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: UnityEventAction
+  Name: Enable Turn Pages Left
   OnExecute:
     m_PersistentCalls:
       m_Calls:
@@ -1639,7 +1657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0e98867b2173494983582dfb1a01d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: UnityEventAction
+  Name: Enable Turn Pages Right
   OnExecute:
     m_PersistentCalls:
       m_Calls:
@@ -1654,6 +1672,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &8225647076505940762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8795821182672341123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 313f9593d35b2c740928abbd82069aa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Audio state open
+  StateMachine: {fileID: 367420208474014548}
+  m_State: OpenBook
 --- !u!1 &8795821182836674262
 GameObject:
   m_ObjectHideFlags: 0
@@ -1698,6 +1731,7 @@ GameObject:
   - component: {fileID: 8795821182855286316}
   - component: {fileID: 8795821182855286312}
   - component: {fileID: 8795821182855286319}
+  - component: {fileID: 885890616493623040}
   m_Layer: 0
   m_Name: ClosePages
   m_TagString: Untagged
@@ -1736,6 +1770,7 @@ MonoBehaviour:
   - {fileID: 8795821182855286316}
   - {fileID: 8795821182855286312}
   - {fileID: 8795821182855286319}
+  - {fileID: 885890616493623040}
   OnButtonUp: []
 --- !u!114 &8795821182855286316
 MonoBehaviour:
@@ -1810,3 +1845,110 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &885890616493623040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8795821182855286739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 313f9593d35b2c740928abbd82069aa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Audio state close
+  StateMachine: {fileID: 367420208474014548}
+  m_State: CloseBook
+--- !u!1001 &3788606827246607902
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8795821182575647106}
+    m_Modifications:
+    - target: {fileID: 1940567613468126537, guid: 31fe177a57b17384a87eb25d2260dcb7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.015408009
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940567613468126537, guid: 31fe177a57b17384a87eb25d2260dcb7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0028322004
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940567613468126537, guid: 31fe177a57b17384a87eb25d2260dcb7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0015807599
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940567613468126537, guid: 31fe177a57b17384a87eb25d2260dcb7,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940567613468126537, guid: 31fe177a57b17384a87eb25d2260dcb7,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940567613468126537, guid: 31fe177a57b17384a87eb25d2260dcb7,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940567613468126537, guid: 31fe177a57b17384a87eb25d2260dcb7,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940567613468126537, guid: 31fe177a57b17384a87eb25d2260dcb7,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940567613468126537, guid: 31fe177a57b17384a87eb25d2260dcb7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940567613468126537, guid: 31fe177a57b17384a87eb25d2260dcb7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940567613468126537, guid: 31fe177a57b17384a87eb25d2260dcb7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4714836586824788284, guid: 31fe177a57b17384a87eb25d2260dcb7,
+        type: 3}
+      propertyPath: m_Name
+      value: BookAudio
+      objectReference: {fileID: 0}
+    - target: {fileID: 6752592262009173809, guid: 31fe177a57b17384a87eb25d2260dcb7,
+        type: 3}
+      propertyPath: m_Sources.Array.data[0].sourceTransform
+      value: 
+      objectReference: {fileID: 2858813685353953297}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 31fe177a57b17384a87eb25d2260dcb7, type: 3}
+--- !u!4 &3349994365526373207 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1940567613468126537, guid: 31fe177a57b17384a87eb25d2260dcb7,
+    type: 3}
+  m_PrefabInstance: {fileID: 3788606827246607902}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &367420208474014548 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3569810161013071178, guid: 31fe177a57b17384a87eb25d2260dcb7,
+    type: 3}
+  m_PrefabInstance: {fileID: 3788606827246607902}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0219af91f351df2429e921b320124912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
