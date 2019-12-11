@@ -2202,6 +2202,11 @@ MonoBehaviour:
   m_UseScreenSpaceShadows: 0
   m_InteractsWithSky: 1
   m_AngularDiameter: 0
+  m_FlareSize: 2
+  m_FlareTint: {r: 1, g: 1, b: 1, a: 1}
+  m_FlareFalloff: 4
+  m_SurfaceTexture: {fileID: 0}
+  m_SurfaceTint: {r: 1, g: 1, b: 1, a: 1}
   m_Distance: 150000000
   m_UseRayTracedShadows: 0
   m_NumRayTracingSamples: 4
@@ -2239,6 +2244,8 @@ MonoBehaviour:
   m_NormalBias: 0.75
   m_SlopeBias: 0.5
   m_ShadowUpdateMode: 0
+  m_BarnDoorAngle: 90
+  m_BarnDoorLength: 0.05
   m_ShadowCascadeRatios:
   - 0.05
   - 0.2
@@ -14006,8 +14013,8 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 79.57747
-  m_Range: 15
-  m_SpotAngle: 159.3
+  m_Range: 2.28
+  m_SpotAngle: 135.8
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
@@ -14036,7 +14043,7 @@ Light:
       e32: 0
       e33: 1
     m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
+  m_Cookie: {fileID: 2800000, guid: 5933d758ce96998498d7581195e96619, type: 3}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 0
@@ -14074,10 +14081,10 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 1000
+  m_Intensity: 6000
   m_EnableSpotReflector: 0
   m_LuxAtDistance: 1
-  m_InnerSpotPercent: 71.5
+  m_InnerSpotPercent: 88.02148
   m_LightDimmer: 1
   m_VolumetricDimmer: 1
   m_LightUnit: 0
@@ -14093,13 +14100,18 @@ MonoBehaviour:
   m_UseCustomSpotLightShadowCone: 0
   m_CustomSpotLightShadowCone: 30
   m_MaxSmoothness: 0.99
-  m_ApplyRangeAttenuation: 1
+  m_ApplyRangeAttenuation: 0
   m_DisplayAreaLightEmissiveMesh: 0
   m_AreaLightCookie: {fileID: 0}
   m_AreaLightShadowCone: 120
   m_UseScreenSpaceShadows: 0
   m_InteractsWithSky: 1
   m_AngularDiameter: 0
+  m_FlareSize: 2
+  m_FlareTint: {r: 1, g: 1, b: 1, a: 1}
+  m_FlareFalloff: 4
+  m_SurfaceTexture: {fileID: 0}
+  m_SurfaceTint: {r: 1, g: 1, b: 1, a: 1}
   m_Distance: 150000000
   m_UseRayTracedShadows: 0
   m_NumRayTracingSamples: 4
@@ -14137,6 +14149,8 @@ MonoBehaviour:
   m_NormalBias: 0.75
   m_SlopeBias: 0.5
   m_ShadowUpdateMode: 0
+  m_BarnDoorAngle: 90
+  m_BarnDoorLength: 0.05
   m_ShadowCascadeRatios:
   - 0.05
   - 0.2
@@ -14230,15 +14244,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.45442912
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 4285a26f4eaf75d4093af189d2473c7b,
-        type: 3}
-      propertyPath: m_Name
-      value: Candle (5)
-      objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_CastShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 4285a26f4eaf75d4093af189d2473c7b,
+        type: 3}
+      propertyPath: m_Name
+      value: Candle (5)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4285a26f4eaf75d4093af189d2473c7b, type: 3}
@@ -14249,11 +14263,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5324092878823727771}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
-        type: 3}
-      propertyPath: m_Name
-      value: MetalCircle (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b7ddcd2a894e2264cabfaa66af708d7f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14334,6 +14343,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: af43978e88bc40a43a9fcc2d5be21676, type: 2}
+    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
+        type: 3}
+      propertyPath: m_Name
+      value: MetalCircle (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7ddcd2a894e2264cabfaa66af708d7f, type: 3}
 --- !u!4 &5713091921715068480 stripped
@@ -14419,15 +14433,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.45442924
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 4285a26f4eaf75d4093af189d2473c7b,
-        type: 3}
-      propertyPath: m_Name
-      value: Candle
-      objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_CastShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 4285a26f4eaf75d4093af189d2473c7b,
+        type: 3}
+      propertyPath: m_Name
+      value: Candle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4285a26f4eaf75d4093af189d2473c7b, type: 3}
@@ -14438,11 +14452,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5324092878823727771}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
-        type: 3}
-      propertyPath: m_Name
-      value: MetalCircle (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b7ddcd2a894e2264cabfaa66af708d7f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14523,6 +14532,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: af43978e88bc40a43a9fcc2d5be21676, type: 2}
+    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
+        type: 3}
+      propertyPath: m_Name
+      value: MetalCircle (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7ddcd2a894e2264cabfaa66af708d7f, type: 3}
 --- !u!4 &6319539274174800605 stripped
@@ -14608,15 +14622,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.45442915
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 4285a26f4eaf75d4093af189d2473c7b,
-        type: 3}
-      propertyPath: m_Name
-      value: Candle (3)
-      objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_CastShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 4285a26f4eaf75d4093af189d2473c7b,
+        type: 3}
+      propertyPath: m_Name
+      value: Candle (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4285a26f4eaf75d4093af189d2473c7b, type: 3}
@@ -14627,11 +14641,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5809995188395588994}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 6befcd7775204804c99710ad4d3dd9a1,
-        type: 3}
-      propertyPath: m_Name
-      value: Disk
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6befcd7775204804c99710ad4d3dd9a1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14707,6 +14716,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c4af4c187e248e144a24c3fcfc56e93c, type: 2}
+    - target: {fileID: -927199367670048503, guid: 6befcd7775204804c99710ad4d3dd9a1,
+        type: 3}
+      propertyPath: m_Name
+      value: Disk
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6befcd7775204804c99710ad4d3dd9a1, type: 3}
 --- !u!1001 &1567483749276055662
@@ -14716,11 +14730,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5713091921715068480}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 6befcd7775204804c99710ad4d3dd9a1,
-        type: 3}
-      propertyPath: m_Name
-      value: Disk
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6befcd7775204804c99710ad4d3dd9a1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14796,6 +14805,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c4af4c187e248e144a24c3fcfc56e93c, type: 2}
+    - target: {fileID: -927199367670048503, guid: 6befcd7775204804c99710ad4d3dd9a1,
+        type: 3}
+      propertyPath: m_Name
+      value: Disk
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6befcd7775204804c99710ad4d3dd9a1, type: 3}
 --- !u!1001 &1575005437786691224
@@ -14805,11 +14819,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5324092878823727771}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
-        type: 3}
-      propertyPath: m_Name
-      value: MetalCircle (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b7ddcd2a894e2264cabfaa66af708d7f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14890,6 +14899,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: af43978e88bc40a43a9fcc2d5be21676, type: 2}
+    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
+        type: 3}
+      propertyPath: m_Name
+      value: MetalCircle (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7ddcd2a894e2264cabfaa66af708d7f, type: 3}
 --- !u!4 &5809995188395588994 stripped
@@ -14905,11 +14919,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7704483474358638302}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 6befcd7775204804c99710ad4d3dd9a1,
-        type: 3}
-      propertyPath: m_Name
-      value: Disk
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6befcd7775204804c99710ad4d3dd9a1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14985,6 +14994,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c4af4c187e248e144a24c3fcfc56e93c, type: 2}
+    - target: {fileID: -927199367670048503, guid: 6befcd7775204804c99710ad4d3dd9a1,
+        type: 3}
+      propertyPath: m_Name
+      value: Disk
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6befcd7775204804c99710ad4d3dd9a1, type: 3}
 --- !u!1001 &2557469479426118312
@@ -14994,11 +15008,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9132504826477776412}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 6befcd7775204804c99710ad4d3dd9a1,
-        type: 3}
-      propertyPath: m_Name
-      value: Disk
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6befcd7775204804c99710ad4d3dd9a1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15074,6 +15083,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c4af4c187e248e144a24c3fcfc56e93c, type: 2}
+    - target: {fileID: -927199367670048503, guid: 6befcd7775204804c99710ad4d3dd9a1,
+        type: 3}
+      propertyPath: m_Name
+      value: Disk
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6befcd7775204804c99710ad4d3dd9a1, type: 3}
 --- !u!1001 &3112152046715490494
@@ -15083,11 +15097,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 153109988886822723}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 6befcd7775204804c99710ad4d3dd9a1,
-        type: 3}
-      propertyPath: m_Name
-      value: Disk
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6befcd7775204804c99710ad4d3dd9a1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15163,6 +15172,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c4af4c187e248e144a24c3fcfc56e93c, type: 2}
+    - target: {fileID: -927199367670048503, guid: 6befcd7775204804c99710ad4d3dd9a1,
+        type: 3}
+      propertyPath: m_Name
+      value: Disk
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6befcd7775204804c99710ad4d3dd9a1, type: 3}
 --- !u!1001 &3330263090775134421
@@ -15172,11 +15186,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5324092878823727771}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
-        type: 3}
-      propertyPath: m_Name
-      value: MetalCircle (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b7ddcd2a894e2264cabfaa66af708d7f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15257,6 +15266,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: af43978e88bc40a43a9fcc2d5be21676, type: 2}
+    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
+        type: 3}
+      propertyPath: m_Name
+      value: MetalCircle (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7ddcd2a894e2264cabfaa66af708d7f, type: 3}
 --- !u!4 &7732060901500959695 stripped
@@ -15272,11 +15286,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7732060901500959695}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 6befcd7775204804c99710ad4d3dd9a1,
-        type: 3}
-      propertyPath: m_Name
-      value: Disk
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6befcd7775204804c99710ad4d3dd9a1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15352,6 +15361,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c4af4c187e248e144a24c3fcfc56e93c, type: 2}
+    - target: {fileID: -927199367670048503, guid: 6befcd7775204804c99710ad4d3dd9a1,
+        type: 3}
+      propertyPath: m_Name
+      value: Disk
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6befcd7775204804c99710ad4d3dd9a1, type: 3}
 --- !u!1001 &3427633117057924548
@@ -15361,11 +15375,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5324092878823727771}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
-        type: 3}
-      propertyPath: m_Name
-      value: MetalCircle (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b7ddcd2a894e2264cabfaa66af708d7f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15446,6 +15455,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: af43978e88bc40a43a9fcc2d5be21676, type: 2}
+    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
+        type: 3}
+      propertyPath: m_Name
+      value: MetalCircle (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7ddcd2a894e2264cabfaa66af708d7f, type: 3}
 --- !u!4 &7704483474358638302 stripped
@@ -15461,11 +15475,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5324092878823727771}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
-        type: 3}
-      propertyPath: m_Name
-      value: MetalCircle (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b7ddcd2a894e2264cabfaa66af708d7f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15546,6 +15555,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: af43978e88bc40a43a9fcc2d5be21676, type: 2}
+    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
+        type: 3}
+      propertyPath: m_Name
+      value: MetalCircle (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7ddcd2a894e2264cabfaa66af708d7f, type: 3}
 --- !u!4 &8473821925719644427 stripped
@@ -15631,15 +15645,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.45442927
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 4285a26f4eaf75d4093af189d2473c7b,
-        type: 3}
-      propertyPath: m_Name
-      value: Candle (2)
-      objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_CastShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 4285a26f4eaf75d4093af189d2473c7b,
+        type: 3}
+      propertyPath: m_Name
+      value: Candle (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4285a26f4eaf75d4093af189d2473c7b, type: 3}
@@ -15650,11 +15664,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5324092878823727771}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
-        type: 3}
-      propertyPath: m_Name
-      value: MetalCircle (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b7ddcd2a894e2264cabfaa66af708d7f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15735,6 +15744,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: c4af4c187e248e144a24c3fcfc56e93c, type: 2}
+    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
+        type: 3}
+      propertyPath: m_Name
+      value: MetalCircle (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7ddcd2a894e2264cabfaa66af708d7f, type: 3}
 --- !u!4 &9132504826477776412 stripped
@@ -15820,15 +15834,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.4544294
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 4285a26f4eaf75d4093af189d2473c7b,
-        type: 3}
-      propertyPath: m_Name
-      value: Candle (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_CastShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 4285a26f4eaf75d4093af189d2473c7b,
+        type: 3}
+      propertyPath: m_Name
+      value: Candle (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4285a26f4eaf75d4093af189d2473c7b, type: 3}
@@ -15839,11 +15853,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5324092878823727771}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
-        type: 3}
-      propertyPath: m_Name
-      value: MetalCircle (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b7ddcd2a894e2264cabfaa66af708d7f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15924,6 +15933,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: af43978e88bc40a43a9fcc2d5be21676, type: 2}
+    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
+        type: 3}
+      propertyPath: m_Name
+      value: MetalCircle (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7ddcd2a894e2264cabfaa66af708d7f, type: 3}
 --- !u!4 &153109988886822723 stripped
@@ -16009,15 +16023,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.45442918
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 4285a26f4eaf75d4093af189d2473c7b,
-        type: 3}
-      propertyPath: m_Name
-      value: Candle (7)
-      objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_CastShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 4285a26f4eaf75d4093af189d2473c7b,
+        type: 3}
+      propertyPath: m_Name
+      value: Candle (7)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4285a26f4eaf75d4093af189d2473c7b, type: 3}
@@ -16028,11 +16042,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5324092878823727771}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
-        type: 3}
-      propertyPath: m_Name
-      value: MetalCircle (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b7ddcd2a894e2264cabfaa66af708d7f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16113,6 +16122,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: af43978e88bc40a43a9fcc2d5be21676, type: 2}
+    - target: {fileID: -927199367670048503, guid: b7ddcd2a894e2264cabfaa66af708d7f,
+        type: 3}
+      propertyPath: m_Name
+      value: MetalCircle (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7ddcd2a894e2264cabfaa66af708d7f, type: 3}
 --- !u!4 &1879184932893562051 stripped
@@ -16198,15 +16212,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.4544293
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 4285a26f4eaf75d4093af189d2473c7b,
-        type: 3}
-      propertyPath: m_Name
-      value: Candle (4)
-      objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_CastShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 4285a26f4eaf75d4093af189d2473c7b,
+        type: 3}
+      propertyPath: m_Name
+      value: Candle (4)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4285a26f4eaf75d4093af189d2473c7b, type: 3}
@@ -16287,15 +16301,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.45442933
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 4285a26f4eaf75d4093af189d2473c7b,
-        type: 3}
-      propertyPath: m_Name
-      value: Candle (6)
-      objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_CastShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 4285a26f4eaf75d4093af189d2473c7b,
+        type: 3}
+      propertyPath: m_Name
+      value: Candle (6)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4285a26f4eaf75d4093af189d2473c7b, type: 3}
@@ -16306,11 +16320,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6319539274174800605}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 6befcd7775204804c99710ad4d3dd9a1,
-        type: 3}
-      propertyPath: m_Name
-      value: Disk
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6befcd7775204804c99710ad4d3dd9a1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16386,6 +16395,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c4af4c187e248e144a24c3fcfc56e93c, type: 2}
+    - target: {fileID: -927199367670048503, guid: 6befcd7775204804c99710ad4d3dd9a1,
+        type: 3}
+      propertyPath: m_Name
+      value: Disk
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6befcd7775204804c99710ad4d3dd9a1, type: 3}
 --- !u!1001 &8534524880943831674
@@ -16395,11 +16409,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1879184932893562051}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 6befcd7775204804c99710ad4d3dd9a1,
-        type: 3}
-      propertyPath: m_Name
-      value: Disk
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6befcd7775204804c99710ad4d3dd9a1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16475,6 +16484,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c4af4c187e248e144a24c3fcfc56e93c, type: 2}
+    - target: {fileID: -927199367670048503, guid: 6befcd7775204804c99710ad4d3dd9a1,
+        type: 3}
+      propertyPath: m_Name
+      value: Disk
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6befcd7775204804c99710ad4d3dd9a1, type: 3}
 --- !u!1001 &8928431446055647950
@@ -16554,15 +16568,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.4544292
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 4285a26f4eaf75d4093af189d2473c7b,
-        type: 3}
-      propertyPath: m_Name
-      value: Candle (8)
-      objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 4285a26f4eaf75d4093af189d2473c7b,
         type: 3}
       propertyPath: m_CastShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 4285a26f4eaf75d4093af189d2473c7b,
+        type: 3}
+      propertyPath: m_Name
+      value: Candle (8)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4285a26f4eaf75d4093af189d2473c7b, type: 3}
@@ -16573,11 +16587,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8473821925719644427}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 6befcd7775204804c99710ad4d3dd9a1,
-        type: 3}
-      propertyPath: m_Name
-      value: Disk
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6befcd7775204804c99710ad4d3dd9a1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16653,5 +16662,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c4af4c187e248e144a24c3fcfc56e93c, type: 2}
+    - target: {fileID: -927199367670048503, guid: 6befcd7775204804c99710ad4d3dd9a1,
+        type: 3}
+      propertyPath: m_Name
+      value: Disk
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6befcd7775204804c99710ad4d3dd9a1, type: 3}
