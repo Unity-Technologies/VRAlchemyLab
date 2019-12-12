@@ -62,9 +62,9 @@ MonoBehaviour:
   Name: Impact wood 01
   Clip: {fileID: 8300000, guid: e9c7d95e52d0f094e8a130cad1f5abe6, type: 3}
   Source: {fileID: 5661255491237744002}
-  RandomizePitch: 0
-  PitchRange: {x: 0, y: 3}
-  RandomizeVolume: 1
+  RandomizePitch: 1
+  PitchRange: {x: 0.95, y: 1.05}
+  RandomizeVolume: 0
   VolumeRange: {x: 0.5, y: 1}
 --- !u!1 &2006590009985956013
 GameObject:
@@ -134,7 +134,7 @@ MonoBehaviour:
   Source: {fileID: 5661255491237744002}
   RandomizePitch: 1
   PitchRange: {x: 0.9, y: 1.1}
-  RandomizeVolume: 1
+  RandomizeVolume: 0
   VolumeRange: {x: 0.5, y: 1}
 --- !u!114 &7821240056946866410
 MonoBehaviour:
@@ -238,7 +238,7 @@ MonoBehaviour:
   Source: {fileID: 5661255491237744002}
   RandomizePitch: 1
   PitchRange: {x: 0.9, y: 1.1}
-  RandomizeVolume: 1
+  RandomizeVolume: 0
   VolumeRange: {x: 0.5, y: 1}
 --- !u!1 &6194191069830676367
 GameObject:
@@ -254,8 +254,6 @@ GameObject:
   - component: {fileID: 1779181788274303135}
   - component: {fileID: 1489465860701926336}
   - component: {fileID: 4629520440193371829}
-  - component: {fileID: 1210627178183532186}
-  - component: {fileID: 2028325876278730720}
   m_Layer: 0
   m_Name: Cup
   m_TagString: Untagged
@@ -410,41 +408,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onCollisionEnter:
-  - {fileID: 486678243372981005}
-  OnlyInteractWithPhysicMaterial: 1
-  PhysicMaterialName: Stone
---- !u!114 &1210627178183532186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6194191069830676367}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a232ae355ee64b4f8431a11972f7a0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onCollisionEnter:
-  - {fileID: 6027299139879404651}
-  OnlyInteractWithPhysicMaterial: 1
-  PhysicMaterialName: Wood
---- !u!114 &2028325876278730720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6194191069830676367}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a232ae355ee64b4f8431a11972f7a0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onCollisionEnter:
-  - {fileID: 1201539038872281549}
-  OnlyInteractWithPhysicMaterial: 1
-  PhysicMaterialName: Fabric
+  - {fileID: 1564065239016634402}
+  audioImpactLogic: {fileID: 1564065239016634402}
 --- !u!1 &6783662023986977359
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,6 +420,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5859703918225038264}
   - component: {fileID: 5661255491237744002}
+  - component: {fileID: 1564065239016634402}
   m_Layer: 0
   m_Name: Impact Audio
   m_TagString: Untagged
@@ -500,7 +466,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 0.32521653
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -576,6 +542,32 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1564065239016634402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6783662023986977359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5867d509924ad13458eec50b8c8a046f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: SetImpactVolumeLogic
+  cooldownDuration: 0.8
+  velocityThreshold: 0.05
+  audioSource: {fileID: 5661255491237744002}
+  magnitudeMultiplier: 2
+  maximumVolume: 1
+  physicMaterials:
+  - {fileID: 13400000, guid: 0763cbdba0d66c84e9f88e5d6152b053, type: 2}
+  - {fileID: 13400000, guid: f7a2bc5b13d48b44f8f4c1da7e3490c7, type: 2}
+  - {fileID: 13400000, guid: 46703445c6d70d148952e3cfd269b1e3, type: 2}
+  onImpactSound:
+  - {fileID: 6027299139879404651}
+  - {fileID: 486678243372981005}
+  - {fileID: 1201539038872281549}
 --- !u!1 &7199508729403539423
 GameObject:
   m_ObjectHideFlags: 0
