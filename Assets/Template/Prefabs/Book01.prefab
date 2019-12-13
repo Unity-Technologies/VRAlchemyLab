@@ -1052,7 +1052,10 @@ VFXRenderer:
   m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1377,6 +1380,7 @@ GameObject:
   - component: {fileID: 8795821182575647134}
   - component: {fileID: 8795821182575647133}
   - component: {fileID: 8795821182575647132}
+  - component: {fileID: 11774933908584397}
   m_Layer: 0
   m_Name: Book01
   m_TagString: Untagged
@@ -1545,6 +1549,21 @@ MonoBehaviour:
   floatValue: 0
   intValue: 0
   boolValue: 0
+--- !u!114 &11774933908584397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8795821182575647110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a232ae355ee64b4f8431a11972f7a0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioImpactLogic: {fileID: 1664528512719540755}
+  onCollisionEnter:
+  - {fileID: 1664528512719540755}
 --- !u!1 &8795821182672341123
 GameObject:
   m_ObjectHideFlags: 0
@@ -1950,5 +1969,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0219af91f351df2429e921b320124912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1664528512719540755 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2560931952531016717, guid: 31fe177a57b17384a87eb25d2260dcb7,
+    type: 3}
+  m_PrefabInstance: {fileID: 3788606827246607902}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5867d509924ad13458eec50b8c8a046f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

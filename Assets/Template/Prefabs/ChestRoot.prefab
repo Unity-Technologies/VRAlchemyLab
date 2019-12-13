@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 2207351884419767551}
   - component: {fileID: 2207351884419767491}
   - component: {fileID: 2207351884419767490}
+  - component: {fileID: 3068675061812776298}
   m_Layer: 0
   m_Name: ChestRoot
   m_TagString: Untagged
@@ -239,6 +240,21 @@ MonoBehaviour:
   floatValue: 0
   intValue: 0
   boolValue: 0
+--- !u!114 &3068675061812776298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2207351884419767550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a232ae355ee64b4f8431a11972f7a0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioImpactLogic: {fileID: 3572299343037578903}
+  onCollisionEnter:
+  - {fileID: 3572299343037578903}
 --- !u!1 &2207351885201391521
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,5 +740,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0219af91f351df2429e921b320124912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3572299343037578903 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7742251188096084554, guid: 71e4f26b66d335b4fb2ec0893cd4966c,
+    type: 3}
+  m_PrefabInstance: {fileID: 6548615647122527453}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5867d509924ad13458eec50b8c8a046f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
