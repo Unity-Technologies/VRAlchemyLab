@@ -171,6 +171,11 @@ MonoBehaviour:
   m_UseScreenSpaceShadows: 0
   m_InteractsWithSky: 1
   m_AngularDiameter: 0
+  m_FlareSize: 2
+  m_FlareTint: {r: 1, g: 1, b: 1, a: 1}
+  m_FlareFalloff: 4
+  m_SurfaceTexture: {fileID: 0}
+  m_SurfaceTint: {r: 1, g: 1, b: 1, a: 1}
   m_Distance: 150000000
   m_UseRayTracedShadows: 0
   m_NumRayTracingSamples: 4
@@ -208,6 +213,8 @@ MonoBehaviour:
   m_NormalBias: 0.75
   m_SlopeBias: 0.5
   m_ShadowUpdateMode: 0
+  m_BarnDoorAngle: 90
+  m_BarnDoorLength: 0.05
   m_ShadowCascadeRatios:
   - 0.05
   - 0.2
@@ -383,6 +390,11 @@ MonoBehaviour:
   m_UseScreenSpaceShadows: 0
   m_InteractsWithSky: 1
   m_AngularDiameter: 0
+  m_FlareSize: 2
+  m_FlareTint: {r: 1, g: 1, b: 1, a: 1}
+  m_FlareFalloff: 4
+  m_SurfaceTexture: {fileID: 0}
+  m_SurfaceTint: {r: 1, g: 1, b: 1, a: 1}
   m_Distance: 150000000
   m_UseRayTracedShadows: 0
   m_NumRayTracingSamples: 4
@@ -420,6 +432,8 @@ MonoBehaviour:
   m_NormalBias: 0.75
   m_SlopeBias: 0.5
   m_ShadowUpdateMode: 0
+  m_BarnDoorAngle: 90
+  m_BarnDoorLength: 0.05
   m_ShadowCascadeRatios:
   - 0.05
   - 0.2
@@ -510,7 +524,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8496576177059207230}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3536a2d2751224247ac79b8e3f56ba50, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -717,7 +731,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8496576177473735808}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 0763cbdba0d66c84e9f88e5d6152b053, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -730,7 +744,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8496576177473735808}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 0763cbdba0d66c84e9f88e5d6152b053, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.04827862
@@ -760,7 +774,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8496576177996763601}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 0763cbdba0d66c84e9f88e5d6152b053, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -773,7 +787,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8496576177996763601}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 0763cbdba0d66c84e9f88e5d6152b053, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -972,6 +986,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.9493483
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: a55410a49c78c0749bc51fb30300e88b,
+        type: 3}
+      propertyPath: m_ReceiveGI
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: a55410a49c78c0749bc51fb30300e88b,
         type: 3}
       propertyPath: m_Name
@@ -981,11 +1000,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -1504981713932161579, guid: a55410a49c78c0749bc51fb30300e88b,
-        type: 3}
-      propertyPath: m_ReceiveGI
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a55410a49c78c0749bc51fb30300e88b, type: 3}
@@ -1057,15 +1071,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.25
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 0ccb74dfe2ed97346a6406dfc0b98d75,
-        type: 3}
-      propertyPath: m_Name
-      value: GlobeSun
-      objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 0ccb74dfe2ed97346a6406dfc0b98d75,
         type: 3}
       propertyPath: m_CastShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 0ccb74dfe2ed97346a6406dfc0b98d75,
+        type: 3}
+      propertyPath: m_Name
+      value: GlobeSun
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ccb74dfe2ed97346a6406dfc0b98d75, type: 3}
