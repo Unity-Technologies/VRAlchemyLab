@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace GameplayIngredients.Events
 {
-    [RequireComponent(typeof(Collider))]
+    [RequireComponent(typeof(Rigidbody))]
     public class OnAudioCollisionEvent : EventBase
     {
-        [ReorderableList]
-        public Callable[] onCollisionEnter;
         [NonNullCheck]
         public AudioImpactLogic audioImpactLogic;
+        [ReorderableList]
+        public Callable[] onCollisionEnter;
         private void OnCollisionEnter(Collision collision)
         {
             audioImpactLogic.SetCollision(collision);

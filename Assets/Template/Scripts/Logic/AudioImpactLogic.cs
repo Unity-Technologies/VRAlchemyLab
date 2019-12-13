@@ -17,7 +17,7 @@ public class AudioImpactLogic : LogicBase
     public PhysicMaterial[] physicMaterials;
     public Callable[] onImpactSound;
 
-    public override void Execute(GameObject instigator)
+    public override void Execute(GameObject instigator = null)
     {
         if(!coolingDown && collision.collider.sharedMaterial != null)
         {
