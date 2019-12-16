@@ -29,7 +29,7 @@ public class AudioImpactLogic : LogicBase
                 {
                     if (collision.collider.sharedMaterial == physicMaterials[i])
                     {
-                        Callable.Call(onImpactSound[i]);
+                        Callable.Call(onImpactSound[i],instigator);
                         if (cooldownDuration > 0)
                         {
                             coolingDown = true;
