@@ -13,7 +13,7 @@ namespace GameplayIngredients.Events
         private void OnCollisionEnter(Collision collision)
         {
             audioImpactLogic.SetCollision(collision);
-            Callable.Call(onCollisionEnter, collision.collider.gameObject);
+            Callable.Call(onCollisionEnter, gameObject);
         }
     }
 }
