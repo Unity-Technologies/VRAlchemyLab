@@ -2,6 +2,7 @@
 
 namespace RDSystem
 {
+    [ExecuteAlways]
     public class LiquidDropUpdater : MonoBehaviour
     {
         [SerializeField] CustomRenderTexture _texture;
@@ -14,8 +15,9 @@ namespace RDSystem
         public float simulationDuration = 2;
 
         void Start()
-        {
+        {   
             _texture.material.SetColor("_Color1", hitColor);
+            _texture.material.SetVector("_Position", new Vector4(hitPosition.x, hitPosition.y, 0, 0));
             _texture.Initialize();
             _textureCube.Initialize();
         }
