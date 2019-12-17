@@ -6748,6 +6748,11 @@ PrefabInstance:
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[2].m_Value.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 874806822791077182, guid: ba7250a25011d44459de89f44f269dec,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[12].m_Value
+      value: 8.759313e-21
+      objectReference: {fileID: 0}
     - target: {fileID: 1547506345244474002, guid: ba7250a25011d44459de89f44f269dec,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -20231,7 +20236,7 @@ MonoBehaviour:
   m_ActivateUsage: 2
   m_UIPressUsage: 2
   m_AxisToPressThreshold: 0.1
-  m_ModelPrefab: {fileID: -4216859302048453862, guid: bd86364972efae3459eef29dfb6320f6,
+  m_ModelPrefab: {fileID: 4132963818430680499, guid: 02a266c73c9e94b418b6464997017212,
     type: 3}
   m_ModelTransform: {fileID: 1849281664}
   m_AnimateModel: 1
@@ -32207,7 +32212,7 @@ PrefabInstance:
     - target: {fileID: 7769593327830180776, guid: 0f334e901dfe254488e2491073bfe14e,
         type: 3}
       propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[12].m_Value
-      value: 2.02
+      value: 8.759313e-21
       objectReference: {fileID: 0}
     - target: {fileID: 7838285956445490488, guid: 0f334e901dfe254488e2491073bfe14e,
         type: 3}
@@ -56339,6 +56344,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[4]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5196540099712085713, guid: 496045d36a9de9e4fb1c769fc699d24f,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[12].m_Value
+      value: 8.759313e-21
+      objectReference: {fileID: 0}
     - target: {fileID: 5856923935635933565, guid: 496045d36a9de9e4fb1c769fc699d24f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -59434,6 +59444,11 @@ PrefabInstance:
       propertyPath: m_LocalRotation.w
       value: 0.98437506
       objectReference: {fileID: 0}
+    - target: {fileID: 1313494700536688754, guid: 626d3110ebecfca44ba3c9652b25ef5f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 1609534528562850374, guid: 626d3110ebecfca44ba3c9652b25ef5f,
         type: 3}
       propertyPath: m_IsActive
@@ -59461,7 +59476,7 @@ LookAtConstraint:
   m_GameObject: {fileID: 1904927651}
   m_Enabled: 1
   m_Weight: 1
-  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_RotationAtRest: {x: 0, y: 90, z: 0}
   m_RotationOffset: {x: 0, y: 0, z: 0}
   m_Roll: 0
   m_WorldUpObject: {fileID: 0}
@@ -71686,6 +71701,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 477329843}
     m_Modifications:
+    - target: {fileID: 810948850574291662, guid: c6b825f59a233a64d98328767f6a00d3,
+        type: 3}
+      propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[12].m_Value
+      value: 8.759313e-21
+      objectReference: {fileID: 0}
     - target: {fileID: 1304699563634103650, guid: c6b825f59a233a64d98328767f6a00d3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -71773,6 +71793,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6b825f59a233a64d98328767f6a00d3, type: 3}
+--- !u!1 &5480372201456387365 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1279250644319133485, guid: c6b825f59a233a64d98328767f6a00d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 5480372201456387364}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5480372201456387366 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 532235668543705383, guid: c6b825f59a233a64d98328767f6a00d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 5480372201456387364}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5480372201456387365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b467d2936169c04d908e5134f6d0b67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5480372201456387367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5480372201456387365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e98867b2173494983582dfb1a01d0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: UnityEventAction
+  OnExecute:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5480372201456387366}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &5516743507543635325
 PrefabInstance:
   m_ObjectHideFlags: 0
