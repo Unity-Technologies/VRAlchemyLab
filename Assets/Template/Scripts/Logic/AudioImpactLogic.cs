@@ -19,9 +19,9 @@ public class AudioImpactLogic : LogicBase
 
     public override void Execute(GameObject instigator = null)
     {
-        if(!coolingDown && collision.collider.sharedMaterial != null)
+        if(!coolingDown && collision != null)
         {
-            Debug.Log(collision.relativeVelocity.magnitude.ToString());
+            //Debug.Log(collision.relativeVelocity.magnitude.ToString());
             audioSource.volume = Mathf.Clamp(collision.relativeVelocity.magnitude * magnitudeMultiplier, 0, maximumVolume);
             if (physicMaterials.Length == onImpactSound.Length)
             {
@@ -29,7 +29,10 @@ public class AudioImpactLogic : LogicBase
                 {
                     if (collision.collider.sharedMaterial == physicMaterials[i])
                     {
-                        Callable.Call(onImpactSound[i],instigator);
+                        if (instigator != null)
+                            Callable.Call(onImpactSound[i], instigator);
+                        else
+                            Callable.Call(onImpactSound[i]);
                         if (cooldownDuration > 0)
                         {
                             coolingDown = true;

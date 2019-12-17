@@ -30,7 +30,7 @@ public class AudioRollAction : ActionBase
         {
             Rigidbody rb = instigator.GetComponent<Rigidbody>();
 
-            Debug.Log(rb.angularVelocity.ToString());
+            //Debug.Log(rb.angularVelocity.ToString());
             if (rb == null) return;
 
             float angularVelocity = new float();
