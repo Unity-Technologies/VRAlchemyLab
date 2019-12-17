@@ -2544,6 +2544,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1834888731}
   - component: {fileID: 1834888730}
+  - component: {fileID: 1834888734}
+  - component: {fileID: 1834888733}
+  - component: {fileID: 1834888732}
   m_Layer: 0
   m_Name: Render settings
   m_TagString: Untagged
@@ -2582,6 +2585,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1834888732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834888729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a0b28d40e78fb248b2e0a2e3071ae10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Scale Eye Texture Resolution on PS4
+  scale: 1.4
+--- !u!114 &1834888733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834888729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a2d9e7c18466144eaae9232d1d52e61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: If PS4
+  platforms: 19000000
+  inclusionMode: 0
+  Calls:
+  - {fileID: 1834888732}
+--- !u!114 &1834888734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834888729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bfe7209b5cff4f49b13217ed25f16dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onAwake:
+  - {fileID: 1834888733}
 --- !u!1 &1846611274
 GameObject:
   m_ObjectHideFlags: 0
