@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-[ExecuteAlways]
+//[ExecuteAlways]
 [RequireComponent(typeof(VisualEffect))]
 public class LiquidPour : MonoBehaviour
 {
@@ -17,8 +17,10 @@ public class LiquidPour : MonoBehaviour
     public string colorNameInMat = "Color_2B85FF3B";
     public int matId = 0;
     public bool flowFromObjScript = false;
-    //public string fillStateNameInMat = "FillingRate";
     public float flowMultiplier = 3;
+    public AudioSource audioSource;
+    public float audioVolume = 0;
+
 
     VisualEffect vfx;
     float flow;
@@ -29,6 +31,61 @@ public class LiquidPour : MonoBehaviour
 
     float currentFilling = 1;
     float oldFilling = 1;
+
+    // Impact Generator for sound
+    public GameObject impactPrefab = null;
+    [Range(0, 100)]
+    public int maximumImpactObj = 10;
+    [Range(1,100)]
+    public float impactObjSpawnRate = 10;
+    float impactObjSpawnTime = 0;
+    GameObject[] impactObjArray;
+    int impactObjIndex = 0;
+    float lastSpawnTime = 0;
+    //[HideInInspector]
+    public float impactCount = 0;
+
+
+    GameObject GenImpactObj(int index)
+    {
+        GameObject newImpact = null;
+
+        if (impactPrefab != null)
+        {
+            newImpact = Instantiate(impactPrefab, transform.position, transform.rotation);
+            newImpact.SetActive(false);
+            newImpact.name = gameObject.name + "_impact" + index.ToString();
+            newImpact.GetComponent<ImpactObj>().spawnerObj = this.gameObject;
+        }
+        else
+        {
+            return newImpact;
+        }
+          
+        return newImpact;
+    }
+
+
+    void SpawnImpactObj()
+    {
+        lastSpawnTime += Time.deltaTime;
+        if (lastSpawnTime > impactObjSpawnTime)
+        {
+            GameObject impactObj = impactObjArray[impactObjIndex];
+            impactObjIndex += 1;
+            if (impactObjIndex >= maximumImpactObj)
+                impactObjIndex = 0;
+
+            impactObj.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            impactObj.transform.position = transform.position + transform.up * 0.05f;
+            impactObj.transform.rotation = transform.rotation;
+            impactObj.SetActive(true);
+
+            lastSpawnTime = 0;
+        }
+
+    }
+
 
     private void Init()
     {
@@ -56,6 +113,16 @@ public class LiquidPour : MonoBehaviour
     void Start()
     {
         Verif();
+
+        // Impacts for sound
+        impactObjSpawnTime = 1.0f / impactObjSpawnRate;
+        impactObjArray = new GameObject[maximumImpactObj];
+        impactObjIndex = 0;
+        for (int i = 0; i < maximumImpactObj; i++)
+        {
+            impactObjArray[i] = GenImpactObj(i);
+        }
+
     }
 
     void Update()
@@ -139,6 +206,32 @@ public class LiquidPour : MonoBehaviour
                 }
             }
         }
+
+
+        if (flow > 0.1)
+        {
+            SpawnImpactObj();
+        }
+
+        if (impactCount > 0.01f)
+        {
+            if (!audioSource.isPlaying)
+                audioSource.Play();
+
+            float volume = audioVolume * (impactCount / 2.0f);
+
+            audioSource.volume = volume;
+
+            impactCount -= Time.deltaTime * 0.5f;
+
+            impactCount = Mathf.Clamp01(impactCount);
+        }
+        else if (audioSource.isPlaying)
+            audioSource.Stop();
+
+        
+
+        
 
         vfx.SetFloat("Flow", flow);
         vfx.SetFloat("BottleDiameter(cm)", bottleNeckDiameter);
