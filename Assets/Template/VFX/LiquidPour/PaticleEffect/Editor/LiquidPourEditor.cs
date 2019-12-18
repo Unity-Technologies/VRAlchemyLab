@@ -11,19 +11,15 @@ public class LiquidPourEditor : Editor
             var lp = target as LiquidPour;
             if (lp == null)
                 return;
-            var q = Quaternion.Euler(90, 0, 0);
+            var rot = lp.transform.rotation * Quaternion.Euler(90, 0, 0);
+            var pos = lp.transform.position;
+            var rad = lp.bottleNeckDiameter * 0.005f;
+
             Color oldHandleColor = Handles.color;
             Handles.color = Color.red;
-            //Handles.CircleCap(0, lp.transform.position, q, 0.1f);
-            Handles.CircleHandleCap(
-                0,
-                lp.transform.position,
-                q,
-                lp.bottleNeckDiameter * 0.005f, EventType.Repaint
-                );
+            Handles.CircleHandleCap(0, pos, rot, rad, EventType.Repaint);
+            Handles.ArrowHandleCap(0, pos, rot * Quaternion.Euler(180, 0, 0), rad * 2, EventType.Repaint);
             Handles.color = oldHandleColor;
-
-            Debug.Log(lp.transform.position);
         }
         
     }
