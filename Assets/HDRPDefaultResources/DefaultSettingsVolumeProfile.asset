@@ -89,6 +89,11 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 50
     min: 0
+  directionalTransmissionMultiplier:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+    max: 1
   cascadeShadowSplitCount:
     m_OverrideState: 1
     m_Value: 4
@@ -212,6 +217,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   m_AdvancedMode: 0
+  quality:
+    m_OverrideState: 0
+    m_Value: 1
   rayTracing:
     m_OverrideState: 0
     m_Value: 0
@@ -221,28 +229,15 @@ MonoBehaviour:
     min: 0
     max: 4
   directLightingStrength:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 0.5
     min: 0
     max: 1
-  stepCount:
-    m_OverrideState: 0
-    m_Value: 6
-    min: 2
-    max: 32
   radius:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.6
     min: 0.25
     max: 5
-  fullResolution:
-    m_OverrideState: 0
-    m_Value: 0
-  maximumRadiusInPixels:
-    m_OverrideState: 0
-    m_Value: 40
-    min: 16
-    max: 256
   temporalAccumulation:
     m_OverrideState: 0
     m_Value: 1
@@ -251,14 +246,6 @@ MonoBehaviour:
     m_Value: 0.5
     min: 0
     max: 1
-  bilateralUpsample:
-    m_OverrideState: 0
-    m_Value: 1
-  directionCount:
-    m_OverrideState: 0
-    m_Value: 2
-    min: 1
-    max: 8
   blurSharpness:
     m_OverrideState: 0
     m_Value: 0.1
@@ -287,6 +274,27 @@ MonoBehaviour:
     m_Value: 0.5
     min: 0.001
     max: 1
+  m_StepCount:
+    m_OverrideState: 0
+    m_Value: 6
+    min: 2
+    max: 32
+  m_FullResolution:
+    m_OverrideState: 0
+    m_Value: 0
+  m_MaximumRadiusInPixels:
+    m_OverrideState: 0
+    m_Value: 40
+    min: 16
+    max: 256
+  m_BilateralUpsample:
+    m_OverrideState: 0
+    m_Value: 1
+  m_DirectionCount:
+    m_OverrideState: 0
+    m_Value: 2
+    min: 1
+    max: 8
 --- !u!114 &8689955086501673153
 MonoBehaviour:
   m_ObjectHideFlags: 3
