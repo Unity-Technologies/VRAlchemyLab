@@ -1247,11 +1247,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 498493266}
     m_Modifications:
-    - target: {fileID: 506675014051701076, guid: 2cadc6b78ea722446a4a138520235d42,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3946700486326006799, guid: 2cadc6b78ea722446a4a138520235d42,
         type: 3}
       propertyPath: m_Name
@@ -1332,6 +1327,42 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 53477892}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &53477896 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5740830227773217156, guid: 2cadc6b78ea722446a4a138520235d42,
+    type: 3}
+  m_PrefabInstance: {fileID: 53477892}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28a2beba7cb33a243b449d62cbe62962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &53477898 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6723703483546598191, guid: 2cadc6b78ea722446a4a138520235d42,
+    type: 3}
+  m_PrefabInstance: {fileID: 53477892}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28a2beba7cb33a243b449d62cbe62962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &53477899 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8610898378407397798, guid: 2cadc6b78ea722446a4a138520235d42,
+    type: 3}
+  m_PrefabInstance: {fileID: 53477892}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28a2beba7cb33a243b449d62cbe62962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &61234045
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11342,13 +11373,24 @@ MonoBehaviour:
       m_Calls: []
   m_OnSelectExit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 53477896}
+        m_MethodName: Execute
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 387195722}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_ToggleSelect: 0
   m_HideControllerOnSelect: 0
-  m_PlayAudioClipOnSelectEnter: 1
+  m_PlayAudioClipOnSelectEnter: 0
   m_AudioClipForOnSelectEnter: {fileID: 8300000, guid: 8a637dbbf2e23804fa47557ba567e56a,
     type: 3}
-  m_PlayAudioClipOnSelectExit: 1
+  m_PlayAudioClipOnSelectExit: 0
   m_AudioClipForOnSelectExit: {fileID: 8300000, guid: ca6a397ff0e424443b1fdcfeefb8a890,
     type: 3}
   m_PlayAudioClipOnHoverEnter: 0
@@ -20476,6 +20518,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 53477899}
+        m_MethodName: Execute
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 648131462}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnSelectExit:
     m_PersistentCalls:
       m_Calls:
@@ -20490,12 +20543,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 53477898}
+        m_MethodName: Execute
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 648131462}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_ToggleSelect: 0
   m_HideControllerOnSelect: 0
-  m_PlayAudioClipOnSelectEnter: 1
+  m_PlayAudioClipOnSelectEnter: 0
   m_AudioClipForOnSelectEnter: {fileID: 8300000, guid: 8a637dbbf2e23804fa47557ba567e56a,
     type: 3}
-  m_PlayAudioClipOnSelectExit: 1
+  m_PlayAudioClipOnSelectExit: 0
   m_AudioClipForOnSelectExit: {fileID: 8300000, guid: ca6a397ff0e424443b1fdcfeefb8a890,
     type: 3}
   m_PlayAudioClipOnHoverEnter: 0
