@@ -20,17 +20,15 @@ public class LiquidPour : MonoBehaviour
     public float flowMultiplier = 3;
     public AudioSource audioSource;
     public float audioVolume = 0;
-
-
     VisualEffect vfx;
     float flow;
-
     float verticality;
     Vector3 upVector;
     bool playVFX;
-
     float currentFilling = 1;
     float oldFilling = 1;
+    float vfxLife = 0;
+    public float vfxLifeTime = 2;
 
     // Impact Generator for sound
     public GameObject impactPrefab = null;
@@ -209,8 +207,10 @@ public class LiquidPour : MonoBehaviour
         }
 
 
-        if (flow > 0.1)
+        if (flow > 0.05)
         {
+            vfxLife = vfxLifeTime;
+
             if (!impactGenerated)
             {
                 for (int i = 0; i < maximumImpactObj; i++)
@@ -221,7 +221,13 @@ public class LiquidPour : MonoBehaviour
             }
             SpawnImpactObj();
         }
+        else
+        {
+            vfxLife = Mathf.Max(0, vfxLife - Time.deltaTime);
+        }
 
+        vfx.enabled = (vfxLife > 0);
+        
         if (impactCount > 0.01f)
         {
             if (!audioSource.isPlaying)
@@ -237,9 +243,6 @@ public class LiquidPour : MonoBehaviour
         }
         else if (audioSource.isPlaying)
             audioSource.Stop();
-
-        
-
         
 
         vfx.SetFloat("Flow", flow);
