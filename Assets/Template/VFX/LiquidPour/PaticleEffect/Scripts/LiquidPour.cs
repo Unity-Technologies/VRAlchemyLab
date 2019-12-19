@@ -42,8 +42,9 @@ public class LiquidPour : MonoBehaviour
     GameObject[] impactObjArray;
     int impactObjIndex = 0;
     float lastSpawnTime = 0;
-    //[HideInInspector]
+    [HideInInspector]
     public float impactCount = 0;
+    bool impactGenerated = false;
 
 
     GameObject GenImpactObj(int index)
@@ -118,10 +119,10 @@ public class LiquidPour : MonoBehaviour
         impactObjSpawnTime = 1.0f / impactObjSpawnRate;
         impactObjArray = new GameObject[maximumImpactObj];
         impactObjIndex = 0;
-        for (int i = 0; i < maximumImpactObj; i++)
-        {
-            impactObjArray[i] = GenImpactObj(i);
-        }
+        //for (int i = 0; i < maximumImpactObj; i++)
+        //{
+        //    impactObjArray[i] = GenImpactObj(i);
+        //}
 
     }
 
@@ -210,6 +211,14 @@ public class LiquidPour : MonoBehaviour
 
         if (flow > 0.1)
         {
+            if (!impactGenerated)
+            {
+                for (int i = 0; i < maximumImpactObj; i++)
+                {
+                    impactObjArray[i] = GenImpactObj(i);
+                }
+                impactGenerated = true;
+            }
             SpawnImpactObj();
         }
 
