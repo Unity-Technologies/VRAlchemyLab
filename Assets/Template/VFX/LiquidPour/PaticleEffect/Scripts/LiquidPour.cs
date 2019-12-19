@@ -226,7 +226,23 @@ public class LiquidPour : MonoBehaviour
             vfxLife = Mathf.Max(0, vfxLife - Time.deltaTime);
         }
 
-        vfx.enabled = (vfxLife > 0);
+        if (vfxLife > 0)
+        {
+            vfx.enabled = true;
+        }
+        else
+        {
+            vfx.enabled = false;
+
+            for (int i = 0; i < impactObjArray.Length; i++)
+            {
+                GameObject objToDestry = impactObjArray[i];
+                DestroyImmediate(objToDestry);
+                impactObjArray[i] = null;
+            }
+            impactGenerated = false;
+        }
+            
         
         if (impactCount > 0.01f)
         {
