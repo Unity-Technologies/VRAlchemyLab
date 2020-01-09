@@ -11,7 +11,7 @@ public class ControllerManager : MonoBehaviour
 
     bool m_LeftPrimaryButtonPressed;
     bool m_LeftSecondaryButtonPressed;
-    bool m_LeftGripButtonPressed;
+    //bool m_LeftThumbstickPressed;
 
     bool m_RightTouchPadClicked;
     bool m_RightPrimaryButtonClicked;
@@ -169,7 +169,7 @@ public class ControllerManager : MonoBehaviour
             {
                 m_LeftController = connectedDevice;
                 m_LeftControllerState.ClearAll();
-                //m_LeftControllerState.SetState(ControllerStates.Select);
+                m_LeftControllerState.SetState(ControllerStates.Teleport);
             }
             else if (connectedDevice.role == InputDeviceRole.RightHanded)
             {
@@ -187,7 +187,8 @@ public class ControllerManager : MonoBehaviour
             
             m_LeftController.TryGetFeatureValue(CommonUsages.primaryButton, out m_LeftPrimaryButtonPressed);
             m_LeftController.TryGetFeatureValue(CommonUsages.secondaryButton, out m_LeftSecondaryButtonPressed);
-            m_LeftController.TryGetFeatureValue(CommonUsages.gripButton, out m_LeftGripButtonPressed);
+
+            //m_LeftController.TryGetFeatureValue(CommonUsages.primary2DAxisClick, out m_LeftThumbstickPressed);
 
             if (m_LeftPrimaryButtonPressed)
             {
@@ -197,10 +198,10 @@ public class ControllerManager : MonoBehaviour
             {
                 m_LeftControllerState.SetState(ControllerStates.Select);
             }
-            if (m_LeftGripButtonPressed)
+            /*if (m_LeftThumbstickPressed)
             {
                 m_LeftControllerState.ClearAll();
-            }
+            }*/
         }
 
         if (m_RightController.isValid)
