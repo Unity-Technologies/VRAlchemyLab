@@ -92,10 +92,8 @@ GameObject:
   - component: {fileID: 1674410413503974268}
   - component: {fileID: 6581139687156359795}
   - component: {fileID: 7998122057114467837}
-  - component: {fileID: 4886051539159251626}
-  - component: {fileID: 2475948164728253982}
-  - component: {fileID: 5122331934956136397}
-  - component: {fileID: 8113215538994631388}
+  - component: {fileID: 9145626522789684443}
+  - component: {fileID: 8291557545579119965}
   m_Layer: 0
   m_Name: ControllerLeft
   m_TagString: Untagged
@@ -181,9 +179,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Hand: 4
-  Button: 1
+  Button: 0
   OnButtonDown:
-  - {fileID: 4886051539159251626}
+  - {fileID: 9145626522789684443}
   OnButtonUp: []
 --- !u!114 &7998122057114467837
 MonoBehaviour:
@@ -197,12 +195,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f166a07af64a544ba8502b0da24a082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hand: 5
-  Button: 3
+  Hand: 4
+  Button: 2
   OnButtonDown:
-  - {fileID: 2475948164728253982}
+  - {fileID: 8291557545579119965}
   OnButtonUp: []
---- !u!114 &4886051539159251626
+--- !u!114 &9145626522789684443
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -211,58 +209,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1080975420344287136}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0e98867b2173494983582dfb1a01d0b, type: 3}
+  m_Script: {fileID: 11500000, guid: 846d5f33f7af4014ea15adf7a92dc953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Active A
-  OnExecute:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1080975420416086041}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 1
-      - m_Target: {fileID: 139799320441730994}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1080975420761089035}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6031432435613149671}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
---- !u!114 &2475948164728253982
+  Name: Enable A
+  Targets:
+  - GameObject: {fileID: 1080975420416086041}
+    State: 1
+  - GameObject: {fileID: 139799320441730994}
+    State: 0
+  - GameObject: {fileID: 1080975420761089035}
+    State: 0
+  - GameObject: {fileID: 6031432435613149671}
+    State: 1
+--- !u!114 &8291557545579119965
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -271,89 +231,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1080975420344287136}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0e98867b2173494983582dfb1a01d0b, type: 3}
+  m_Script: {fileID: 11500000, guid: 846d5f33f7af4014ea15adf7a92dc953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Active B
-  OnExecute:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1080975420416086041}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 139799320441730994}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1080975420761089035}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 6031432435613149671}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &5122331934956136397
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1080975420344287136}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05f246f96cd54614b8232876837d4746, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Button: Fire1
-  OnButtonDown:
-  - {fileID: 4886051539159251626}
-  OnButtonUp: []
---- !u!114 &8113215538994631388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1080975420344287136}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05f246f96cd54614b8232876837d4746, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Button: Fire2
-  OnButtonDown:
-  - {fileID: 2475948164728253982}
-  OnButtonUp: []
+  Name: Enable B
+  Targets:
+  - GameObject: {fileID: 1080975420416086041}
+    State: 0
+  - GameObject: {fileID: 139799320441730994}
+    State: 1
+  - GameObject: {fileID: 1080975420761089035}
+    State: 1
+  - GameObject: {fileID: 6031432435613149671}
+    State: 0
 --- !u!1001 &2346972227224924398
 PrefabInstance:
   m_ObjectHideFlags: 0
