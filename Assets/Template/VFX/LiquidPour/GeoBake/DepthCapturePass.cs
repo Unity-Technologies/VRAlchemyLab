@@ -30,7 +30,7 @@ class DepthCapturePass : CustomPass
         }
             
 
-        if (render && hdCamera.camera != bakeCamera)
+        if (render && hdCamera.camera != bakeCamera && hdCamera.camera.cameraType != CameraType.SceneView)
         {
             bakeCamera.TryGetCullingParameters(out var cullingParams);
             cullingParams.cullingOptions = CullingOptions.ShadowCasters;
