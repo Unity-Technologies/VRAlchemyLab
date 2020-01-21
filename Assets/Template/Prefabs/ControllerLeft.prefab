@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 7998122057114467837}
   - component: {fileID: 9145626522789684443}
   - component: {fileID: 8291557545579119965}
+  - component: {fileID: 8611878698123745309}
   m_Layer: 0
   m_Name: ControllerLeft
   m_TagString: Untagged
@@ -244,6 +245,25 @@ MonoBehaviour:
     State: 1
   - GameObject: {fileID: 6031432435613149671}
     State: 0
+--- !u!95 &8611878698123745309
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080975420344287136}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6f40fb8833cfa464ea6bbb00c113f1ef, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &2346972227224924398
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -325,7 +345,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a3bf93c1eca83d540aab19c344ce4cea, type: 2}
+      objectReference: {fileID: 2100000, guid: 6f8f175140004474e90c85468b69d6cf, type: 2}
     - target: {fileID: -927199367670048503, guid: 9e762748a20dcef49a9745f03b497e66,
         type: 3}
       propertyPath: m_Name
@@ -357,6 +377,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4132963818430680499}
     m_Modifications:
+    - target: {fileID: -5178661895559278292, guid: 9e762748a20dcef49a9745f03b497e66,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4711208715938537054, guid: 9e762748a20dcef49a9745f03b497e66,
+        type: 3}
     - target: {fileID: -4216859302048453862, guid: 9e762748a20dcef49a9745f03b497e66,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -542,7 +568,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ffc4302ac09e70d4cac6a50c32aef876, type: 2}
+      objectReference: {fileID: 2100000, guid: 69cfd50220736f542ad118341cdd93ae, type: 2}
     - target: {fileID: -927199367670048503, guid: 9e762748a20dcef49a9745f03b497e66,
         type: 3}
       propertyPath: m_Name
