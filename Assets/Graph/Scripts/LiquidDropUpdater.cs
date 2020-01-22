@@ -6,20 +6,20 @@ namespace RDSystem
     public class LiquidDropUpdater : MonoBehaviour
     {
         [SerializeField] CustomRenderTexture _texture;
-        [SerializeField] CustomRenderTexture _textureCube;
-        [SerializeField, Range(1, 16)] int _stepsPerFrame = 4;
+        int _stepsPerFrame = 1;
         bool m_update = false;
         bool m_hit = false;
+        [HideInInspector]
         public Vector2 hitPosition;
+        [HideInInspector]
         public Color hitColor = Color.green;
-        public float simulationDuration = 2;
+        public float simulationDuration = 4;
 
         void Start()
         {   
             _texture.material.SetColor("_Color1", hitColor);
             _texture.material.SetVector("_Position", new Vector4(hitPosition.x, hitPosition.y, 0, 0));
             _texture.Initialize();
-            _textureCube.Initialize();
         }
 
         void Update()
@@ -28,14 +28,12 @@ namespace RDSystem
             {
                 m_update = true;
                 InitTexture(_texture);
-                InitTexture(_textureCube);
                 Invoke("Stop", simulationDuration);
                 m_hit = false;
             }
             else if (m_update == true)
             {
                 UpdateTexture(_texture);
-                UpdateTexture(_textureCube);
             }
         }
 
