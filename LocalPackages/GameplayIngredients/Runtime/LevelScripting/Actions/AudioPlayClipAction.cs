@@ -6,7 +6,6 @@ namespace GameplayIngredients.Actions
     public class AudioPlayClipAction : ActionBase
     {
         public AudioClip Clip;
-        [NonNullCheck]
         public AudioSource Source;
         public bool RandomizePitch = false;
         [ShowIf("RandomizePitch")]
