@@ -1,8 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 using UnityEngine.VFX.Utility;
+using GameplayIngredients;
+using NaughtyAttributes;
 
 [RequireComponent(typeof(VisualEffect))]
 public class GrimoireControl : MonoBehaviour
@@ -22,7 +23,11 @@ public class GrimoireControl : MonoBehaviour
 
     [Header("Events")]
     public ExposedProperty TurnLeftEvent = "TurnLeft";
+    [ReorderableList]
+    public Callable[] OnTurnLeft;
     public ExposedProperty TurnRightEvent = "TurnRight";
+    [ReorderableList]
+    public Callable[] OnTurnRight;
 
     VisualEffect m_VFX;
     bool isTurning = false;
@@ -55,7 +60,7 @@ public class GrimoireControl : MonoBehaviour
         isTurning = true;
         m_VFX.SetFloat(AnimationDurationProperty, AnimDuration - Time.deltaTime);
         m_VFX.SendEvent(TurnLeftEvent);
-
+        Callable.Call(OnTurnLeft, this.gameObject);
 
         m_VFX.SetInt(TurnPageRightProperty, newIndexLeft);
         m_VFX.SetInt(TurnPageLeftProperty, m_VFX.GetInt(BasePageRightProperty));
@@ -76,6 +81,7 @@ public class GrimoireControl : MonoBehaviour
         isTurning = true;
         m_VFX.SetFloat(AnimationDurationProperty, AnimDuration - Time.deltaTime);
         m_VFX.SendEvent(TurnRightEvent);
+        Callable.Call(OnTurnRight, this.gameObject);
 
         m_VFX.SetInt(TurnPageLeftProperty, newIndexRight);
         m_VFX.SetInt(TurnPageRightProperty, m_VFX.GetInt(BasePageLeftProperty));

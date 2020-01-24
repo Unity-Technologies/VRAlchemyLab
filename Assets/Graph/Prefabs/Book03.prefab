@@ -620,7 +620,6 @@ MonoBehaviour:
   direction: -1
   OnDirectionEnter:
   - {fileID: 4934948670344421836}
-  - {fileID: 6577825095816538658}
   OnDirectionLeave: []
 --- !u!114 &6577825095816538658
 MonoBehaviour:
@@ -903,8 +902,12 @@ MonoBehaviour:
     m_Name: Turn Page (Right Side)
   TurnLeftEvent:
     m_Name: TurnLeft
+  OnTurnLeft:
+  - {fileID: 6577825095816538658}
   TurnRightEvent:
     m_Name: TurnRight
+  OnTurnRight:
+  - {fileID: 6577825095816538658}
 --- !u!95 &4934948670979387678
 Animator:
   serializedVersion: 3
@@ -1000,7 +1003,6 @@ MonoBehaviour:
   direction: 1
   OnDirectionEnter:
   - {fileID: 4934948671064204357}
-  - {fileID: 6577825095816538658}
   OnDirectionLeave: []
 --- !u!136 &7819718682311458595
 CapsuleCollider:

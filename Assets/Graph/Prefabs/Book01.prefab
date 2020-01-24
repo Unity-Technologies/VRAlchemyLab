@@ -823,7 +823,6 @@ MonoBehaviour:
   direction: -1
   OnDirectionEnter:
   - {fileID: 8795821180920236326}
-  - {fileID: 421203842103176826}
   OnDirectionLeave: []
 --- !u!114 &421203842103176826
 MonoBehaviour:
@@ -1103,8 +1102,12 @@ MonoBehaviour:
     m_Name: Turn Page (Right Side)
   TurnLeftEvent:
     m_Name: TurnLeft
+  OnTurnLeft:
+  - {fileID: 421203842103176826}
   TurnRightEvent:
     m_Name: TurnRight
+  OnTurnRight:
+  - {fileID: 421203842103176826}
 --- !u!95 &8795821181425080820
 Animator:
   serializedVersion: 3
@@ -1297,7 +1300,6 @@ MonoBehaviour:
   direction: 1
   OnDirectionEnter:
   - {fileID: 8795821181641985199}
-  - {fileID: 421203842103176826}
   OnDirectionLeave: []
 --- !u!1 &8795821182240324804
 GameObject:

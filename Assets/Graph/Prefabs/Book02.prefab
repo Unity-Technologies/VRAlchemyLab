@@ -1013,7 +1013,6 @@ MonoBehaviour:
   direction: -1
   OnDirectionEnter:
   - {fileID: 7801722811260925172}
-  - {fileID: 6172610454323869809}
   OnDirectionLeave: []
 --- !u!114 &6172610454323869809
 MonoBehaviour:
@@ -1284,8 +1283,12 @@ MonoBehaviour:
     m_Name: Turn Page (Right Side)
   TurnLeftEvent:
     m_Name: TurnLeft
+  OnTurnLeft:
+  - {fileID: 6172610454323869809}
   TurnRightEvent:
     m_Name: TurnRight
+  OnTurnRight:
+  - {fileID: 6172610454323869809}
 --- !u!95 &7801722811901125670
 Animator:
   serializedVersion: 3
@@ -1381,7 +1384,6 @@ MonoBehaviour:
   direction: 1
   OnDirectionEnter:
   - {fileID: 7801722811952656765}
-  - {fileID: 6172610454323869809}
   OnDirectionLeave: []
 --- !u!1001 &2608557447798293664
 PrefabInstance:
