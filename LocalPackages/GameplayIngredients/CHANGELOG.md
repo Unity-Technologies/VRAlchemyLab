@@ -1,5 +1,24 @@
 # Changelog
 
+## 2019.3.2
+
+#### Added
+
+- Added Counters : Integer counters stored in the scene
+- Added CounterAction and CounterLogic
+- Added Create State button to StateMachines
+- Added State Machine templates in the GameObject Creation Menu
+
+#### Changed
+
+- **Delayed Logic** now has a mode that allows you to have a random delay within a range.
+- **Audio Play Clip Action** now allows you to randomize volume and pitch within a range of values every time you play the clip.
+- Messager now send messages through a copy of its source listeners array instead of the actual enumerator. This prevents from modifying the call array at the same frame if a OnMessageEvent becomes disabled during execution.
+
+#### Fixed
+
+- Fixed selection of Call tree window that became broken somehow in 2019.3.0f1
+
 ## 2019.3.1
 
 #### Changed
