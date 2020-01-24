@@ -222,7 +222,6 @@ GameObject:
   - component: {fileID: 4934948669591119556}
   - component: {fileID: 4934948669591119558}
   - component: {fileID: 4934948669591119554}
-  - component: {fileID: 4934948669591119557}
   - component: {fileID: 906300397401733900}
   - component: {fileID: 1583753801577756191}
   - component: {fileID: 2827301205875251309}
@@ -263,7 +262,6 @@ MonoBehaviour:
   OnButtonDown:
   - {fileID: 4934948669591119558}
   - {fileID: 4934948669591119554}
-  - {fileID: 4934948669591119557}
   - {fileID: 906300397401733900}
   - {fileID: 1583753801577756191}
   OnButtonUp: []
@@ -298,7 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0e98867b2173494983582dfb1a01d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: UnityEventAction
+  Name: Disable Turn Pages
   OnExecute:
     m_PersistentCalls:
       m_Calls:
@@ -313,22 +311,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4934948669591119557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4934948669591119673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0e98867b2173494983582dfb1a01d0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: UnityEventAction
-  OnExecute:
-    m_PersistentCalls:
-      m_Calls:
       - m_Target: {fileID: 4934948671064204356}
         m_MethodName: set_enabled
         m_Mode: 6
@@ -402,7 +384,6 @@ GameObject:
   - component: {fileID: 4934948669951271031}
   - component: {fileID: 4934948669951271028}
   - component: {fileID: 4934948669951271026}
-  - component: {fileID: 4934948669951271029}
   - component: {fileID: 7939126659515572150}
   - component: {fileID: 3594232122858926993}
   - component: {fileID: 8040178276521248117}
@@ -464,7 +445,6 @@ MonoBehaviour:
   - {fileID: 3594232122858926993}
   - {fileID: 4934948669951271031}
   - {fileID: 4934948669951271026}
-  - {fileID: 4934948669951271029}
   - {fileID: 7939126659515572150}
   OnButtonUp: []
 --- !u!114 &4934948669951271026
@@ -479,7 +459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0e98867b2173494983582dfb1a01d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: UnityEventAction
+  Name: Enable Turn Pages
   OnExecute:
     m_PersistentCalls:
       m_Calls:
@@ -494,22 +474,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
---- !u!114 &4934948669951271029
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4934948669951271017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0e98867b2173494983582dfb1a01d0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: UnityEventAction
-  OnExecute:
-    m_PersistentCalls:
-      m_Calls:
       - m_Target: {fileID: 4934948671064204356}
         m_MethodName: set_enabled
         m_Mode: 6
@@ -656,7 +620,6 @@ MonoBehaviour:
   direction: -1
   OnDirectionEnter:
   - {fileID: 4934948670344421836}
-  - {fileID: 6577825095816538658}
   OnDirectionLeave: []
 --- !u!114 &6577825095816538658
 MonoBehaviour:
@@ -939,8 +902,12 @@ MonoBehaviour:
     m_Name: Turn Page (Right Side)
   TurnLeftEvent:
     m_Name: TurnLeft
+  OnTurnLeft:
+  - {fileID: 6577825095816538658}
   TurnRightEvent:
     m_Name: TurnRight
+  OnTurnRight:
+  - {fileID: 6577825095816538658}
 --- !u!95 &4934948670979387678
 Animator:
   serializedVersion: 3
@@ -1036,7 +1003,6 @@ MonoBehaviour:
   direction: 1
   OnDirectionEnter:
   - {fileID: 4934948671064204357}
-  - {fileID: 6577825095816538658}
   OnDirectionLeave: []
 --- !u!136 &7819718682311458595
 CapsuleCollider:
@@ -1336,6 +1302,8 @@ MonoBehaviour:
   OnEnableEvent:
   - {fileID: 7819718682218757910}
   - {fileID: 7819718682218757909}
+  - {fileID: 4934948669591119554}
+  - {fileID: 8819866914257307438}
   OnDisableEvent: []
 --- !u!114 &7819718682218757910
 MonoBehaviour:
@@ -1482,6 +1450,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0219af91f351df2429e921b320124912, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8819866914257307438 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7566208726436888347, guid: 31fe177a57b17384a87eb25d2260dcb7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1398055995791128629}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 313f9593d35b2c740928abbd82069aa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3525375743610795064 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2560931952531016717, guid: 31fe177a57b17384a87eb25d2260dcb7,
@@ -1578,15 +1558,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 891f558dbaeff904d8c155a81f7fb131, type: 3}
---- !u!1 &5987759615646432819 stripped
+--- !u!1 &1960945642670377946 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: -4639284787539460588, guid: 891f558dbaeff904d8c155a81f7fb131,
-    type: 3}
-  m_PrefabInstance: {fileID: 7819718680352047143}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &2181304588069947560 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8268807114483828879, guid: 891f558dbaeff904d8c155a81f7fb131,
+  m_CorrespondingSourceObject: {fileID: 8625401648885861373, guid: 891f558dbaeff904d8c155a81f7fb131,
     type: 3}
   m_PrefabInstance: {fileID: 7819718680352047143}
   m_PrefabAsset: {fileID: 0}
@@ -1596,9 +1570,15 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7819718680352047143}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2280182211301972270 stripped
+--- !u!4 &2181304588069947560 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8268807114483828879, guid: 891f558dbaeff904d8c155a81f7fb131,
+    type: 3}
+  m_PrefabInstance: {fileID: 7819718680352047143}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5987759615646432819 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 891f558dbaeff904d8c155a81f7fb131,
+  m_CorrespondingSourceObject: {fileID: -4639284787539460588, guid: 891f558dbaeff904d8c155a81f7fb131,
     type: 3}
   m_PrefabInstance: {fileID: 7819718680352047143}
   m_PrefabAsset: {fileID: 0}
@@ -1608,9 +1588,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7819718680352047143}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1960945642670377946 stripped
+--- !u!1 &2280182211301972270 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 8625401648885861373, guid: 891f558dbaeff904d8c155a81f7fb131,
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 891f558dbaeff904d8c155a81f7fb131,
     type: 3}
   m_PrefabInstance: {fileID: 7819718680352047143}
   m_PrefabAsset: {fileID: 0}

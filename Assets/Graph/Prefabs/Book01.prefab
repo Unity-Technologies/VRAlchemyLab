@@ -823,7 +823,6 @@ MonoBehaviour:
   direction: -1
   OnDirectionEnter:
   - {fileID: 8795821180920236326}
-  - {fileID: 421203842103176826}
   OnDirectionLeave: []
 --- !u!114 &421203842103176826
 MonoBehaviour:
@@ -1103,8 +1102,12 @@ MonoBehaviour:
     m_Name: Turn Page (Right Side)
   TurnLeftEvent:
     m_Name: TurnLeft
+  OnTurnLeft:
+  - {fileID: 421203842103176826}
   TurnRightEvent:
     m_Name: TurnRight
+  OnTurnRight:
+  - {fileID: 421203842103176826}
 --- !u!95 &8795821181425080820
 Animator:
   serializedVersion: 3
@@ -1297,7 +1300,6 @@ MonoBehaviour:
   direction: 1
   OnDirectionEnter:
   - {fileID: 8795821181641985199}
-  - {fileID: 421203842103176826}
   OnDirectionLeave: []
 --- !u!1 &8795821182240324804
 GameObject:
@@ -1620,6 +1622,8 @@ MonoBehaviour:
   OnEnableEvent:
   - {fileID: 8795821182575647133}
   - {fileID: 8795821182575647132}
+  - {fileID: 8314089506250997916}
+  - {fileID: 6742811587295076613}
   OnDisableEvent: []
 --- !u!114 &8795821182575647133
 MonoBehaviour:
@@ -1686,7 +1690,6 @@ GameObject:
   - component: {fileID: 8795821182672341149}
   - component: {fileID: 8795821182672341150}
   - component: {fileID: 8795821182672341144}
-  - component: {fileID: 8795821182672341151}
   - component: {fileID: 8225647076505940762}
   - component: {fileID: 2639579983460430735}
   - component: {fileID: 6547841921218454311}
@@ -1748,7 +1751,6 @@ MonoBehaviour:
   - {fileID: 2639579983460430735}
   - {fileID: 8795821182672341149}
   - {fileID: 8795821182672341144}
-  - {fileID: 8795821182672341151}
   - {fileID: 8225647076505940762}
   OnButtonUp: []
 --- !u!114 &8795821182672341144
@@ -1763,7 +1765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0e98867b2173494983582dfb1a01d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Enable Turn Pages Left
+  Name: Enable Turn Pages
   OnExecute:
     m_PersistentCalls:
       m_Calls:
@@ -1778,22 +1780,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
---- !u!114 &8795821182672341151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8795821182672341123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0e98867b2173494983582dfb1a01d0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Enable Turn Pages Right
-  OnExecute:
-    m_PersistentCalls:
-      m_Calls:
       - m_Target: {fileID: 8795821181641985198}
         m_MethodName: set_enabled
         m_Mode: 6
@@ -1910,6 +1896,8 @@ GameObject:
   - component: {fileID: 885890616493623040}
   - component: {fileID: 7892968945298995843}
   - component: {fileID: 8562500449468573204}
+  - component: {fileID: 5629279934729706323}
+  - component: {fileID: 8314089506250997916}
   m_Layer: 0
   m_Name: ClosePages
   m_TagString: Untagged
@@ -1949,6 +1937,8 @@ MonoBehaviour:
   - {fileID: 8795821182855286312}
   - {fileID: 8795821182855286319}
   - {fileID: 885890616493623040}
+  - {fileID: 5629279934729706323}
+  - {fileID: 8314089506250997916}
   - {fileID: 7892968945298995843}
   OnButtonUp: []
 --- !u!114 &8795821182855286316
@@ -2070,10 +2060,66 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 756d008da58a19e4dbc02fa1e3c84852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: ToggleBehaviourAction
+  Name: Disable Grimoire VFX
   Targets:
   - Behaviour: {fileID: 8795821181425080825}
     State: 0
+--- !u!114 &5629279934729706323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8795821182855286739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 846d5f33f7af4014ea15adf7a92dc953, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Disable Page Turn
+  Targets:
+  - GameObject: {fileID: 8795821180920236324}
+    State: 0
+  - GameObject: {fileID: 8795821181641985197}
+    State: 0
+--- !u!114 &8314089506250997916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8795821182855286739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e98867b2173494983582dfb1a01d0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Disable Turn Pages
+  OnExecute:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8795821180920236325}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8795821181641985198}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &3788606827246607902
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2164,6 +2210,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0219af91f351df2429e921b320124912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6742811587295076613 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7566208726436888347, guid: 31fe177a57b17384a87eb25d2260dcb7,
+    type: 3}
+  m_PrefabInstance: {fileID: 3788606827246607902}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 313f9593d35b2c740928abbd82069aa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1664528512719540755 stripped
