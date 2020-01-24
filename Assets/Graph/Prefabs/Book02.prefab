@@ -280,6 +280,8 @@ MonoBehaviour:
   OnEnableEvent:
   - {fileID: 2384151691184831767}
   - {fileID: 2384151691184831784}
+  - {fileID: 6838993504373638507}
+  - {fileID: 5563044580586994619}
   OnDisableEvent: []
 --- !u!114 &2384151691184831767
 MonoBehaviour:
@@ -543,7 +545,6 @@ GameObject:
   - component: {fileID: 7801722810850997583}
   - component: {fileID: 7801722810850997580}
   - component: {fileID: 7801722810850997578}
-  - component: {fileID: 7801722810850997581}
   - component: {fileID: 5750745848875491011}
   - component: {fileID: 3384534610729551724}
   - component: {fileID: 8468373184111072001}
@@ -605,7 +606,6 @@ MonoBehaviour:
   - {fileID: 3384534610729551724}
   - {fileID: 7801722810850997583}
   - {fileID: 7801722810850997578}
-  - {fileID: 7801722810850997581}
   - {fileID: 5750745848875491011}
   OnButtonUp: []
 --- !u!114 &7801722810850997578
@@ -620,7 +620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0e98867b2173494983582dfb1a01d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: UnityEventAction
+  Name: 'Enable Turn Pages '
   OnExecute:
     m_PersistentCalls:
       m_Calls:
@@ -635,22 +635,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
---- !u!114 &7801722810850997581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7801722810850997585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0e98867b2173494983582dfb1a01d0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: UnityEventAction
-  OnExecute:
-    m_PersistentCalls:
-      m_Calls:
       - m_Target: {fileID: 7801722811952656764}
         m_MethodName: set_enabled
         m_Mode: 6
@@ -732,10 +716,10 @@ GameObject:
   - component: {fileID: 7801722811007726588}
   - component: {fileID: 7801722811007726590}
   - component: {fileID: 7801722811007726586}
-  - component: {fileID: 7801722811007726589}
   - component: {fileID: 4963836004522367027}
   - component: {fileID: 3780486036344353723}
   - component: {fileID: 5113728199930713249}
+  - component: {fileID: 6838993504373638507}
   m_Layer: 0
   m_Name: ClosePages
   m_TagString: Untagged
@@ -773,7 +757,6 @@ MonoBehaviour:
   OnButtonDown:
   - {fileID: 7801722811007726590}
   - {fileID: 7801722811007726586}
-  - {fileID: 7801722811007726589}
   - {fileID: 4963836004522367027}
   - {fileID: 3780486036344353723}
   OnButtonUp: []
@@ -808,7 +791,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0e98867b2173494983582dfb1a01d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: UnityEventAction
+  Name: Disable Turn Pages
   OnExecute:
     m_PersistentCalls:
       m_Calls:
@@ -823,22 +806,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &7801722811007726589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7801722811007726081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0e98867b2173494983582dfb1a01d0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: UnityEventAction
-  OnExecute:
-    m_PersistentCalls:
-      m_Calls:
       - m_Target: {fileID: 7801722811952656764}
         m_MethodName: set_enabled
         m_Mode: 6
@@ -900,6 +867,44 @@ MonoBehaviour:
   Targets:
   - Behaviour: {fileID: 7801722811901125675}
     State: 0
+--- !u!114 &6838993504373638507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7801722811007726081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e98867b2173494983582dfb1a01d0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Disable Turn Pages
+  OnExecute:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7801722811260925175}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7801722811952656764}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7801722811022144260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1470,6 +1475,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0219af91f351df2429e921b320124912, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5563044580586994619 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7566208726436888347, guid: 31fe177a57b17384a87eb25d2260dcb7,
+    type: 3}
+  m_PrefabInstance: {fileID: 2608557447798293664}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 313f9593d35b2c740928abbd82069aa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &556536670820272301 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2560931952531016717, guid: 31fe177a57b17384a87eb25d2260dcb7,
@@ -1639,15 +1656,15 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3277580708268448783}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &978194095353783601 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -6850133288918320834, guid: 0c0e8480e143f424e9b6643ecd8df3c9,
-    type: 3}
-  m_PrefabInstance: {fileID: 3277580708268448783}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1190764228979840856 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4757420202200249513, guid: 0c0e8480e143f424e9b6643ecd8df3c9,
+    type: 3}
+  m_PrefabInstance: {fileID: 3277580708268448783}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &978194095353783601 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6850133288918320834, guid: 0c0e8480e143f424e9b6643ecd8df3c9,
     type: 3}
   m_PrefabInstance: {fileID: 3277580708268448783}
   m_PrefabAsset: {fileID: 0}
