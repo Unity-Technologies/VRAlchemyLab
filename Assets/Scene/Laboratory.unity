@@ -11558,7 +11558,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_ToggleSelect: 0
+  m_SelectActionTrigger: 1
   m_HideControllerOnSelect: 0
   m_PlayAudioClipOnSelectEnter: 0
   m_AudioClipForOnSelectEnter: {fileID: 8300000, guid: 8a637dbbf2e23804fa47557ba567e56a,
@@ -11618,6 +11618,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UpdateTrackingType: 0
   m_EnableInputActions: 1
+  m_PoseProvider: {fileID: 0}
   m_ControllerNode: 4
   m_SelectUsage: 2
   m_ActivateUsage: 2
@@ -12091,7 +12092,7 @@ MonoBehaviour:
   m_OnSelectExit:
     m_PersistentCalls:
       m_Calls: []
-  m_ToggleSelect: 0
+  m_SelectActionTrigger: 1
   m_HideControllerOnSelect: 0
   m_PlayAudioClipOnSelectEnter: 0
   m_AudioClipForOnSelectEnter: {fileID: 0}
@@ -12127,6 +12128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UpdateTrackingType: 0
   m_EnableInputActions: 1
+  m_PoseProvider: {fileID: 0}
   m_ControllerNode: 5
   m_SelectUsage: 3
   m_ActivateUsage: 2
@@ -12355,6 +12357,7 @@ MonoBehaviour:
   m_ThrowVelocityScale: 1.5
   m_ThrowAngularVelocityScale: 0.25
   m_GravityOnDetach: 0
+  m_RetainTransformParent: 1
 --- !u!65 &425021621
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13009,6 +13012,7 @@ MonoBehaviour:
   m_ThrowVelocityScale: 1.5
   m_ThrowAngularVelocityScale: 0.25
   m_GravityOnDetach: 0
+  m_RetainTransformParent: 1
 --- !u!54 &445676316
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -16067,6 +16071,7 @@ MonoBehaviour:
   m_ThrowVelocityScale: 1.5
   m_ThrowAngularVelocityScale: 0.25
   m_GravityOnDetach: 0
+  m_RetainTransformParent: 1
 --- !u!65 &519769688
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19432,8 +19437,8 @@ Transform:
   - {fileID: 1550886743}
   - {fileID: 633566695}
   - {fileID: 1885298329}
-  - {fileID: 1426057668}
   - {fileID: 2147020636}
+  - {fileID: 1426057668}
   - {fileID: 2054394253}
   m_Father: {fileID: 295485966}
   m_RootOrder: 1
@@ -20749,7 +20754,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  m_ToggleSelect: 0
+  m_SelectActionTrigger: 1
   m_HideControllerOnSelect: 0
   m_PlayAudioClipOnSelectEnter: 0
   m_AudioClipForOnSelectEnter: {fileID: 8300000, guid: 8a637dbbf2e23804fa47557ba567e56a,
@@ -20807,6 +20812,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UpdateTrackingType: 0
   m_EnableInputActions: 1
+  m_PoseProvider: {fileID: 0}
   m_ControllerNode: 4
   m_SelectUsage: 2
   m_ActivateUsage: 2
@@ -28483,6 +28489,7 @@ MonoBehaviour:
   m_ThrowVelocityScale: 1.5
   m_ThrowAngularVelocityScale: 0.25
   m_GravityOnDetach: 0
+  m_RetainTransformParent: 1
 --- !u!54 &876543514
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -28592,6 +28599,7 @@ MonoBehaviour:
   m_ThrowVelocityScale: 1.5
   m_ThrowAngularVelocityScale: 0.25
   m_GravityOnDetach: 0
+  m_RetainTransformParent: 1
 --- !u!54 &876682705
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -28641,26 +28649,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1324704110}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &877072810 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7659932732642483106, guid: 14d6b4dfb9d66a9408968606af8046be,
-    type: 3}
-  m_PrefabInstance: {fileID: 3237188779210450589}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &877072813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 877072810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03dad04ec4c0a5a42a8c5708efc7c4ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Decay: 1
-  ShakeForce: 1
 --- !u!1 &880445151 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 652e3526f12839f40a25d542d5da614e,
@@ -31212,6 +31200,7 @@ MonoBehaviour:
   m_ThrowVelocityScale: 1.5
   m_ThrowAngularVelocityScale: 0.25
   m_GravityOnDetach: 0
+  m_RetainTransformParent: 1
 --- !u!136 &962843343
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -33051,6 +33040,7 @@ MonoBehaviour:
   m_ThrowVelocityScale: 1.5
   m_ThrowAngularVelocityScale: 0.25
   m_GravityOnDetach: 0
+  m_RetainTransformParent: 1
 --- !u!4 &1024816387 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: f3403a714ad960045b859cac239146ab,
@@ -33535,36 +33525,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.49870256, y: 0.5002789, z: 0.5022284}
   m_Center: {x: 0.00023493914, y: -0.0001374334, z: 0.0006426722}
---- !u!1 &1055069874
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1055069875}
-  m_Layer: 9
-  m_Name: AttachPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1055069875
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1055069874}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.2026, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1901483310}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1056066838
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34303,6 +34263,7 @@ MonoBehaviour:
   m_ThrowVelocityScale: 1.5
   m_ThrowAngularVelocityScale: 0.25
   m_GravityOnDetach: 0
+  m_RetainTransformParent: 1
 --- !u!65 &1067230388
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -43703,6 +43664,7 @@ MonoBehaviour:
   m_ThrowVelocityScale: 1.5
   m_ThrowAngularVelocityScale: 0.25
   m_GravityOnDetach: 0
+  m_RetainTransformParent: 1
 --- !u!1001 &1344938092
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45667,6 +45629,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf14a19557e47054b85358261f0a0be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ActivationButtons: 06000000
+  m_DeactivationButtons: 08000000
   m_LeftBaseController: {fileID: 648131462}
   m_LeftTeleportController: {fileID: 387195722}
   m_RightBaseController: {fileID: 0}
@@ -45686,7 +45650,8 @@ MonoBehaviour:
   m_RigBaseGameObject: {fileID: 1395181926}
   m_CameraFloorOffsetObject: {fileID: 1532147180}
   m_CameraGameObject: {fileID: 498493265}
-  m_TrackingSpace: 0
+  m_TrackingOriginMode: 1
+  m_TrackingSpace: 3
   m_CameraYOffset: 1.6
 --- !u!1001 &1395296361
 PrefabInstance:
@@ -54454,6 +54419,7 @@ MonoBehaviour:
   m_ThrowVelocityScale: 1.5
   m_ThrowAngularVelocityScale: 0.25
   m_GravityOnDetach: 0
+  m_RetainTransformParent: 1
 --- !u!136 &1665489305
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -59885,12 +59851,6 @@ Transform:
   m_Father: {fileID: 149682553}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1901483310 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7608403610117509613, guid: 14d6b4dfb9d66a9408968606af8046be,
-    type: 3}
-  m_PrefabInstance: {fileID: 3237188779210450589}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1901984342 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4133950177787911851, guid: f3403a714ad960045b859cac239146ab,
@@ -65903,6 +65863,7 @@ MonoBehaviour:
   m_ThrowVelocityScale: 1.5
   m_ThrowAngularVelocityScale: 0.25
   m_GravityOnDetach: 0
+  m_RetainTransformParent: 1
 --- !u!54 &2104112709
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -70918,6 +70879,31 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 7059329616302481545, guid: 14d6b4dfb9d66a9408968606af8046be,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7059329616302481545, guid: 14d6b4dfb9d66a9408968606af8046be,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7059329616302481545, guid: 14d6b4dfb9d66a9408968606af8046be,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7059329616302481545, guid: 14d6b4dfb9d66a9408968606af8046be,
+        type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7059329616302481545, guid: 14d6b4dfb9d66a9408968606af8046be,
+        type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7329684912320034408, guid: 14d6b4dfb9d66a9408968606af8046be,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -70997,7 +70983,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AttachTransform
       value: 
-      objectReference: {fileID: 1055069875}
+      objectReference: {fileID: 0}
     - target: {fileID: 7804911890524761187, guid: 14d6b4dfb9d66a9408968606af8046be,
         type: 3}
       propertyPath: m_GravityOnDetach
@@ -71091,85 +71077,6 @@ PrefabInstance:
     - {fileID: 6971896298692928814, guid: 14d6b4dfb9d66a9408968606af8046be, type: 3}
     - {fileID: 7804911890524761187, guid: 14d6b4dfb9d66a9408968606af8046be, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 14d6b4dfb9d66a9408968606af8046be, type: 3}
---- !u!1 &3237188779210450590 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6903212412754486270, guid: 14d6b4dfb9d66a9408968606af8046be,
-    type: 3}
-  m_PrefabInstance: {fileID: 3237188779210450589}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3237188779210450591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3237188779210450590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_InteractionManager: {fileID: 0}
-  m_Colliders: []
-  m_InteractionLayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_OnFirstHoverEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnHoverEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnHoverExit:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnLastHoverExit:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnSelectEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnSelectExit:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnActivate:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnDeactivate:
-    m_PersistentCalls:
-      m_Calls: []
-  m_CustomReticle: {fileID: 0}
-  m_AttachTransform: {fileID: 1055069875}
-  m_AttachEaseInTime: 0.15
-  m_MovementType: 1
-  m_TrackPosition: 1
-  m_SmoothPosition: 0
-  m_SmoothPositionAmount: 5
-  m_TightenPosition: 0.5
-  m_TrackRotation: 1
-  m_SmoothRotation: 0
-  m_SmoothRotationAmount: 5
-  m_TightenRotation: 0.5
-  m_ThrowOnDetach: 1
-  m_ThrowSmoothingDuration: 0.25
-  m_ThrowSmoothingCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  m_ThrowVelocityScale: 1.5
-  m_ThrowAngularVelocityScale: 0.25
-  m_GravityOnDetach: 0
 --- !u!4 &3366117171222457381 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6293478274147093981, guid: 710f52dc6f239134bada7b3ba22d3223,
