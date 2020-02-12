@@ -42,7 +42,7 @@ The teleport area limits are defined by a blue smoke on the ground.
 
 The teleport action is controlled by the A button on the left controller. The player has to focus the point where he wants to teleport while he press the A button and he uses the trigger button to activate the teleport.
 
-![Teleport](Documentation/Images/teleport.png)
+![Teleport](Documentation/Images/Teleport.png)
 
 ### Grab
 
@@ -50,11 +50,11 @@ The distance grab is the default mode for the left controller. It allows you to 
 
 When the ray aims at a grabbable object, a Visual Effect is shown and a sound can be hear.
 
-![Grab](Documentation/Images/grab.png)
+![Grab](Documentation/Images/Grab.png)
 
 The direct grab is controlled by the grip button of the right controller.
 
-![Direct Grab](Documentation/Images/directgrab.png)
+![Direct Grab](Documentation/Images/DirectGrab.png)
 
 # Interactive objects
 
