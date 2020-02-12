@@ -1,3 +1,2 @@
-# VR High Definition Render Pipeline Project Template
+# VR High Definition Render Pipeline Project
 
-TODO ( guidelines: https://github.cds.internal.unity3d.com/unity/com.unity.template-starter-kit )
