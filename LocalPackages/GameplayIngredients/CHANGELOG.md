@@ -1,6 +1,40 @@
 # Changelog
 
-## 2019.3.2
+## 2019.3.5
+
+#### Added
+
+- Discover : Tag Filtering System
+- Discover : Images in Discover Window
+
+## 2019.3.4
+
+This version added the following package dependencies:
+
+* Cinemachine 2.5.0 
+* Timeline 1.3.0
+
+#### Added
+
+* Preferences for Advanced Hierarchy View
+* Added API to AdvancedHierarchyView to add other Icons from component types
+* Help Menu links (github, documentation, openUPM)
+* Added support for SceneAsset and EditorSceneSetup in Discover
+* Added an option to change the Game View Link camera behavior to Cinemachine Brain preview.
+
+#### Changed
+
+* Game Save manager now saves to the Application.persistentDataPath folder
+* Renamed HierarchyHints to AdvancedHierarchyView + Changed behaviour to apply visibility from preferences
+* Managers: Adjusted RuntimeInitializeOnLoad for new Quick Enter Play Mode Settings
+* Updated Starter Packages for Built-in RP, HDRP and URP (removed LWRP)
+
+#### Fixed
+
+* Fixed FocusUIAction that did not update the focus of a button in certain conditions.
+* Fixed possible null in discover components
+
+## 2019.3.3
 
 #### Added
 
@@ -11,9 +45,19 @@
 
 #### Changed
 
+- Messager now send messages through a copy of its source listeners array instead of the actual enumerator. This prevents from modifying the call array at the same frame if a OnMessageEvent becomes disabled during execution.
+- Changed SceneViewToolbar Accessibility (now public to give access to OnSceneViewToolbarGUI)
+
+#### Fixed
+
+- Fixes in changelog (bad changes in 2019.3.2)
+
+## 2019.3.2
+
+#### Changed
+
 - **Delayed Logic** now has a mode that allows you to have a random delay within a range.
 - **Audio Play Clip Action** now allows you to randomize volume and pitch within a range of values every time you play the clip.
-- Messager now send messages through a copy of its source listeners array instead of the actual enumerator. This prevents from modifying the call array at the same frame if a OnMessageEvent becomes disabled during execution.
 
 #### Fixed
 

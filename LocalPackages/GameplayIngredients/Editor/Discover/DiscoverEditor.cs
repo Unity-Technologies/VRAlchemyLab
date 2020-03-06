@@ -72,12 +72,24 @@ namespace GameplayIngredients.Editor
 
                 GUILayout.Space(8);
 
+                if (discover.image != null)
+                {
+                    DrawImage(discover.image);
+                }
+
                 foreach (var section in discover.Sections)
                 {
                     SectionGUI(section);
                     GUILayout.Space(16);
                 }
             }
+        }
+
+        public static void DrawImage(Texture texture)
+        {
+            float aspect = (float)texture.width / texture.height;
+            var rect = GUILayoutUtility.GetAspectRect(aspect);
+            GUI.DrawTexture(rect, texture, ScaleMode.ScaleToFit, false);
         }
 
         public static void SectionGUI(DiscoverSection section)
@@ -87,6 +99,11 @@ namespace GameplayIngredients.Editor
                 using (new GUILayout.VerticalScope(DiscoverWindow.Styles.slightIndent))
                 {
                     GUILayout.Label(section.SectionContent, DiscoverWindow.Styles.body);
+
+                    if(section.image != null)
+                    {
+                        DrawImage(section.image);
+                    }
 
                     if (section.Actions != null && section.Actions.Length > 0)
                     {
@@ -200,6 +217,22 @@ namespace GameplayIngredients.Editor
                 {
                     Shader shader = target as Shader;
                     AssetDatabase.OpenAsset(shader);
+                }
+            }
+            else if (t == typeof(SceneAsset))
+            {
+                if (GUILayout.Button("Open Scene"))
+                {
+                    SceneAsset scene = target as SceneAsset;
+                    AssetDatabase.OpenAsset(scene);
+                }
+            }
+            else if (t == typeof(EditorSceneSetup))
+            {
+                if (GUILayout.Button("Open Scenes"))
+                {
+                    EditorSceneSetup scene = target as EditorSceneSetup;
+                    AssetDatabase.OpenAsset(scene);
                 }
             }
             else

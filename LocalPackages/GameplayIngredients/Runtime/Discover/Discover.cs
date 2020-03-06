@@ -11,11 +11,16 @@ public class Discover : MonoBehaviour
     public bool DefaultSelected = false;
     public bool AlignViewToTransform = false;
 
-    public GameObjectToggle[] ObjectsToToggle;
+#if UNITY_EDITOR
+    public Texture2D image;
+#endif
+
+    public GameObjectToggle[] ObjectsToToggle = new GameObjectToggle[0];
     [Multiline]
     public string Description = "Some Description of the Component\n\nCan be set as multiple lines.";
+    public string Tags = "";
     public int Priority = 0;
-    public DiscoverSection[] Sections;
+    public DiscoverSection[] Sections = new DiscoverSection[0];
 
 #if UNITY_EDITOR
     [UnityEditor.MenuItem("GameObject/Gameplay Ingredients/Discover", priority=10)]
@@ -39,6 +44,9 @@ public class Discover : MonoBehaviour
 public struct DiscoverSection
 {
     public string SectionName;
+#if UNITY_EDITOR
+    public Texture2D image;
+#endif
     [Multiline]
     public string SectionContent;
     public SectionAction[] Actions;
