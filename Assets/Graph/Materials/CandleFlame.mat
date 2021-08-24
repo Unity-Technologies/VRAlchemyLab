@@ -10,7 +10,7 @@ Material:
   m_Name: CandleFlame
   m_Shader: {fileID: -6465566751694194690, guid: e19812a1a8ae45345801ba67028de760,
     type: 3}
-  m_ShaderKeywords: _BLENDMODE_ALPHA _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
+  m_ShaderKeywords: _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -19,9 +19,10 @@ Material:
     MotionVector: User
     RenderType: Transparent
   disabledShaderPasses:
-  - DistortionVectors
-  - MOTIONVECTORS
   - TransparentBackface
+  - MOTIONVECTORS
+  - TransparentDepthPrepass
+  - TransparentDepthPostpass
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -85,7 +86,15 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2DLOD_2ed6bdec5929388f90cd0bddcaa17ba9_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 2965d09064f956e43a69e4722536ec7b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2DLOD_CA7D6B1F_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 2965d09064f956e43a69e4722536ec7b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_5a46664c299a0b8eb1ec404a4ce298c8_Texture_1:
         m_Texture: {fileID: 2800000, guid: 2965d09064f956e43a69e4722536ec7b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -121,10 +130,24 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
+    - _AddPrecomputedVelocity: 0
     - _AlbedoAffectEmissive: 0
     - _AlphaCutoff: 0.5
     - _AlphaCutoffEnable: 0
@@ -133,9 +156,12 @@ Material:
     - _AlphaCutoffShadow: 0.5
     - _AlphaDstBlend: 10
     - _AlphaSrcBlend: 1
+    - _AlphaToMask: 0
+    - _AlphaToMaskInspectorValue: 0
     - _Anisotropy: 0
     - _BlendMode: 0
     - _CoatMask: 0
+    - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 2
     - _CullModeForward: 2
     - _Cutoff: 0.5
@@ -164,6 +190,7 @@ Material:
     - _DistortionVectorBias: -1
     - _DistortionVectorScale: 2
     - _DoubleSidedEnable: 0
+    - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 1
     - _Drag: 1
     - _DstBlend: 10
@@ -171,7 +198,7 @@ Material:
     - _EmissiveExposureWeight: 1
     - _EmissiveIntensity: 421.77
     - _EmissiveIntensityUnit: 0
-    - _EnableBlendModePreserveSpecularLighting: 1
+    - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
     - _EnableGeometricSpecularAA: 0
     - _EnableMotionVectorForVertexAnimation: 0
@@ -199,6 +226,7 @@ Material:
     - _Metallic: 0
     - _NormalMapSpace: 0
     - _NormalScale: 1
+    - _OpaqueCullMode: 2
     - _PPDLodThreshold: 5
     - _PPDMaxSamples: 15
     - _PPDMinSamples: 5
@@ -206,7 +234,7 @@ Material:
     - _PPDPrimitiveWidth: 1
     - _ReceivesSSR: 1
     - _RefractionModel: 0
-    - _RenderQueueType: 5
+    - _RenderQueueType: 4
     - _RequireSplitLighting: 0
     - _SSRefractionProjectionModel: 0
     - _ShiverDirectionality: 0.5
@@ -229,7 +257,6 @@ Material:
     - _StencilWriteMaskMV: 40
     - _Stiffness: 1
     - _SubsurfaceMask: 1
-    - _SupportDecals: 1
     - _SurfaceType: 1
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
@@ -241,6 +268,7 @@ Material:
     - _TransparentDepthPostpassEnable: 0
     - _TransparentDepthPrepassEnable: 0
     - _TransparentSortPriority: 0
+    - _TransparentWritingMotionVec: 0
     - _TransparentWritingVelocity: 0
     - _TransparentZWrite: 1
     - _UVBase: 0
@@ -271,6 +299,7 @@ Material:
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
     - _UnlitColor: {r: 1, g: 0.9564925, b: 0.7028302, a: 0.90588236}
+  m_BuildTextureStacks: []
 --- !u!114 &4621252561383692957
 MonoBehaviour:
   m_ObjectHideFlags: 11
@@ -283,4 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 2
+  version: 12
+  hdPluginSubTargetMaterialVersions:
+    m_Keys: []
+    m_Values: 

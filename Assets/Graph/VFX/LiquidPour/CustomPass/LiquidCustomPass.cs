@@ -3,6 +3,7 @@ using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.Rendering;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.Profiling;
+using UnityEngine.Rendering.RendererUtils;
 
 class LiquidCustomPass : CustomPass
 {
@@ -58,13 +59,13 @@ class LiquidCustomPass : CustomPass
 
     }
 
-    protected override void Execute(ScriptableRenderContext renderContext, CommandBuffer cmd, HDCamera hdCamera, CullingResults cullingResult)
+    protected override void Execute(CustomPassContext ctx)
     {
-        hdCamera.camera.TryGetCullingParameters(out var cullingParams);
+        ctx.hdCamera.camera.TryGetCullingParameters(out var cullingParams);
         cullingParams.cullingMask = (uint)1 << LayerMask.NameToLayer("Liquid") ;
-        cullingResult = renderContext.Cull(ref cullingParams);
+        ctx.cullingResults = ctx.renderContext.Cull(ref cullingParams);
 
-        var result = new RendererListDesc(shaderTags, cullingResult, hdCamera.camera)
+        var result = new RendererListDesc(shaderTags, ctx.cullingResults, ctx.hdCamera.camera)
         {
             rendererConfiguration = PerObjectData.None,
             renderQueueRange = RenderQueueRange.all,
@@ -73,9 +74,9 @@ class LiquidCustomPass : CustomPass
             layerMask = 1 << LayerMask.NameToLayer("Liquid"),
         };
 
-
-        HDUtils.DrawRendererList(renderContext, cmd, RendererList.Create(result));
-        GenerateGaussianMips(cmd, hdCamera);
+        CustomPassUtils.DrawRenderers(ctx, LayerMask.GetMask("Liquid"));
+        //CoreUtils.DrawRendererList(ctx.renderContext, ctx.cmd, RendererList.Create(result));
+        GenerateGaussianMips(ctx);
 
 
     }
@@ -89,29 +90,29 @@ class LiquidCustomPass : CustomPass
     }
     
     
-    void GenerateGaussianMips(CommandBuffer cmd, HDCamera hdCam)
+    void GenerateGaussianMips(CustomPassContext ctx)
     {
-        GetCustomBuffers(out var customColorBuffer, out var _);
+        //GetCustomBuffers(out var customColorBuffer, out var _);
 
         // Downsample
-        using (new ProfilingSample(cmd, "Downsample", CustomSampler.Create("Downsample")))
+        using (new ProfilingSample(ctx.cmd, "Downsample", CustomSampler.Create("Downsample")))
         {
             // This Blit will automatically downsample the color because our target buffer have been allocated in half resolution
-            HDUtils.BlitCameraTexture(cmd, customColorBuffer, downSampleBuffer,0, true);
+            HDUtils.BlitCameraTexture(ctx.cmd, ctx.customColorBuffer.Value, downSampleBuffer,0, true);
         }
 
         // Horizontal Blur
-        using (new ProfilingSample(cmd, "H Blur", CustomSampler.Create("H Blur")))
+        using (new ProfilingSample(ctx.cmd, "H Blur", CustomSampler.Create("H Blur")))
         {
             var hBlurProperties = new MaterialPropertyBlock();
             hBlurProperties.SetFloat(ShaderID._Radius, radius / 4.0f); // The blur is 4 pixel wide in the shader
             hBlurProperties.SetTexture(ShaderID._Source, downSampleBuffer); // The blur is 4 pixel wide in the shader
-            SetViewPortSize(cmd, hBlurProperties, blurBuffer);
-            HDUtils.DrawFullScreen(cmd, blurMaterial, blurBuffer, hBlurProperties, shaderPassId: 0); // Do not forget the shaderPassId: ! or it won't work
+            SetViewPortSize(ctx.cmd, hBlurProperties, blurBuffer);
+            HDUtils.DrawFullScreen(ctx.cmd, blurMaterial, blurBuffer, hBlurProperties, shaderPassId: 0); // Do not forget the shaderPassId: ! or it won't work
         }
 
         // Copy back the result in the color buffer while doing a vertical blur
-        using (new ProfilingSample(cmd, "V Blur + Copy back", CustomSampler.Create("V Blur + Copy back")))
+        using (new ProfilingSample(ctx.cmd, "V Blur + Copy back", CustomSampler.Create("V Blur + Copy back")))
         {
             var vBlurProperties = new MaterialPropertyBlock();
             // When we use a mask, we do the vertical blur into the downsampling buffer instead of the camera buffer
@@ -119,8 +120,8 @@ class LiquidCustomPass : CustomPass
             // if they are in the same buffer
             vBlurProperties.SetFloat(ShaderID._Radius, radius / 4.0f); // The blur is 4 pixel wide in the shader
             vBlurProperties.SetTexture(ShaderID._Source, blurBuffer);
-            SetViewPortSize(cmd, vBlurProperties, customColorBuffer);
-            HDUtils.DrawFullScreen(cmd, blurMaterial, customColorBuffer, vBlurProperties, shaderPassId: 1); // Do not forget the shaderPassId: ! or it won't work
+            SetViewPortSize(ctx.cmd, vBlurProperties, ctx.customColorBuffer.Value);
+            HDUtils.DrawFullScreen(ctx.cmd, blurMaterial, ctx.customColorBuffer.Value, vBlurProperties, shaderPassId: 1); // Do not forget the shaderPassId: ! or it won't work
         }
        
     }

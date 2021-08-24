@@ -13,31 +13,21 @@ MonoBehaviour:
   m_Name: ColorAdjustments
   m_EditorClassIdentifier: 
   active: 1
-  m_AdvancedMode: 0
   postExposure:
     m_OverrideState: 0
     m_Value: 0
   contrast:
     m_OverrideState: 0
     m_Value: 0
-    min: -100
-    max: 100
   colorFilter:
     m_OverrideState: 1
     m_Value: {r: 0, g: 0.84315085, b: 1, a: 1}
-    hdr: 1
-    showAlpha: 0
-    showEyeDropper: 1
   hueShift:
     m_OverrideState: 0
     m_Value: 0
-    min: -180
-    max: 180
   saturation:
     m_OverrideState: 0
     m_Value: 0
-    min: -100
-    max: 100
 --- !u!114 &-6758168560079763708
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -51,7 +41,6 @@ MonoBehaviour:
   m_Name: DepthOfField
   m_EditorClassIdentifier: 
   active: 1
-  m_AdvancedMode: 1
   quality:
     m_OverrideState: 1
     m_Value: 3
@@ -61,49 +50,42 @@ MonoBehaviour:
   focusDistance:
     m_OverrideState: 0
     m_Value: 10
-    min: 0.1
+  focusDistanceMode:
+    m_OverrideState: 0
+    m_Value: 0
   nearFocusStart:
     m_OverrideState: 1
     m_Value: 0
-    min: 0
   nearFocusEnd:
     m_OverrideState: 1
     m_Value: 0
-    min: 0
   farFocusStart:
     m_OverrideState: 1
     m_Value: 0.01
-    min: 0
   farFocusEnd:
     m_OverrideState: 1
     m_Value: 0.5
-    min: 0
   m_NearSampleCount:
     m_OverrideState: 0
     m_Value: 5
-    min: 3
-    max: 8
   m_NearMaxBlur:
     m_OverrideState: 0
     m_Value: 4
-    min: 0
-    max: 8
   m_FarSampleCount:
     m_OverrideState: 1
     m_Value: 7
-    min: 3
-    max: 16
   m_FarMaxBlur:
     m_OverrideState: 1
     m_Value: 6
-    min: 0
-    max: 16
-  m_HighQualityFiltering:
-    m_OverrideState: 0
-    m_Value: 1
   m_Resolution:
     m_OverrideState: 1
     m_Value: 2
+  m_HighQualityFiltering:
+    m_OverrideState: 0
+    m_Value: 1
+  m_PhysicallyBased:
+    m_OverrideState: 0
+    m_Value: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,35 +115,36 @@ MonoBehaviour:
   m_Name: MotionBlur
   m_EditorClassIdentifier: 
   active: 0
-  m_AdvancedMode: 0
   quality:
     m_OverrideState: 0
     m_Value: 1
   intensity:
     m_OverrideState: 1
     m_Value: 4
-    min: 0
   maximumVelocity:
     m_OverrideState: 0
     m_Value: 200
-    min: 0
-    max: 1500
   minimumVelocity:
     m_OverrideState: 0
     m_Value: 2
-    min: 0
-    max: 64
+  cameraMotionBlur:
+    m_OverrideState: 0
+    m_Value: 1
+  specialCameraClampMode:
+    m_OverrideState: 0
+    m_Value: 0
+  cameraVelocityClamp:
+    m_OverrideState: 0
+    m_Value: 0.05
+  cameraTranslationVelocityClamp:
+    m_OverrideState: 0
+    m_Value: 0.05
   cameraRotationVelocityClamp:
     m_OverrideState: 0
     m_Value: 0.03
-    min: 0
-    max: 0.2
   depthComparisonExtent:
     m_OverrideState: 0
     m_Value: 1
-    min: 0
-    max: 20
   m_SampleCount:
     m_OverrideState: 0
     m_Value: 8
-    min: 2

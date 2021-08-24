@@ -10,7 +10,7 @@ Material:
   m_Name: MetalNoDecal
   m_Shader: {fileID: -6465566751694194690, guid: 79f8b3a756d08f5418a39d8bacda7ae1,
     type: 3}
-  m_ShaderKeywords: _DOUBLESIDED_ON
+  m_ShaderKeywords: _DISABLE_DECALS _DISABLE_SSR_TRANSPARENT _DOUBLESIDED_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
@@ -18,11 +18,12 @@ Material:
   stringTagMap:
     MotionVector: User
   disabledShaderPasses:
-  - DistortionVectors
+  - TransparentBackface
   - MOTIONVECTORS
   - TransparentDepthPrepass
   - TransparentDepthPostpass
-  - TransparentBackface
+  - RayTracingPrepass
+  - ForwardEmissiveForDeferred
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -114,6 +115,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 8b3ea3c268836ad45aebf516202ed223, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_20e4dc1ea7e32e88aab51bdf32dbb142_Out_0:
+        m_Texture: {fileID: 2800000, guid: 8b3ea3c268836ad45aebf516202ed223, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _ThicknessMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -126,10 +131,28 @@ Material:
         m_Texture: {fileID: 2800000, guid: dd830ad39d23c4146acd3f59dc85d249, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Triplanar_cc44b72d66c110848b1cca44226fce22_Texture_1:
+        m_Texture: {fileID: 2800000, guid: dd830ad39d23c4146acd3f59dc85d249, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
+    - _AddPrecomputedVelocity: 0
     - _AlbedoAffectEmissive: 0
     - _AlphaCutoff: 0.5
     - _AlphaCutoffEnable: 0
@@ -138,9 +161,12 @@ Material:
     - _AlphaCutoffShadow: 0.5
     - _AlphaDstBlend: 0
     - _AlphaSrcBlend: 1
+    - _AlphaToMask: 0
+    - _AlphaToMaskInspectorValue: 0
     - _Anisotropy: 0
     - _BlendMode: 0
     - _CoatMask: 0
+    - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 0
     - _CullModeForward: 0
     - _Cutoff: 0.5
@@ -168,6 +194,7 @@ Material:
     - _DistortionVectorBias: -1
     - _DistortionVectorScale: 2
     - _DoubleSidedEnable: 1
+    - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 1
     - _Drag: 1
     - _DstBlend: 0
@@ -182,6 +209,7 @@ Material:
     - _EnableSpecularOcclusion: 0
     - _EnableWind: 0
     - _EnergyConservingSpecularColor: 1
+    - _ForceForwardEmissive: 0
     - _HdrpVersion: 2
     - _HeightAmplitude: 0.02
     - _HeightCenter: 0.5
@@ -202,12 +230,15 @@ Material:
     - _Metallic: 1
     - _NormalMapSpace: 0
     - _NormalScale: 1
+    - _OpaqueCullMode: 2
     - _PPDLodThreshold: 5
     - _PPDMaxSamples: 15
     - _PPDMinSamples: 5
     - _PPDPrimitiveLength: 1
     - _PPDPrimitiveWidth: 1
+    - _RayTracing: 0
     - _ReceivesSSR: 1
+    - _ReceivesSSRTransparent: 0
     - _RefractionModel: 0
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
@@ -232,7 +263,7 @@ Material:
     - _StencilWriteMaskMV: 40
     - _Stiffness: 1
     - _SubsurfaceMask: 1
-    - _SupportDecals: 1
+    - _SupportDecals: 0
     - _SurfaceType: 0
     - _TexWorldScale: 2
     - _TexWorldScaleEmissive: 1
@@ -275,6 +306,7 @@ Material:
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 0, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
 --- !u!114 &857698605707264201
 MonoBehaviour:
   m_ObjectHideFlags: 11
@@ -287,4 +319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 2
+  version: 12
+  hdPluginSubTargetMaterialVersions:
+    m_Keys: []
+    m_Values: 

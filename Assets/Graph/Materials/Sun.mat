@@ -10,16 +10,20 @@ Material:
   m_Name: Sun
   m_Shader: {fileID: -6465566751694194690, guid: fa9fe1332bc02e5488acdeb7607029c9,
     type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: _DISABLE_SSR_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: 2225
   stringTagMap:
     MotionVector: User
   disabledShaderPasses:
   - MOTIONVECTORS
   - TransparentBackface
+  - TransparentDepthPrepass
+  - TransparentDepthPostpass
+  - RayTracingPrepass
+  - ForwardEmissiveForDeferred
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -87,7 +91,15 @@ Material:
         m_Texture: {fileID: 2800000, guid: f13f11d7027df0742a18a0eb77b93d56, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2DLOD_7304ad8e5bb198879d67c79a4b5c046e_Texture_1:
+        m_Texture: {fileID: 2800000, guid: f13f11d7027df0742a18a0eb77b93d56, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2DLOD_B2784A2B_Texture_1:
+        m_Texture: {fileID: 2800000, guid: f13f11d7027df0742a18a0eb77b93d56, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2DLOD_e1b949e731d33d8c9f2c39f5928f50a4_Texture_1:
         m_Texture: {fileID: 2800000, guid: f13f11d7027df0742a18a0eb77b93d56, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -99,12 +111,24 @@ Material:
         m_Texture: {fileID: 2800000, guid: 32355f3ede4f4a34bb6547c53f01b6cb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_96bd6655c784e681ad67a478adc91b09_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 32355f3ede4f4a34bb6547c53f01b6cb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_A7F7F887_Texture_1:
         m_Texture: {fileID: 2800000, guid: 32355f3ede4f4a34bb6547c53f01b6cb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_D4ECB934_Texture_1:
         m_Texture: {fileID: 2800000, guid: 32355f3ede4f4a34bb6547c53f01b6cb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_b075b900352306829ef3d7c91e0ca08d_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 32355f3ede4f4a34bb6547c53f01b6cb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_bc97f9e55e834c82929fcec461e9586d_Texture_1:
+        m_Texture: {fileID: 2800000, guid: f13f11d7027df0742a18a0eb77b93d56, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecularColorMap:
@@ -131,12 +155,26 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - Vector1_BF1266FD: 0.035
     - Vector1_C785E5F9: 30
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
+    - _AddPrecomputedVelocity: 0
     - _AlbedoAffectEmissive: 0
     - _AlphaCutoff: 0.5
     - _AlphaCutoffEnable: 0
@@ -145,9 +183,12 @@ Material:
     - _AlphaCutoffShadow: 0.5
     - _AlphaDstBlend: 0
     - _AlphaSrcBlend: 1
+    - _AlphaToMask: 0
+    - _AlphaToMaskInspectorValue: 0
     - _Anisotropy: 0
     - _BlendMode: 0
     - _CoatMask: 0
+    - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 2
     - _CullModeForward: 2
     - _Cutoff: 0.5
@@ -175,6 +216,7 @@ Material:
     - _DistortionVectorBias: -1
     - _DistortionVectorScale: 2
     - _DoubleSidedEnable: 0
+    - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 1
     - _DstBlend: 0
     - _EmissiveColorMode: 1
@@ -186,6 +228,7 @@ Material:
     - _EnableGeometricSpecularAA: 0
     - _EnableSpecularOcclusion: 0
     - _EnergyConservingSpecularColor: 1
+    - _ForceForwardEmissive: 0
     - _HdrpVersion: 2
     - _HeightAmplitude: 0.02
     - _HeightCenter: 0.5
@@ -205,12 +248,15 @@ Material:
     - _Metallic: 0
     - _NormalMapSpace: 0
     - _NormalScale: 1
+    - _OpaqueCullMode: 2
     - _PPDLodThreshold: 5
     - _PPDMaxSamples: 15
     - _PPDMinSamples: 5
     - _PPDPrimitiveLength: 1
     - _PPDPrimitiveWidth: 1
+    - _RayTracing: 0
     - _ReceivesSSR: 1
+    - _ReceivesSSRTransparent: 0
     - _RefractionModel: 0
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
@@ -273,6 +319,7 @@ Material:
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
 --- !u!114 &8909378854085468989
 MonoBehaviour:
   m_ObjectHideFlags: 11
@@ -285,4 +332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 2
+  version: 12
+  hdPluginSubTargetMaterialVersions:
+    m_Keys: []
+    m_Values: 

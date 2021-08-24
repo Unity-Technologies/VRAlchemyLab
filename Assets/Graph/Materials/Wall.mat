@@ -9,13 +9,13 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Wall
   m_Shader: {fileID: 4800000, guid: 756bac9090102564582875f4c7e30202, type: 3}
-  m_ShaderKeywords: _BENTNORMALMAP _DISPLACEMENT_LOCK_TILING_SCALE _HEIGHTMAP _MASKMAP
-    _NORMALMAP _NORMALMAP_TANGENT_SPACE _SPECULAR_OCCLUSION_FROM_BENT_NORMAL_MAP
+  m_ShaderKeywords: _BENTNORMALMAP _DISABLE_SSR_TRANSPARENT _DISPLACEMENT_LOCK_TILING_SCALE
+    _HEIGHTMAP _MASKMAP _NORMALMAP _NORMALMAP_TANGENT_SPACE _SPECULAR_OCCLUSION_FROM_BENT_NORMAL_MAP
     _TESSELLATION_DISPLACEMENT _VERTEX_DISPLACEMENT_LOCK_OBJECT_SCALE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: 2225
   stringTagMap: {}
   disabledShaderPasses:
   - DistortionVectors
@@ -23,6 +23,8 @@ Material:
   - TransparentDepthPrepass
   - TransparentDepthPostpass
   - TransparentBackface
+  - RayTracingPrepass
+  - ForwardEmissiveForDeferred
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -110,6 +112,19 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _AORemapMax: 1.0000001
     - _AORemapMin: 0
@@ -123,6 +138,8 @@ Material:
     - _AlphaCutoffShadow: 0.5
     - _AlphaDstBlend: 0
     - _AlphaSrcBlend: 1
+    - _AlphaToMask: 0
+    - _AlphaToMaskInspectorValue: 0
     - _Anisotropy: 0
     - _BlendMode: 0
     - _CoatMask: 0
@@ -153,6 +170,7 @@ Material:
     - _DistortionVectorBias: -1
     - _DistortionVectorScale: 2
     - _DoubleSidedEnable: 0
+    - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 1
     - _DstBlend: 0
     - _EmissiveColorMode: 1
@@ -164,6 +182,7 @@ Material:
     - _EnableGeometricSpecularAA: 0
     - _EnableSpecularOcclusion: 1
     - _EnergyConservingSpecularColor: 1
+    - _ForceForwardEmissive: 0
     - _HdrpVersion: 2
     - _HeightAmplitude: 0.17
     - _HeightCenter: 0.7488235
@@ -181,14 +200,19 @@ Material:
     - _LinkDetailsWithBase: 1
     - _MaterialID: 1
     - _Metallic: 0
+    - _MetallicRemapMax: 0
+    - _MetallicRemapMin: 0
     - _NormalMapSpace: 0
     - _NormalScale: 0.4
+    - _OpaqueCullMode: 2
     - _PPDLodThreshold: 5
     - _PPDMaxSamples: 15
     - _PPDMinSamples: 5
     - _PPDPrimitiveLength: 1
     - _PPDPrimitiveWidth: 1
+    - _RayTracing: 0
     - _ReceivesSSR: 1
+    - _ReceivesSSRTransparent: 0
     - _RefractionModel: 0
     - _SSRefractionProjectionModel: 0
     - _Smoothness: 1
@@ -241,9 +265,9 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 0.8776147, b: 0.7311321, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 1, g: 0.8776147, b: 0.7311321, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
@@ -257,6 +281,7 @@ Material:
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
 --- !u!114 &9100646520025630711
 MonoBehaviour:
   m_ObjectHideFlags: 11
@@ -269,4 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 2
+  version: 12
+  hdPluginSubTargetMaterialVersions:
+    m_Keys: []
+    m_Values: 
