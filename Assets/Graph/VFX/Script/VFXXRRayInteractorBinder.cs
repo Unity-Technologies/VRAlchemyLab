@@ -39,9 +39,9 @@ public class VFXXRRayInteractorBinder : VFXBinderBase
         int id = 0;
         bool hit = false;
 
-        bool valid = XRRayInteractor.TryGetHitInfo(ref m_Position, ref m_Normal, ref id, ref hit);
+        bool valid = XRRayInteractor.TryGetHitInfo(out m_Position, out m_Normal, out id, out hit);
 
-        if(XRRayInteractor.isActiveAndEnabled)
+        if (XRRayInteractor.isActiveAndEnabled)
         {
             component.SetBool(EnabledProperty, true);
 
