@@ -17783,7 +17783,7 @@ MonoBehaviour:
   flipYMode: 0
   xrRendering: 1
   fullscreenPassthrough: 0
-  allowDynamicResolution: 0
+  allowDynamicResolution: 1
   customRenderingSettings: 0
   invertFaceCulling: 0
   probeLayerMask:
@@ -17911,7 +17911,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 0
   m_AllowMSAA: 0
-  m_AllowDynamicResolution: 0
+  m_AllowDynamicResolution: 1
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -51247,7 +51247,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1395181926}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.881, y: -0.5, z: -0.009}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -67413,22 +67413,22 @@ PrefabInstance:
     - target: {fileID: 1313494700536688754, guid: 626d3110ebecfca44ba3c9652b25ef5f,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.98437506
+      value: 0.96695405
       objectReference: {fileID: 0}
     - target: {fileID: 1313494700536688754, guid: 626d3110ebecfca44ba3c9652b25ef5f,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.018787669
+      value: 0.05616347
       objectReference: {fileID: 0}
     - target: {fileID: 1313494700536688754, guid: 626d3110ebecfca44ba3c9652b25ef5f,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.17504758
+      value: 0.2482692
       objectReference: {fileID: 0}
     - target: {fileID: 1313494700536688754, guid: 626d3110ebecfca44ba3c9652b25ef5f,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0033409377
+      value: -0.014420189
       objectReference: {fileID: 0}
     - target: {fileID: 1313494700536688754, guid: 626d3110ebecfca44ba3c9652b25ef5f,
         type: 3}
@@ -85450,6 +85450,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 162435608910462102, guid: 22596a6d725ae3d4caf677c7527672a8,
         type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 162435608910462102, guid: 22596a6d725ae3d4caf677c7527672a8,
+        type: 3}
       propertyPath: m_UseViewFrustumForShadowCasterCull
       value: 0
       objectReference: {fileID: 0}
@@ -85525,6 +85530,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3123533993840671155, guid: 22596a6d725ae3d4caf677c7527672a8,
         type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3123533993840671155, guid: 22596a6d725ae3d4caf677c7527672a8,
+        type: 3}
       propertyPath: m_UseViewFrustumForShadowCasterCull
       value: 0
       objectReference: {fileID: 0}
@@ -85552,6 +85562,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5154877242099138609, guid: 22596a6d725ae3d4caf677c7527672a8,
+        type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5469927032677752682, guid: 22596a6d725ae3d4caf677c7527672a8,
         type: 3}
