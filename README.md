@@ -22,37 +22,39 @@ This Project uses the XR Interaction Package.
 
 ![Left Controller](Documentation/Images/LeftController.png)
 
-Button A: Active the teleport ray casting. Target on floor the point to teleport in the teleport area. Use the Forward direction of the stick to teleport. Button B: Active the distance grab ray. Target an object gradable and use the grip button to catch it. Stick Left and right are used to turn at 45°.
+Button A: Activates the teleport ray. Aim at a valid point on the floor within the teleport area. Push the stick forward to teleport.
+
+Button B: Activates the distance‑grab ray. Aim at a grabbable object and use the grip button to catch it. Move the stick left or right to rotate by 45°.
 
 ### Right Controller
 
 ![Right Controller](Documentation/Images/RightController.png)
 
-Use the grip button to directly grab objects. Use button A and B to interact with the grabbed objects. Use the stick to turn the page when a book is opened.
+Use the grip button to directly grab objects. Use buttons A and B to interact with the grabbed objects. When a book is open, use the stick to turn the page.
 
 ### Teleport area
 
-The teleport area defines the space where the player can evolve in the environment.The teleport behavior is managed by the teleportation Area component.
+The teleport area defines the space where the player can move within the environment. The teleport behavior is managed by the Teleportation Area component.
 
-The teleport area limits are defined by a blue smoke on the ground. 
+The limits of the teleport area are indicated by a blue smoke effect on the ground.
 
 ![Teleport Area](Documentation/Images/TeleportArea.png)
 
 ### Teleport
 
-The teleport action is controlled by the A button on the left controller. The player has to focus the point where he wants to teleport while he press the A button and he uses the trigger button to activate the teleport.
+The teleport action is controlled by the A button on the left controller. The player must aim at the point where they want to teleport while pushing the stick upward to activate the teleport.
 
 ![Teleport](Documentation/Images/Teleport.png)
 
 ### Grab
 
-Use the B button of the left controller for the distance grab. It allows you to attract distant objects to you. When the distance grab is enabled, the B button is lit on the left controller. 
+Use the B button on the left controller to activate the distance grab. It allows you to pull distant objects toward you. When distance grab is enabled, the B button lights up on the left controller.
 
-When the ray aims at a grabbable object, a Visual Effect is shown and a sound can be hear.
+When the ray is aimed at a grabbable object, a visual effect appears and a sound can be heard.
 
 ![Grab](Documentation/Images/Grab.png)
 
-The direct grab is controlled by the grip button of the right controller.
+The direct grab is controlled by the grip button on the right controller.
 
 ![Direct Grab](Documentation/Images/DirectGrab.png)
 
@@ -60,34 +62,35 @@ The direct grab is controlled by the grip button of the right controller.
 
 #### Flasks and test tubes
 
-The test tubes and the open flasks contain interactive liquid. They can be used to interact with the cauldron. 
+The test tubes and open flasks contain interactive liquid. They can be used to interact with the cauldron.
 
-They use some scripts and shader graphs to manage the fluid animation. The spilling liquid uses a Visual Effect.
+They use custom scripts and Shader Graphs to manage the fluid animation. The spilling liquid is handled by a Visual Effect.
 
 #### Books
 
-Books can be grabbed with any controller, and then the player can interact with them using the right controller.
+Books can be grabbed with either controller, and the player can then interact with them using the right controller.
 
-While grabbed, the right controller A button opens the book and the B button closes it. The right controller stick is used to turn the pages.
+While a book is grabbed by the right controller, the A button on the right controller opens it and the B button closes it. The right controller’s stick is used to turn the pages.
 
-The books are composed of some parts of the photogrammetry workflow documentation. This documentation can be found here https://unity.com/solutions/photogrammetry.
+The books contain excerpts from the photogrammetry workflow documentation. This documentation can be found here: 
+https://unity.com/solutions/photogrammetry.
 
-The pages of the books are managed by a Visual Effect done with the Visual effect graph. More information about the Visual effect graph here https://unity.com/fr/visual-effect-graph or on the forum here https://forum.unity.com/threads/welcome-to-the-visual-effect-graph-forum.821184/.
+The pages of the books are driven by a Visual Effect created with the Visual Effect Graph. More information about the Visual Effect Graph can be found here: https://unity.com/fr/visual-effect-graph or on the forum here: https://forum.unity.com/threads/welcome-to-the-visual-effect-graph-forum.821184/.
 
 #### Candle
 
-The candle flame's material uses Shader Graph to react to the candle orientation.
+The candle flame’s material uses Shader Graph to react to the candle’s orientation.
 
 #### Globe
 
-The globe can be manipulated by colliding with it using the controllers.
+The globe can be manipulated by pushing or colliding with it using the controllers.
 
 #### Cauldron
 
-The Cauldron interacts with the test tubes and open flasks. Spill their liquid in the cauldron to change its color.
+The cauldron interacts with the test tubes and open flasks. Pour their liquid into the cauldron to change its color.
 
 #### More
 
-Explore the scene and find more interactions : chests, 
+Explore the scene and discover additional interactions, such as chests.
 
-Many objects in the scene have a physical behavior (Table cloth, spider web, mug, skull, …).
+Many objects in the scene have physical behavior (tablecloth, spider web, mug, skull, etc.).
