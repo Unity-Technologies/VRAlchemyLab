@@ -1,0 +1,44 @@
+#pragma kernel BlurHorizontal
+#pragma kernel BlurVertical
+
+Texture2D<float4> _Source;
+RWTexture2D<float4> _Result;
+
+float2 _TexelSize;
+
+SamplerState sampler_linear_clamp
+{
+    Filter = MIN_MAG_MIP_LINEAR;
+    AddressU = Clamp;
+    AddressV = Clamp;
+};
+
+[numthreads(8,8,1)]
+void BlurHorizontal(uint3 id : SV_DispatchThreadID)
+{
+    float2 uv = (id.xy + 0.5) * _TexelSize;
+    float4 sum = 0;
+
+    sum += _Source.SampleLevel(sampler_linear_clamp, uv + float2(-2,0) * _TexelSize, 0) * 0.1216216;
+    sum += _Source.SampleLevel(sampler_linear_clamp, uv + float2(-1,0) * _TexelSize, 0) * 0.2332432;
+    sum += _Source.SampleLevel(sampler_linear_clamp, uv, 0) * 0.2902703;
+    sum += _Source.SampleLevel(sampler_linear_clamp, uv + float2(1,0) * _TexelSize, 0) * 0.2332432;
+    sum += _Source.SampleLevel(sampler_linear_clamp, uv + float2(2,0) * _TexelSize, 0) * 0.1216216;
+
+    _Result[id.xy] = sum;
+}
+
+[numthreads(8,8,1)]
+void BlurVertical(uint3 id : SV_DispatchThreadID)
+{
+    float2 uv = (id.xy + 0.5) * _TexelSize;
+    float4 sum = 0;
+
+    sum += _Source.SampleLevel(sampler_linear_clamp, uv + float2(0,-2) * _TexelSize, 0) * 0.1216216;
+    sum += _Source.SampleLevel(sampler_linear_clamp, uv + float2(0,-1) * _TexelSize, 0) * 0.2332432;
+    sum += _Source.SampleLevel(sampler_linear_clamp, uv, 0) * 0.2902703;
+    sum += _Source.SampleLevel(sampler_linear_clamp, uv + float2(0,1) * _TexelSize, 0) * 0.2332432;
+    sum += _Source.SampleLevel(sampler_linear_clamp, uv + float2(0,2) * _TexelSize, 0) * 0.1216216;
+
+    _Result[id.xy] = sum;
+}

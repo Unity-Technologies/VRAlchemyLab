@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 using UnityEngine.VFX.Utility;
-using UnityEngine.XR.Interaction.Toolkit;
+
 
 [VFXBinder("VR Demo/XR Ray Interactor Binder")]
 public class VFXXRRayInteractorBinder : VFXBinderBase
 {
-    public XRRayInteractor XRRayInteractor;
+    public UnityEngine.XR.Interaction.Toolkit.Interactors.XRRayInteractor XRRayInteractor;
 
     [VFXPropertyBinding("System.Boolean")]
     public ExposedProperty EnabledProperty = "IsEnabled";
@@ -39,7 +39,7 @@ public class VFXXRRayInteractorBinder : VFXBinderBase
         int id = 0;
         bool hit = false;
 
-        bool valid = XRRayInteractor.TryGetHitInfo(ref m_Position, ref m_Normal, ref id, ref hit);
+        bool valid = XRRayInteractor.TryGetHitInfo(out m_Position, out m_Normal, out id, out hit);
 
         if(XRRayInteractor.isActiveAndEnabled)
         {

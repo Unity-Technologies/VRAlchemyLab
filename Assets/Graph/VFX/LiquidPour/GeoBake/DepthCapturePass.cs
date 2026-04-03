@@ -1,85 +1,90 @@
 ﻿using UnityEngine;
-using UnityEngine.Rendering.HighDefinition;
-using UnityEngine.Rendering;
 using UnityEngine.Experimental.Rendering;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.RenderGraphModule;
+using UnityEngine.Rendering.Universal;
 
-class DepthCapturePass : CustomPass
+public class DepthCapturePass : ScriptableRenderPass
 {
-    public RenderTexture depthFromCam;
-    public Material depthMaterial;
-    public Camera bakeCamera;
-    public bool render;
+    Material depthMat;
+    Camera bakeCam;
+    bool enabled;
 
-    ShaderTagId[] shaderTags;
+    static readonly ShaderTagId shaderTag = new ShaderTagId("DepthOnly");
 
-    protected override void Setup(ScriptableRenderContext renderContext, CommandBuffer cmd)
+    public DepthCapturePass(Material mat, Camera cam, bool enabled)
     {
-        shaderTags = new ShaderTagId[2]
-        {
-            new ShaderTagId("DepthForwardOnly"),
-            new ShaderTagId("DepthOnly")
-        };
+        this.depthMat = mat;
+        this.bakeCam = cam;
+        this.enabled = enabled;
+
+        renderPassEvent = RenderPassEvent.AfterRendering;
     }
 
-    protected override void Execute(ScriptableRenderContext renderContext, CommandBuffer cmd, HDCamera hdCamera, CullingResults cullingResult)
+    class PassData
     {
-        if (injectionPoint != CustomPassInjectionPoint.AfterPostProcess)
-        {
-            Debug.LogError("CustomPassInjectionPoint shouild be set on AfterPostProcess");
+        public Material depthMat;
+        public Camera camera;
+        public CullingResults cull;
+        public TextureHandle output;
+        public RendererListHandle rendererList;
+    }
+
+    public override void RecordRenderGraph(RenderGraph renderGraph, ContextContainer frameData)
+    {
+        if (!enabled)
             return;
-        }
-            
 
-        if (render && hdCamera.camera != bakeCamera && hdCamera.camera.cameraType != CameraType.SceneView)
+        var camData = frameData.Get<UniversalCameraData>();
+        var renderData = frameData.Get<UniversalRenderingData>();
+
+        // Ignore bake camera
+        if (camData.camera == bakeCam)
+            return;
+
+        using (var builder = renderGraph.AddRasterRenderPass<PassData>("DepthCapturePass", out var passData))
         {
-            bakeCamera.TryGetCullingParameters(out var cullingParams);
-            cullingParams.cullingOptions = CullingOptions.ShadowCasters;
-            cullingResult = renderContext.Cull(ref cullingParams);
+            passData.depthMat = depthMat;
+            passData.camera = camData.camera;
+            passData.cull = renderData.cullResults;
 
-            var result = new RendererListDesc(shaderTags, cullingResult, bakeCamera)
+            // Output texture
+            TextureDesc desc = new TextureDesc(camData.camera.pixelWidth, camData.camera.pixelHeight)
             {
-                rendererConfiguration = PerObjectData.None,
-                //renderQueueRange = RenderQueueRange.all,
-                renderQueueRange = GetRenderQueueRange(RenderQueueType.AllOpaque),
-                sortingCriteria = SortingCriteria.BackToFront,
-                excludeObjectMotionVectors = false,
-                layerMask = -1,
-                overrideMaterial = depthMaterial,
-                overrideMaterialPassIndex = depthMaterial.FindPass("ForwardOnly"),
+                colorFormat = GraphicsFormat.R32_SFloat,
+                depthBufferBits = DepthBits.None,
+                clearBuffer = true,
+                clearColor = Color.clear,
+                name = "DepthCaptureTexture"
             };
 
-            //renderContext.StereoEndRender(hdCamera.camera);
-            renderContext.ExecuteCommandBuffer(cmd);
-            cmd.Clear();
-            renderContext.StopMultiEye(hdCamera.camera);
+            passData.output = builder.CreateTransientTexture(desc);
+            builder.SetRenderAttachment(passData.output, 0);
 
-            var p = GL.GetGPUProjectionMatrix(bakeCamera.projectionMatrix, true);
-            Matrix4x4 scaleMatrix = Matrix4x4.identity;
-            scaleMatrix.m22 = -1.0f;
-            var v = scaleMatrix * bakeCamera.transform.localToWorldMatrix.inverse;
-            var vp = p * v;
-            cmd.SetGlobalMatrix("_ViewMatrix", v);
-            cmd.SetGlobalMatrix("_InvViewMatrix", v.inverse);
-            cmd.SetGlobalMatrix("_ProjMatrix", p);
-            cmd.SetGlobalMatrix("_InvProjMatrix", p.inverse);
-            cmd.SetGlobalMatrix("_ViewProjMatrix", vp);
-            cmd.SetGlobalMatrix("_InvViewProjMatrix", vp.inverse);
-            cmd.SetGlobalMatrix("_CameraViewProjMatrix", vp);
-            cmd.SetGlobalVector("_WorldSpaceCameraPos", Vector3.zero);
-            cmd.SetGlobalVector("_ShadowClipPlanes", Vector3.zero);
+            // Build RendererListParams (URP 17.5 compatible)
+            var sorting = new SortingSettings(passData.camera)
+            {
+                criteria = SortingCriteria.CommonOpaque
+            };
 
-            CoreUtils.SetRenderTarget(cmd, depthFromCam, ClearFlag.All);
+            var drawing = new DrawingSettings(shaderTag, sorting)
+            {
+                overrideMaterial = passData.depthMat,
+                overrideMaterialPassIndex = 0
+            };
 
-            HDUtils.DrawRendererList(renderContext, cmd, RendererList.Create(result));
+            var filtering = new FilteringSettings(RenderQueueRange.opaque);
 
-            renderContext.StartMultiEye(hdCamera.camera);
-            renderContext.ExecuteCommandBuffer(cmd);
-            cmd.Clear();
+            var rlParams = new RendererListParams(passData.cull, drawing, filtering);
+            passData.rendererList = renderGraph.CreateRendererList(rlParams);
+
+            builder.UseRendererList(passData.rendererList);
+
+            builder.SetRenderFunc((PassData data, RasterGraphContext ctx) =>
+            {
+                ctx.cmd.ClearRenderTarget(true, true, Color.clear);
+                ctx.cmd.DrawRendererList(data.rendererList);
+            });
         }
-    }
-
-    protected override void Cleanup()
-    {
-        // Cleanup code
     }
 }

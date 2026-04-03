@@ -1,141 +1,128 @@
-﻿Shader "Hidden/FullScreen/BlurPasses"
+﻿Shader "Hidden/URP/BlurPasses"
 {
-	HLSLINCLUDE
+    HLSLINCLUDE
 
-#pragma vertex Vert
+    #pragma vertex Vert
+    #pragma fragment Frag
+    #pragma target 4.5
 
-#pragma target 4.5
-#pragma only_renderers d3d11 ps4 xboxone vulkan metal switch
-#pragma enable_d3d11_debug_symbols
+    #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-#include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/RenderPass/CustomPass/CustomPassCommon.hlsl"
+    TEXTURE2D(_Source);
+    SAMPLER(sampler_Source);
 
-		// The PositionInputs struct allow you to retrieve a lot of useful information for your fullScreenShader:
-		// struct PositionInputs
-		// {
-		//     float3 positionWS;  // World space position (could be camera-relative)
-		//     float2 positionNDC; // Normalized screen coordinates within the viewport    : [0, 1) (with the half-pixel offset)
-		//     uint2  positionSS;  // Screen space pixel coordinates                       : [0, NumPixels)
-		//     uint2  tileCoord;   // Screen tile coordinates                              : [0, NumTiles)
-		//     float  deviceDepth; // Depth from the depth buffer                          : [0, 1] (typically reversed)
-		//     float  linearDepth; // View space Z coordinate                              : [Near, Far]
-		// };
+    float _Radius;
+    float4 _Source_TexelSize; // x = 1/width, y = 1/height
 
-		// To sample custom buffers, you have access to these functions:
-		// But be careful, on most platforms you can't sample to the bound color buffer. It means that you
-		// can't use the SampleCustomColor when the pass color buffer is set to custom (and same for camera the buffer).
-		// float3 SampleCustomColor(float2 uv);
-		// float3 LoadCustomColor(uint2 pixelCoords);
-		// float LoadCustomDepth(uint2 pixelCoords);
-		// float SampleCustomDepth(float2 uv);
+    float4 BlurPixels(float4 taps[9])
+    {
+        return 0.27343750 * taps[4]
+            + 0.21875000 * (taps[3] + taps[5])
+            + 0.10937500 * (taps[2] + taps[6])
+            + 0.03125000 * (taps[1] + taps[7])
+            + 0.00390625 * (taps[0] + taps[8]);
+    }
 
-		// There are also a lot of utility function you can use inside Common.hlsl and Color.hlsl,
-		// you can check them out in the source code of the core SRP package.
+    struct Attributes
+    {
+        float4 positionOS : POSITION;
+        float2 uv : TEXCOORD0;
+    };
 
-		TEXTURE2D_X(_Source);
-	TEXTURE2D_X(_ColorBufferCopy);
-	TEXTURE2D_X_HALF(_Mask);
-	TEXTURE2D_X_HALF(_MaskDepth);
-	float _Radius;
-	float _InvertMask;
-	float4 _ViewPortSize; // We need the viewport size because we have a non fullscreen render target (blur buffers are downsampled in half res)
+    struct Varyings
+    {
+        float4 positionHCS : SV_POSITION;
+        float2 uv : TEXCOORD0;
+    };
 
-#pragma enable_d3d11_debug_symbols
+    Varyings Vert(Attributes IN)
+    {
+        Varyings OUT;
+        OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
+        OUT.uv = IN.uv;
+        return OUT;
+    }
 
-	float4 BlurPixels(float4 taps[9])
-	{
-		return 0.27343750 * (taps[4])
-			+ 0.21875000 * (taps[3] + taps[5])
-			+ 0.10937500 * (taps[2] + taps[6])
-			+ 0.03125000 * (taps[1] + taps[7])
-			+ 0.00390625 * (taps[0] + taps[8]);
-	}
+    // -------------------------
+    // HORIZONTAL BLUR
+    // -------------------------
+    float4 HorizontalBlur(float2 uv)
+    {
+        float offset = _Radius * _Source_TexelSize.x;
 
-	// We need to clamp the UVs to avoid bleeding from bigger render tragets (when we have multiple cameras)
-	float2 ClampUVs(float2 uv)
-	{
-		uv = clamp(uv, 0, _RTHandleScale.xy - _ViewPortSize.zw); // clamp UV to 1 pixel to avoid bleeding
-		return uv;
-	}
-	
-	float2 GetSampleUVs(Varyings varyings)
-	{
-		float depth = LoadCameraDepth(varyings.positionCS.xy);
-		//float linearDepth = Linear01Depth(depth,_ZBufferParams);
-		PositionInputs posInput = GetPositionInput(varyings.positionCS.xy, _ViewPortSize.zw, depth, UNITY_MATRIX_I_VP, UNITY_MATRIX_V);
-		return posInput.positionNDC.xy * _RTHandleScale;
-	}
+        float4 taps[9];
+        for (int i = -4; i <= 4; i++)
+        {
+            float2 uvOffset = uv + float2(i * offset, 0);
+            taps[i + 4] = SAMPLE_TEXTURE2D(_Source, sampler_Source, uvOffset);
+        }
 
+        return BlurPixels(taps);
+    }
 
-	float4 HorizontalBlur(Varyings varyings) : SV_Target
-	{
-		UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(varyings);
-		float2 texcoord = GetSampleUVs(varyings);
+    // -------------------------
+    // VERTICAL BLUR
+    // -------------------------
+    float4 VerticalBlur(float2 uv)
+    {
+        float offset = _Radius * _Source_TexelSize.y;
 
-		// Horizontal blur from the camera color buffer
-		float offset = _Radius * 0.001;
-		float4 taps[9];
-		for (int i = -4; i <= 4; i++)
-		{
-			float2 uv = ClampUVs(texcoord + float2(i * offset, 0));
-			taps[i + 4] = SAMPLE_TEXTURE2D_X_LOD(_Source, s_linear_clamp_sampler, uv, 0);
-		}
+        float4 taps[9];
+        for (int i = -4; i <= 4; i++)
+        {
+            float2 uvOffset = uv + float2(0, i * offset);
+            taps[i + 4] = SAMPLE_TEXTURE2D(_Source, sampler_Source, uvOffset);
+        }
 
-		return BlurPixels(taps);
-	}
+        return BlurPixels(taps);
+    }
 
-	float4 VerticalBlur(Varyings varyings) : SV_Target
-	{
-		UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(varyings);
-		float2 texcoord = GetSampleUVs(varyings);
+    // -------------------------
+    // FRAGMENT (select pass via keyword)
+    // -------------------------
+    #pragma multi_compile _ BLUR_HORIZONTAL BLUR_VERTICAL
 
-		// Vertical blur from the blur color buffer
-		float offset = max(0.1,(_ViewPortSize.x/ _ViewPortSize.y)) * _Radius * 0.001;
-		float4 taps[9];
-		for (int i = -4; i <= 4; i++)
-		{
-			float2 uv = ClampUVs(texcoord + float2(0,i * offset));
-			taps[i + 4] = SAMPLE_TEXTURE2D_X_LOD(_Source, s_linear_clamp_sampler, uv, 0);
-		}
+    float4 Frag(Varyings IN) : SV_Target
+    {
+        #if defined(BLUR_HORIZONTAL)
+            return HorizontalBlur(IN.uv);
+        #else
+            return VerticalBlur(IN.uv);
+        #endif
+    }
 
-		return BlurPixels(taps);
-	}
+    ENDHLSL
 
+    SubShader
+    {
+        Tags { "RenderType"="Opaque" "RenderPipeline"="UniversalPipeline" }
 
-		ENDHLSL
+        Pass
+        {
+            Name "Horizontal Blur"
+            ZWrite Off
+            ZTest Always
+            Cull Off
+            Blend Off
 
-		SubShader
-	{
-		Pass
-		{
-			// Horizontal Blur from the camera color LOD
-			Name "Horizontal Blur"
+            HLSLPROGRAM
+                #define BLUR_HORIZONTAL
+            ENDHLSL
+        }
 
-			ZWrite Off
-			ZTest Always
-			Blend Off
-			Cull Off
+        Pass
+        {
+            Name "Vertical Blur"
+            ZWrite Off
+            ZTest Always
+            Cull Off
+            Blend Off
 
-			HLSLPROGRAM
-				#pragma fragment HorizontalBlur
-			ENDHLSL
-		}
+            HLSLPROGRAM
+                #define BLUR_VERTICAL
+            ENDHLSL
+        }
+    }
 
-			Pass
-		{
-			// Vertical Blur from the blur buffer back to camera color
-			Name "Vertical Blur"
-
-			ZWrite Off
-			ZTest Always
-			Blend Off
-			Cull Off
-
-			HLSLPROGRAM
-				#pragma fragment VerticalBlur
-			ENDHLSL
-		}
-
-	}
-	Fallback Off
+    Fallback Off
 }

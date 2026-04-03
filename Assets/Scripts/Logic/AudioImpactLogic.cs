@@ -14,7 +14,7 @@ public class AudioImpactLogic : LogicBase
     public float magnitudeMultiplier = 2;
     [Range(0,1)]
     public float maximumVolume = 1;
-    public PhysicMaterial[] physicMaterials;
+    public PhysicsMaterial[] physicMaterials;
     public Callable[] onImpactSound;
 
     public override void Execute(GameObject instigator = null)

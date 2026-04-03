@@ -1,26 +1,37 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.VFX;
-using UnityEngine.VFX.Utility;
+using UnityEngine.XR;
 
-[VFXBinder("VR Demo/VFXCameraBinder")]
-public class VFXCameraBinder : VFXBinderBase
+public class VFXCameraBinder_XR : MonoBehaviour
 {
-    public new Camera camera;
-    public ExposedProperty viewProjProperty = "ViewProj";
+	[Header("Camera used for XR rendering")]
+	public Camera xrCamera;
 
-    public override bool IsValid(VisualEffect component)
-    {
-        return camera != null && component != null && component.HasMatrix4x4(viewProjProperty);
-    }
+	[Header("Target Visual Effect Graph")]
+	public VisualEffect vfx;
 
-    public override void UpdateBinding(VisualEffect component)
-    {
-        Matrix4x4 pm = camera.projectionMatrix;
-        Matrix4x4 wcm = camera.worldToCameraMatrix;
+	[Header("Name of the exposed Matrix4x4 property in the VFX Graph")]
+	public string viewProjProperty = "ViewProj";
 
-        component.SetMatrix4x4("ViewProj", pm * wcm);
-    }
+	void LateUpdate()
+	{
+		if (xrCamera == null || vfx == null)
+			return;
 
+		// Retrieve the correct projection matrix depending on XR state
+		Matrix4x4 projection = XRSettings.enabled
+			? xrCamera.GetStereoProjectionMatrix(Camera.StereoscopicEye.Left)
+			: xrCamera.projectionMatrix;
+
+		// Retrieve the view matrix (world-to-camera)
+		Matrix4x4 view = XRSettings.enabled
+			? xrCamera.GetStereoViewMatrix(Camera.StereoscopicEye.Left)
+			: xrCamera.worldToCameraMatrix;
+
+		// Compute the ViewProjection matrix
+		Matrix4x4 viewProj = projection * view;
+
+		// Push the matrix to the VFX Graph
+		vfx.SetMatrix4x4(viewProjProperty, viewProj);
+	}
 }

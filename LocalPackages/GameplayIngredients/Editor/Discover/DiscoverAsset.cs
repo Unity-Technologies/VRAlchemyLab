@@ -14,18 +14,18 @@ namespace GameplayIngredients.Editor
             AssetFactory.CreateAssetInProjectWindow<DiscoverAsset>(null, "New DiscoverAsset.asset");
         }
 
-        [OnOpenAsset]
-        static bool OpenAsset(int instanceID, int line)
-        {
-            var asset = EditorUtility.InstanceIDToObject(instanceID);
-            if (asset is DiscoverAsset)
-            {
-                DiscoverWindow.ShowDiscoverWindow(asset as DiscoverAsset);
-                return true;
-            }
-            else
-                return false;
-        }
+        // [OnOpenAsset]
+        // static bool OpenAsset(int instanceID, int line)
+        // {
+        //     var asset = EditorUtility.InstanceIDToObject(instanceID);
+        //     if (asset is DiscoverAsset)
+        //     {
+        //         DiscoverWindow.ShowDiscoverWindow(asset as DiscoverAsset);
+        //         return true;
+        //     }
+        //     else
+        //         return false;
+        // }
 
         [Header("General Properties")]
         public string WindowTitle = "Discover";

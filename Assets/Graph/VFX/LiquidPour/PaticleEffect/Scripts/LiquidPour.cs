@@ -75,7 +75,7 @@ public class LiquidPour : MonoBehaviour
             if (impactObjIndex >= maximumImpactObj)
                 impactObjIndex = 0;
 
-            impactObj.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            impactObj.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
             impactObj.transform.position = transform.position + transform.up * 0.05f;
             impactObj.transform.rotation = transform.rotation;
             impactObj.SetActive(true);

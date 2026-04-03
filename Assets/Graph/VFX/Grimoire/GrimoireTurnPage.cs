@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+//using System.Collections;
+//sing System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]

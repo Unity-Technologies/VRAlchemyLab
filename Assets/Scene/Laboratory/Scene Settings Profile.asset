@@ -13,16 +13,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 1
-  m_AdvancedMode: 0
   skyType:
     m_OverrideState: 1
     m_Value: 2
+  cloudType:
+    m_OverrideState: 0
+    m_Value: 0
   skyAmbientMode:
     m_OverrideState: 1
+    m_Value: 0
+  planetRadius:
+    m_OverrideState: 0
+    m_Value: 6378.1
+  renderingSpace:
+    m_OverrideState: 0
+    m_Value: 1
+  centerMode:
+    m_OverrideState: 0
+    m_Value: 0
+  planetCenter:
+    m_OverrideState: 0
+    m_Value: {x: 0, y: -6378.1, z: 0}
+  windOrientation:
+    m_OverrideState: 0
+    m_Value: 0
+  windSpeed:
+    m_OverrideState: 0
     m_Value: 0
   fogType:
     m_OverrideState: 1
     m_Value: 2
+  m_Version: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37,7 +58,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   components:
   - {fileID: -2064752978470635731}
-  - {fileID: 1972363274838502945}
   - {fileID: 1132482210455984603}
 --- !u!114 &1132482210455984603
 MonoBehaviour:
@@ -52,50 +72,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 1
-  m_AdvancedMode: 0
   colorMode:
     m_OverrideState: 1
     m_Value: 1
   color:
     m_OverrideState: 1
     m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    hdr: 1
-    showAlpha: 0
-    showEyeDropper: 1
+  tint:
+    m_OverrideState: 0
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
   density:
     m_OverrideState: 1
     m_Value: 1
-    min: 0
-    max: 1
   maxFogDistance:
     m_OverrideState: 1
     m_Value: 5000
-    min: 0
   mipFogMaxMip:
     m_OverrideState: 1
     m_Value: 0.5
-    min: 0
-    max: 1
   mipFogNear:
     m_OverrideState: 1
     m_Value: 0
-    min: 0
   mipFogFar:
     m_OverrideState: 1
     m_Value: 1000
-    min: 0
   fogDistance:
     m_OverrideState: 1
     m_Value: 200
-    min: 0
   fogBaseHeight:
     m_OverrideState: 1
     m_Value: 0
   fogHeightAttenuation:
     m_OverrideState: 1
     m_Value: 0.2
-    min: 0
-    max: 1
 --- !u!114 &1972363274838502945
 MonoBehaviour:
   m_ObjectHideFlags: 3

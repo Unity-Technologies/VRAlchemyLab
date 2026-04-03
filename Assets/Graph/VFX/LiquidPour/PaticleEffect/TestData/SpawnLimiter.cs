@@ -1,28 +1,34 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.VFX;
-using UnityEngine.VFX.Utility;
 
 public class SpawnLimiter : VFXSpawnerCallbacks
 {
-    public class InputProperties
-    {
-        public uint maxSpawnPerFrame = 1;
-    }
-    static readonly ExposedProperty maxSpawnPerFrameName = "maxSpawnPerFrame";
-    public override void OnPlay(VFXSpawnerState state, VFXExpressionValues vfxValues, VisualEffect vfxComponent)
-    {
+	// Input properties exposed to the VFX Graph
+	public class InputProperties
+	{
+		public uint maxSpawnPerFrame = 1;
+	}
 
-    }
+	// Name of the exposed property in the VFX Graph
+	static readonly string maxSpawnPerFrameName = "maxSpawnPerFrame";
 
-    public override void OnStop(VFXSpawnerState state, VFXExpressionValues vfxValues, VisualEffect vfxComponent)
-    {
+	public override void OnPlay(VFXSpawnerState state, VFXExpressionValues vfxValues, VisualEffect vfxComponent)
+	{
+		// Called when the spawner starts playing
+		// No initialization needed for this behavior
+	}
 
-    }
+	public override void OnStop(VFXSpawnerState state, VFXExpressionValues vfxValues, VisualEffect vfxComponent)
+	{
+		// Called when the spawner stops
+		// No cleanup required
+	}
 
-    public override void OnUpdate(VFXSpawnerState state, VFXExpressionValues vfxValues, VisualEffect vfxComponent)
-    {
-        state.spawnCount = Mathf.Min(state.spawnCount, vfxValues.GetUInt(maxSpawnPerFrameName));
-    }
+	public override void OnUpdate(VFXSpawnerState state, VFXExpressionValues vfxValues, VisualEffect vfxComponent)
+	{
+		// Limit the number of particles spawned per frame
+		// Ensures the spawnCount never exceeds the user-defined maximum
+		uint maxPerFrame = vfxValues.GetUInt(maxSpawnPerFrameName);
+		state.spawnCount = Mathf.Min(state.spawnCount, maxPerFrame);
+	}
 }
