@@ -1,6 +1,6 @@
-# The alchemy lab : a VR project with High Definition Render Pipeline
+# The alchemy lab URP: a VR project with Universal Render Pipeline
 
-This project is designed for the Oculus Rift and Rift S. It's made using Unity 2019.3.1f1 and HDRP 7.2.0.
+This project is designed for the Meta Quest 3. It's made using Unity 6000.6.0a1 and URP 17.6.0.
 
 The controllers are not configured correctly for other VR platforms.
 
@@ -22,13 +22,13 @@ This Project uses the XR Interaction Package.
 
 ![Left Controller](Documentation/Images/LeftController.png)
 
-Button A: Active the teleport ray casting. Target on floor the point to teleport in the teleport area. Use the trigger button to teleport.Button B: Active the distance grab ray. Target an object gradable and use the trigger to catch it.Stick used to turn at 45°
+Button A: Active the teleport ray casting. Target on floor the point to teleport in the teleport area. Use the Forward direction of the stick to teleport. Button B: Active the distance grab ray. Target an object gradable and use the grip button to catch it. Stick Left and right are used to turn at 45°.
 
 ### Right Controller
 
 ![Right Controller](Documentation/Images/RightController.png)
 
-Use the grip button to directly grab objects.Use button A and B to interact with the grabbed objects by the right or the left controller.Use the stick to turn the page when a book is opened.
+Use the grip button to directly grab objects. Use button A and B to interact with the grabbed objects. Use the stick to turn the page when a book is opened.
 
 ### Teleport area
 
@@ -46,7 +46,7 @@ The teleport action is controlled by the A button on the left controller. The pl
 
 ### Grab
 
-The distance grab is the default mode for the left controller. It allows you to attract distant objects to you. It is automatically re-activated when releasing the A button. When the distance grab is enabled, the B button is lit on the left controller. 
+Use the B button of the left controller for the distance grab. It allows you to attract distant objects to you. When the distance grab is enabled, the B button is lit on the left controller. 
 
 When the ray aims at a grabbable object, a Visual Effect is shown and a sound can be hear.
 
