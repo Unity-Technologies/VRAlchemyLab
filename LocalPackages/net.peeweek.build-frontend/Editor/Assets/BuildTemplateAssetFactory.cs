@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEditor.ProjectWindowCallback;
 using System.IO;
@@ -11,7 +12,15 @@ namespace UnityEditor.VFXToolbox.ImageSequencer
         private static void MenuCreatePostProcessingProfile()
         {
             var icon = EditorGUIUtility.FindTexture("BuildTemplate");
-            ProjectWindowUtil.StartNameEditingIfProjectWindowExists(0, ScriptableObject.CreateInstance<DoCreateBuildTemplateAsset>(), "New BuildTemplate.asset", icon, null);
+
+            // Unity 6: first parameter is EntityId, not int
+            ProjectWindowUtil.StartNameEditingIfProjectWindowExists(
+                default, // default(EntityId) – évite le cast obsolète depuis un int
+                ScriptableObject.CreateInstance<DoCreateBuildTemplateAsset>(),
+                "New BuildTemplate.asset",
+                icon,
+                null
+            );
         }
 
         public static BuildTemplate CreateAssetAtPath(string path)
@@ -23,9 +32,9 @@ namespace UnityEditor.VFXToolbox.ImageSequencer
         }
     }
 
-    internal class DoCreateBuildTemplateAsset : EndNameEditAction
+    internal class DoCreateBuildTemplateAsset : AssetCreationEndAction
     {
-        public override void Action(int instanceId, string pathName, string resourceFile)
+        public override void Action(EntityId entityId, string pathName, string resourceFile)
         {
             BuildTemplate asset = BuildTemplateAssetFactory.CreateAssetAtPath(pathName);
             ProjectWindowUtil.ShowCreatedAsset(asset);

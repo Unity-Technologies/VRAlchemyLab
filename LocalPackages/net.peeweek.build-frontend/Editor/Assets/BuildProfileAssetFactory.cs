@@ -1,4 +1,5 @@
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEditor.ProjectWindowCallback;
 using System.IO;
@@ -11,7 +12,15 @@ namespace UnityEditor.VFXToolbox.ImageSequencer
         private static void MenuCreatePostProcessingProfile()
         {
             var icon = EditorGUIUtility.FindTexture("BuildProfile");
-            ProjectWindowUtil.StartNameEditingIfProjectWindowExists(0, ScriptableObject.CreateInstance<DoCreateBuildProfileAsset>(), "New BuildProfile.asset", icon, null);
+
+            // Unity 6 : premier paramètre = EntityId, pas int
+            ProjectWindowUtil.StartNameEditingIfProjectWindowExists(
+                default, // évite tout cast implicite int → EntityId
+                ScriptableObject.CreateInstance<DoCreateBuildProfileAsset>(),
+                "New BuildProfile.asset",
+                icon,
+                null
+            );
         }
 
         public static BuildProfile CreateAssetAtPath(string path)
@@ -23,9 +32,9 @@ namespace UnityEditor.VFXToolbox.ImageSequencer
         }
     }
 
-    internal class DoCreateBuildProfileAsset : EndNameEditAction
+    internal class DoCreateBuildProfileAsset : AssetCreationEndAction
     {
-        public override void Action(int instanceId, string pathName, string resourceFile)
+        public override void Action(EntityId entityId, string pathName, string resourceFile)
         {
             BuildProfile asset = BuildProfileAssetFactory.CreateAssetAtPath(pathName);
             ProjectWindowUtil.ShowCreatedAsset(asset);

@@ -12,7 +12,9 @@ namespace NaughtyAttributes.Editor
 
         string GetPropertyKeyName(SerializedProperty property)
         {
-            return property.serializedObject.targetObject.GetInstanceID() + "/" + property.name;
+            // Use GetEntityId instead of deprecated GetInstanceID
+            var entityId = property.serializedObject.targetObject.GetEntityId();
+            return entityId.ToString() + "/" + property.name;
         }
 
         public override void DrawProperty(SerializedProperty property)
@@ -39,7 +41,11 @@ namespace NaughtyAttributes.Editor
                             rect.x += 10.0f;
                             rect.width -= 10.0f;
 
-                            EditorGUI.PropertyField(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), element, true);
+                            EditorGUI.PropertyField(
+                                new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight),
+                                element,
+                                true
+                            );
                         },
 
                         elementHeightCallback = (int index) =>

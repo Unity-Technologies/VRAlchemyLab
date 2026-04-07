@@ -3,7 +3,6 @@ using UnityEditor;
 
 namespace GameplayIngredients.Editor
 {
-  
     [CustomPropertyDrawer(typeof(Callable))]
     public class CallablePropertyDrawer : PropertyDrawer
     {
@@ -11,22 +10,21 @@ namespace GameplayIngredients.Editor
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            if(setNextObjectValue != null)
+            // Apply deferred selection
+            if (setNextObjectValue != null)
             {
                 property.objectReferenceValue = setNextObjectValue;
                 setNextObjectValue = null;
-                if(CallTreeWindow.visible)
-                {
-                    CallTreeWindow.Refresh();
-                }
             }
 
-            if(property.objectReferenceValue == null)
+            // Highlight null reference
+            if (property.objectReferenceValue == null)
             {
                 GUI.backgroundColor = Color.red;
-                EditorGUI.DrawRect(position, new Color(1.0f,0,0,0.25f));
+                EditorGUI.DrawRect(position, new Color(1.0f, 0, 0, 0.25f));
             }
 
+            // Layout rects
             var pickRect = new Rect(position);
             pickRect.xMin = pickRect.xMax - 184;
             pickRect.xMax -= 30;
@@ -37,15 +35,13 @@ namespace GameplayIngredients.Editor
             var objRect = new Rect(position);
             objRect.xMax -= 188;
 
-
-
+            // Object field
             var obj = EditorGUI.ObjectField(objRect, property.objectReferenceValue, typeof(Callable), true);
-
             if (GUI.changed)
                 property.objectReferenceValue = obj;
 
-
-            if(property.objectReferenceValue != null)
+            // Buttons
+            if (property.objectReferenceValue != null)
             {
                 if (GUI.Button(gotoRect, ">"))
                 {
@@ -63,18 +59,23 @@ namespace GameplayIngredients.Editor
                 GUI.Label(pickRect, "No Callable Selected", EditorStyles.popup);
                 EditorGUI.EndDisabledGroup();
             }
-            
+
             GUI.backgroundColor = Color.white;
-            
         }
 
         void ShowMenu(SerializedProperty property)
         {
             GenericMenu menu = new GenericMenu();
             var components = (property.objectReferenceValue as Callable).gameObject.GetComponents<Callable>();
-            foreach(var component in components)
+
+            foreach (var component in components)
             {
-                menu.AddItem(new GUIContent(component.GetType().Name + " - " + component.Name), component == property.objectReferenceValue, SetMenu, component);
+                menu.AddItem(
+                    new GUIContent(component.GetType().Name + " - " + component.Name),
+                    component == property.objectReferenceValue,
+                    SetMenu,
+                    component
+                );
             }
 
             menu.ShowAsContext();
@@ -84,10 +85,6 @@ namespace GameplayIngredients.Editor
         {
             Callable component = o as Callable;
             setNextObjectValue = component;
-
         }
-        
     }
 }
-
-

@@ -1,21 +1,29 @@
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEditor.ProjectWindowCallback;
 using System;
 using System.IO;
-using UnityEditor;
 
 namespace GameplayIngredients.Editor
 {
     public class AssetFactory
     {
-        public static void CreateAssetInProjectWindow<T>(string iconName, string fileName) where T: ScriptableObject
+        public static void CreateAssetInProjectWindow<T>(string iconName, string fileName) where T : ScriptableObject
         {
             var icon = EditorGUIUtility.FindTexture(iconName);
 
-            var namingInstance = new DoCreateGenericAsset();
+            var namingInstance = ScriptableObject.CreateInstance<DoCreateGenericAsset>();
             namingInstance.type = typeof(T);
-            ProjectWindowUtil.StartNameEditingIfProjectWindowExists(0, namingInstance, fileName, icon, null);
+
+            // Unity 6 : premier paramètre = EntityId, pas int
+            ProjectWindowUtil.StartNameEditingIfProjectWindowExists(
+                default, // évite le cast implicite int → EntityId
+                namingInstance,
+                fileName,
+                icon,
+                null
+            );
         }
 
         public static ScriptableObject CreateAssetAtPath(string path, Type type)
@@ -28,16 +36,15 @@ namespace GameplayIngredients.Editor
             return asset;
         }
 
-        class DoCreateGenericAsset : EndNameEditAction
+        class DoCreateGenericAsset : AssetCreationEndAction
         {
             public Type type;
 
-            public override void Action(int instanceId, string pathName, string resourceFile)
+            public override void Action(EntityId entityId, string pathName, string resourceFile)
             {
                 ScriptableObject asset = AssetFactory.CreateAssetAtPath(pathName, type);
                 ProjectWindowUtil.ShowCreatedAsset(asset);
             }
         }
-
     }
 }
